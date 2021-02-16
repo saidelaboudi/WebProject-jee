@@ -2,15 +2,15 @@ package ensias.teams.buzinessLayer;
 
 import java.util.ArrayList;
 
-public class Groupe extends MenuItem{
-	public String Name;
-	public Person Owner;
-	public String Description;
+public class Group extends MenuItem{
+	public String name;
+	public User owner;
+	public String description;
 	public ArrayList<Team> teams;
 
-	public Groupe(String name, String description){
+	public Group(String name, String description){
 		super(name);
-		Description = description;
+		this.description = description;
 		teams= new ArrayList<Team>();
 	}
 	
