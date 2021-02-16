@@ -7,7 +7,6 @@ public class Team {
 	
 	public String name;
 	public Person owner;
-	
 	public ArrayList<Person> members;
 	public ArrayList<Channel> channels; 
 	
@@ -17,7 +16,7 @@ public class Team {
 		members = new ArrayList<Person>();
 		channels= new ArrayList<Channel>();
 	}
-	
+
 	public void addMember(Person p) {
 		members.add(p);
 	}
@@ -26,5 +25,4 @@ public class Team {
 		this.channels.add(c);
 	}
 	
-	// Changed
 	}
