@@ -26,5 +26,5 @@ public class Team {
 		this.channels.add(c);
 	}
 	
-	
+	// Changed
 	}
