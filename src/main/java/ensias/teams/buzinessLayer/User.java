@@ -16,7 +16,6 @@ public  class User {
 	public String password;
 	public String dateCreated;
 	public String address;
-	public String password;
 	public String email;
 	
 	/** 
