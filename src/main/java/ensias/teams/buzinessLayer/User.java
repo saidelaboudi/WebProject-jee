@@ -5,8 +5,8 @@ package ensias.teams.buzinessLayer;
 public  class User {
 	@Override
 	public String toString() {
-		return "Person [FirstName=" + firstName + ", LastName=" + lastName + ", address=" + address + ", Birthday="
-				+ birthday + ", Email=" + email + "]";
+		return "Person [FirstName=" + firstName + ", LastName=" + lastName + ", address=" + address + ", Password="
+				+ password + ", Email=" + email + "]";
 	}
 
 	public Long id;
@@ -16,7 +16,6 @@ public  class User {
 	public String password;
 	public String dateCreated;
 	public String address;
-	public String birthday;
 	public String email;
 	
 	/** 
@@ -32,12 +31,12 @@ public  class User {
 		this.dateCreated =  dateCreated;
 	}
 		
-	public User(String firstName, String secondName, String address, String birthday, String email){
+	public User(String firstName, String secondName, String address, String password, String email){
 		super();
 		this.firstName = firstName;
 		this.lastName = secondName;
 		this.address = address;
-		this.birthday = birthday;
+		this.password = password;
 		this.email = email;
 	}
 	
