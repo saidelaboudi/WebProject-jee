@@ -1,0 +1,79 @@
+CREATE TABLE Users(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    FirstName Varchar(30),
+    LastName Varchar(30),
+    Address   Varchar(90),
+    Birthday    Varchar(90),
+    Email   Varchar(30),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE Team(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    Name    Varchar(20),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    OwnerID INTEGER references Users(ID)
+);
+
+CREATE TABLE Channel(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    Name    Varchar(20),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    TeamID INTEGER references Team(ID)
+);
+
+CREATE TABLE Chat(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    ChannelID INTEGER references Channel(ID)
+);
+
+CREATE TABLE Message(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    Message    Varchar(100),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    SenderID INTEGER references User(ID),
+    ChannelID INTEGER references Chat(ID)
+);
+
+CREATE TABLE File(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    Name    Varchar(20),
+    Path    Varchar(20),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    ChannelID INTEGER references Channel(ID)
+);
+
+CREATE TABLE Groups(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    NAME    Varchar(20),
+    OwnerID   INTEGER references Users(ID),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    description varchar(100)
+);
+
+CREATE TABLE Team_Users(
+    ID  INTEGER AUTO_INCREMENT,
+    TeamID INTEGER references Team(ID),
+    UsersID INTEGER references Users(ID),
+    PRIMARY KEY ( TeamID,UsersID )
+);
+
+CREATE TABLE Tag(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    tag Varchar(50)
+);
+
+CREATE TABLE Tag_Users(
+    ID  INTEGER AUTO_INCREMENT,
+    TagID INTEGER references Tag(ID),
+    UsersID INTEGER references Users(ID)
+    PRIMARY KEY ( TagID,UsersID )
+);
+
+CREATE TABLE Groups_Team(
+    ID  INTEGER AUTO_INCREMENT,
+    GroupsID INTEGER references Groups(ID),
+    TeamrID INTEGER references Team(ID),
+    PRIMARY KEY ( GroupsID,TeamrID )
+);

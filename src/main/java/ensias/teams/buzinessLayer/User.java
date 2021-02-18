@@ -8,6 +8,7 @@ public  class User {
 		return "Person [FirstName=" + firstName + ", LastName=" + lastName + ", address=" + address + ", Birthday="
 				+ birthday + ", Email=" + email + "]";
 	}
+
 	public Long id;
 	public String firstName;
 	public String lastName;
@@ -39,7 +40,5 @@ public  class User {
 		this.birthday = birthday;
 		this.email = email;
 	}
-	
-	
 	
 }
