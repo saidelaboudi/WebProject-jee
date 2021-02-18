@@ -3,6 +3,7 @@
         http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
   <display-name>Web Application</display-name>
+<<<<<<< Updated upstream
 
   <servlet>
     <servlet-name>DragomeResourcesServlet</servlet-name>
@@ -95,5 +96,29 @@
     <filter-name>DragomeWro4jFilter</filter-name>
     <url-pattern>/dragome/*</url-pattern>
   </filter-mapping>
+=======
+  <absolute-ordering />
+ 	<servlet>
+  		<servlet-name>usersDisplay</servlet-name>
+  		<servlet-class>ensias.teams.servlets.UsersDisplay</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+		 <servlet-name>usersDisplay</servlet-name>
+		 <url-pattern>/usersDisplay</url-pattern>
+	</servlet-mapping>
+  
+  	<servlet>
+  		<servlet-name>inscription</servlet-name>
+  		<servlet-class>ensias.teams.servlets.App</servlet-class>
+  	</servlet>
+  	<servlet-mapping>
+		 <servlet-name>inscription</servlet-name>
+		 <url-pattern>/inscription</url-pattern>
+	</servlet-mapping>
+  	
+  <listener>
+    <listener-class>ensias.teams.config.InitialisationDaoFactory</listener-class>
+	</listener>
+>>>>>>> Stashed changes
 
 </web-app>
