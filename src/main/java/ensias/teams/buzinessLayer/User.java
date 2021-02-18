@@ -12,9 +12,25 @@ public  class User {
 	public Long id;
 	public String firstName;
 	public String lastName;
+	public String login;
+	public String password;
+	public String dateCreated;
 	public String address;
 	public String password;
 	public String email;
+	
+	/** 
+	 * Constructor used in load all users from the DB
+	 */
+	public User(Long id, String name, String lastName, String login, String password ,String dateCreated){
+		
+		this.firstName   = 	name;
+		this.lastName    =	lastName;
+		this.login	     = 	login;
+		this.password    = 	password;
+		this.id 	     = 	id;
+		this.dateCreated =  dateCreated;
+	}
 		
 	public User(String firstName, String secondName, String address, String password, String email){
 		super();
