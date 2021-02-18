@@ -52,27 +52,24 @@ CREATE TABLE Groups(
     description varchar(100)
 );
 
-CREATE TABLE Team_Users(
-    ID  INTEGER AUTO_INCREMENT,
-    TeamID INTEGER references Team(ID),
-    UsersID INTEGER references Users(ID),
-    PRIMARY KEY ( TeamID,UsersID )
-);
-
 CREATE TABLE Tag(
     ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
     tag Varchar(50)
 );
 
+CREATE TABLE Team_Users(
+    TeamID INTEGER references Team(ID),
+    UsersID INTEGER references Users(ID),
+    PRIMARY KEY ( TeamID,UsersID )
+);
+
 CREATE TABLE Tag_Users(
-    ID  INTEGER AUTO_INCREMENT,
     TagID INTEGER references Tag(ID),
-    UsersID INTEGER references Users(ID)
+    UsersID INTEGER references Users(ID),
     PRIMARY KEY ( TagID,UsersID )
 );
 
 CREATE TABLE Groups_Team(
-    ID  INTEGER AUTO_INCREMENT,
     GroupsID INTEGER references Groups(ID),
     TeamID INTEGER references Team(ID),
     PRIMARY KEY (GroupsID,TeamID)
