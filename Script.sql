@@ -74,6 +74,6 @@ CREATE TABLE Tag_Users(
 CREATE TABLE Groups_Team(
     ID  INTEGER AUTO_INCREMENT,
     GroupsID INTEGER references Groups(ID),
-    TeamrID INTEGER references Team(ID),
-    PRIMARY KEY ( GroupsID,TeamrID )
+    TeamID INTEGER references Team(ID),
+    PRIMARY KEY (GroupsID,TeamID)
 );
