@@ -3,8 +3,8 @@ CREATE TABLE Users(
     FirstName Varchar(30),
     LastName Varchar(30),
     Address   Varchar(90),
-    Birthday    Varchar(90),
-    Email   Varchar(30),
+    Password    Varchar(90), # pour connecter au compte
+    Email   Varchar(30),  # pour connecter au compte
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
