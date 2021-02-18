@@ -19,16 +19,16 @@ public class UserDAO {
 
     
 	public void addUser(User user,DataBase db) throws SQLException {
-		String sql="INSERT INTO Users (FirstName,LastName,Address,Birthday,Email) VALUES (?,?,?,?,?)";
+		String sql="INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?,?,?,?,?)";
         PreparedStatement statement = db.connection.prepareStatement(sql);
         statement.setString(1,user.firstName);
         statement.setString(2,user.lastName);
         statement.setString(3,user.address);
-        statement.setString(4,user.birthday);
+        statement.setString(4,user.password);
         statement.setString(5,user.email);
         statement.execute();
 	}
-	
+
 // has not ended yet
 	public void addExcell2Depart(String excelFilePath , DataBase db) throws IOException, SQLException {
 		
