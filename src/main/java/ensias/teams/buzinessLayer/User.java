@@ -9,6 +9,7 @@ public  class User {
 				+ birthday + ", Email=" + email + "]";
 	}
 
+	public Long id;
 	public String firstName;
 	public String lastName;
 	public String address;
@@ -23,7 +24,5 @@ public  class User {
 		this.birthday = birthday;
 		this.email = email;
 	}
-	
-	
 	
 }
