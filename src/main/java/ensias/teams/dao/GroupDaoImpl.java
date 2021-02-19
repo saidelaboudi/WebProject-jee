@@ -37,9 +37,4 @@ public class GroupDaoImpl implements GroupDao{
         System.out.print(statement.toString());
         statement.execute();
 	}
-
-
-
 }
-	
-

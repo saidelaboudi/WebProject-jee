@@ -109,7 +109,6 @@ public class DataBase {
 			Statement statement =getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			result=statement.executeQuery(query);		
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
 		}
 		return result;
 	}

@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-/*import java.io.*;
+import java.io.*;
 import java.sql.*;
 import java.util.*;
 
@@ -14,7 +14,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-*/
+
 import ensias.teams.buzinessLayer.User;
 
 /**
@@ -46,6 +46,9 @@ public class UserDaoImpl implements UserDao {
 			rs=st.executeQuery("SELECT * FROM Users");
 			while( rs.next()) {
 				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7) ));
+			rs=st.executeQuery("SELECT * FROM user");
+			while( rs.next()) {
+				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(4) , rs.getString(5) , rs.getString(6) ));
 			}
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -107,6 +110,12 @@ public class UserDaoImpl implements UserDao {
 	        fermeturesSilencieuses( rs ,st, connection );
 	    }
 	}
+
+		
+		
+		return users;
+	}
+	
 	
 
 	public static void fermetureSilencieuse( ResultSet resultSet ) {
@@ -148,7 +157,18 @@ public class UserDaoImpl implements UserDao {
 	    fermetureSilencieuse( connexion );
 	}
 
-/*
+	
+	public void addUser(User user,DataBase db) throws SQLException {
+		String sql="INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?,?,?,?,?)";
+        PreparedStatement statement = db.connection.prepareStatement(sql);
+        statement.setString(1,user.firstName);
+        statement.setString(2,user.lastName);
+        statement.setString(3,user.address);
+        statement.setString(4,user.password);
+        statement.setString(5,user.email);
+        statement.execute();
+	}
+
 // has not ended yet
 	public void addExcell2Depart(String excelFilePath , DataBase db) throws IOException, SQLException {
 
@@ -191,6 +211,29 @@ public class UserDaoImpl implements UserDao {
         statement.executeBatch();
 
 	}	
-*/
+	}
 
+	public ArrayList<User> getUsersByTag(DataBase db) throws SQLException{
+		ArrayList<User> users = new ArrayList<User>();
+		System.out.print("Saisie L'etiquette");
+		try (Scanner scanner = new Scanner(System.in)) {
+			String tag= scanner.nextLine();
+			ResultSet set = db.Select("Tag","tag='"+tag+"'");
+			set.next();
+			int TagID=set.getInt("ID");
+			set = db.Select("Tag_User","TagID='"+TagID+"'");
+			while(set.next()) {
+				users.add(null);/////////
+			}
+		}
+		return users;
+	}
+
+	public int getUserID(User user,DataBase db) throws SQLException {
+		ResultSet set = db.Select("User","LastName='"+user.lastName+"' AND Email = '"+user.email+"'");
+		set.next();
+		return set.getInt("ID");
+	}
+
+}
 }
