@@ -10,6 +10,7 @@ public class Group extends MenuItem{
 
 	public Group(String name, String description){
 		super(name);
+		this.name=name;
 		this.description = description;
 		teams= new ArrayList<Team>();
 	}

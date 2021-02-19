@@ -5,11 +5,22 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+/*import java.io.*;
+import java.sql.*;
+import java.util.*;
 
+import org.apache.poi.sl.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+*/
 import ensias.teams.buzinessLayer.User;
 
 /**
  * @author Yasser
+ * 
+ * Some methods was added by Said 
  *
  */
 public class UserDaoImpl implements UserDao {
@@ -34,19 +45,21 @@ public class UserDaoImpl implements UserDao {
 			
 			rs=st.executeQuery("SELECT * FROM Users");
 			while( rs.next()) {
-				users.add(new User(rs.getLong(1) ,rs.getString(2) , rs.getString(3) , rs.getString(6) , rs.getString(5), rs.getString(7) ));
+				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7) ));
 			}
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
 	        fermeturesSilencieuses( rs ,st, connection );
 	    }
-		
+
 		return users;
 	}
-	
+		
+	@Override
 	public User bringUser(String email, String pass) {
-		User user = null;
+		User users = null;
+		
 		Connection connection=null;
 		Statement st=null;
 		ResultSet rs=null;
@@ -57,30 +70,35 @@ public class UserDaoImpl implements UserDao {
 			st=connection.createStatement();
 			st.executeQuery("USE "+ this.daoFactory.getSchema());
 			
-			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email +"' and Password = '" + pass + "'");
+			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "' and Password = '" + pass +"'");
 			while( rs.next()) {
-				user = new User(rs.getLong(1) ,rs.getString(2) , rs.getString(3) , rs.getString(6) , rs.getString(5), rs.getString(7) );
+				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
 			}
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
 	        fermeturesSilencieuses( rs ,st, connection );
 	    }
-		
-		return user;
+
+		return users;
 	}
-	
+
+	@Override
 	public void addUser(User user) {
 		Connection connection=null;
-		Statement st=null;
+		Statement st=null;		
 		ResultSet rs=null;
-		
+
 		try {
 			connection = this.daoFactory.getConnection();
 			st=connection.createStatement();
 			st.executeQuery("USE "+ this.daoFactory.getSchema());
-			String query = "INSERT INTO Users (FirstName, LastName, Address, Email, Password) VALUES ('" + user.getFirstName() + "' , '" 
-					+ user.getLastName() + "', '" + user.getAddress() + "', '" + user.getEmail() + "', '" + user.getPassword() + "' )";
+			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (";
+			query = query.concat("'" + user.firstName + "',");
+			query = query.concat("'" + user.lastName + "',");
+			query = query.concat("'" + user.address + "',");
+			query = query.concat("'" + user.password + "',");
+			query = query.concat("'" + user.email + "')");
 			st.executeUpdate(query);
 			
 		}catch ( SQLException e ) {
@@ -88,16 +106,15 @@ public class UserDaoImpl implements UserDao {
 	    } finally {
 	        fermeturesSilencieuses( rs ,st, connection );
 	    }
-		
 	}
 	
-	
+
 	public static void fermetureSilencieuse( ResultSet resultSet ) {
 	    if ( resultSet != null ) {
 	        try {
 	            resultSet.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "Échec de la fermeture du ResultSet : " + e.getMessage() );
+	            System.out.println( "ï¿½chec de la fermeture du ResultSet : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -107,7 +124,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            statement.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "Échec de la fermeture du Statement : " + e.getMessage() );
+	            System.out.println( "ï¿½chec de la fermeture du Statement : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -116,7 +133,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            connexion.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "Échec de la fermeture de la connexion : " + e.getMessage() );
+	            System.out.println( "ï¿½chec de la fermeture de la connexion : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -130,8 +147,50 @@ public class UserDaoImpl implements UserDao {
 	    fermetureSilencieuse( statement );
 	    fermetureSilencieuse( connexion );
 	}
-	
-	
-	
-	
+
+/*
+// has not ended yet
+	public void addExcell2Depart(String excelFilePath , DataBase db) throws IOException, SQLException {
+
+		FileInputStream inputStream = new FileInputStream(excelFilePath);
+
+        Workbook workbook = new XSSFWorkbook(inputStream);
+
+        Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
+        Iterator<Row> rowIterator = firstSheet.iterator();
+
+        String sql = "INSERT INTO User (NAME,CheifID) VALUES (?, ?)";
+        PreparedStatement statement = db.connection.prepareStatement(sql);    
+
+        rowIterator.next(); // skip the header row
+
+        while (rowIterator.hasNext()) {
+            Row nextRow = rowIterator.next();
+            Iterator<Cell> cellIterator = nextRow.cellIterator();
+
+            while (cellIterator.hasNext()) {
+                Cell nextCell = cellIterator.next();
+
+                int columnIndex = nextCell.getColumnIndex();
+
+                switch (columnIndex) {
+                case 0:
+                    String name = nextCell.getStringCellValue();
+                    statement.setString(1, name);
+                    break;
+                case 1:
+                	int chiefID = (int) nextCell.getNumericCellValue();
+                	statement.setInt(2, chiefID);            
+                	break;
+                }
+            }
+        }
+        workbook.close();
+
+        // execute the remaining queries
+        statement.executeBatch();
+
+	}	
+*/
+
 }

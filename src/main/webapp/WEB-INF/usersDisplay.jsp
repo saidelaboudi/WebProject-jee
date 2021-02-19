@@ -24,7 +24,7 @@
 				out.println("<td>" + user.id +"</td>");
 				out.println("<td>" + user.firstName +"</td>");
 				out.println("<td>" + user.lastName +"</td>");
-				out.println("<td>" + user.email +"</td>");
+				out.println("<td>" + user.login +"</td>");
 				out.println("<td>" + user.password +"</td>");
 				out.println("</tr>");
 			}
