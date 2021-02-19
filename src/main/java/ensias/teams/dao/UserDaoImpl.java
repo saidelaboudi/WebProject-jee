@@ -5,15 +5,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
+
 import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-import org.apache.poi.sl.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import ensias.teams.buzinessLayer.User;
 
@@ -121,7 +123,8 @@ public class UserDaoImpl implements UserDao {
         Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
         Iterator<Row> rowIterator = firstSheet.iterator();
 
-        String sql = "INSERT INTO User (NAME,CheifID) VALUES (?, ?)";
+
+        String sql = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?,?,?,?,?)";
         PreparedStatement statement = db.connection.prepareStatement(sql);    
 
         rowIterator.next(); // skip the header row
@@ -132,25 +135,37 @@ public class UserDaoImpl implements UserDao {
 
             while (cellIterator.hasNext()) {
                 Cell nextCell = cellIterator.next();
-
                 int columnIndex = nextCell.getColumnIndex();
 
                 switch (columnIndex) {
                 case 0:
-                    String name = nextCell.getStringCellValue();
-                    statement.setString(1, name);
+                    String FirstName = nextCell.getStringCellValue();
+                    statement.setString(1 , FirstName);
                     break;
                 case 1:
-                	int chiefID = (int) nextCell.getNumericCellValue();
-                	statement.setInt(2, chiefID);            
+                	String LastName = (String) nextCell.getStringCellValue();
+                	statement.setString(2 , LastName);            
+                	break;
+                case 2:
+                	String Address = (String) nextCell.getStringCellValue();
+                	statement.setString(3 , Address);            
+                	break;
+                case 3:
+                	String Password = (String) nextCell.getStringCellValue();
+                	statement.setString(4 , Password);            
+                	break;
+                case 4:
+                	String Email = (String) nextCell.getStringCellValue();
+                	statement.setString(5 , Email);            
                 	break;
                 }
+                System.out.print(statement.toString());
+                statement.execute();
             }
         }
         workbook.close();
 
         // execute the remaining queries
-        statement.executeBatch();
 
 	}
 
@@ -171,12 +186,11 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public int getUserID(User user,DataBase db) throws SQLException {
-		ResultSet set = db.Select("User","LastName='"+user.lastName+"' AND Email = '"+user.email+"'");
-		set.next();
-		return set.getInt("ID");
+		ResultSet set = db.Select("Users","LastName='"+user.lastName+"' AND Email = '"+user.email+"'");
+		if(set.next()) {
+			return set.getInt("ID");
+		}
+		return 0;
 	}
 
-}
-	
-	
 }

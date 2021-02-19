@@ -36,10 +36,8 @@ public class TeamDAO {
 		return set.getInt("ID");
 	}
 
-    
-    	
-    public void addTeam_Student(int TeamID , int UserID,DataBase db) throws SQLException {
-		String sql="INSERT INTO Team_Users (TeamID,StudentID) VALUES (?,?)";
+    public void addTeam_Member(int TeamID , int UserID,DataBase db) throws SQLException {
+		String sql="INSERT INTO Team_Users (TeamID,UsersID) VALUES (?,?)";
         PreparedStatement statement = db.connection.prepareStatement(sql);
         statement.setInt(1,TeamID);
         statement.setInt(2, UserID);
