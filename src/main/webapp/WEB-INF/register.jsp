@@ -25,47 +25,40 @@
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control" 
-                                           name="firstname" placeholder="First Name">
+                                           name="firstname" placeholder="First Name" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control" 
-                                            name="lastname" placeholder="Last Name">
+                                            name="lastname" placeholder="Last Name" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control"
-                                        name="email" placeholder="Email">
+                                        name="email" placeholder="Email" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control"
-                                        name="adresse" placeholder="Address">
+                                        name="adresse" placeholder="Address" required>
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control"
-                                            name="pass" placeholder="Password">
+                                            name="pass" placeholder="Password" required>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control"
-                                            name="cpass" placeholder="Repeat Password">
+                                            name="cpass" placeholder="Repeat Password" required>
                                     </div>
                                 </div>
                                 <input type="submit" class="btn btn-primary btn-user btn-block" value="Register Account"/>
-                                    
                                 <hr>
-                                <a href="index.html" class="btn btn-google btn-user btn-block">
-                                    <i class="fab fa-google fa-fw"></i> Register with Google
-                                </a>
-                                <a href="index.html" class="btn btn-facebook btn-user btn-block">
-                                    <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
-                                </a>
                             </form>
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.html">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.html">Already have an account? Login!</a>
+                                <a class="small" href="/login">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>

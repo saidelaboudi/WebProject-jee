@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * Servlet implementation class test
  */
 @WebServlet("/App")
-public class App extends HttpServlet {
+public class Signin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CONF_DAO_FACTORY = "daofactory";
 	
@@ -22,7 +22,7 @@ public class App extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public App() {
+    public Signin() {
         super();
     }
 
