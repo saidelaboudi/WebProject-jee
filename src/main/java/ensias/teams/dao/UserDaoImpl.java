@@ -46,9 +46,7 @@ public class UserDaoImpl implements UserDao {
 			rs=st.executeQuery("SELECT * FROM Users");
 			while( rs.next()) {
 				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7) ));
-			rs=st.executeQuery("SELECT * FROM user");
-			while( rs.next()) {
-				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(4) , rs.getString(5) , rs.getString(6) ));
+			
 			}
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -86,6 +84,7 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 
+	
 	@Override
 	public void addUser(User user) {
 		Connection connection=null;
@@ -112,9 +111,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 		
-		
-		return users;
-	}
+
 	
 	
 
@@ -123,7 +120,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            resultSet.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "�chec de la fermeture du ResultSet : " + e.getMessage() );
+	            System.out.println( "ï¿½chec de la fermeture du ResultSet : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -133,7 +130,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            statement.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "�chec de la fermeture du Statement : " + e.getMessage() );
+	            System.out.println( "ï¿½chec de la fermeture du Statement : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -142,7 +139,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            connexion.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "�chec de la fermeture de la connexion : " + e.getMessage() );
+	            System.out.println( "ï¿½chec de la fermeture de la connexion : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -211,7 +208,7 @@ public class UserDaoImpl implements UserDao {
         statement.executeBatch();
 
 	}	
-	}
+	
 
 	public ArrayList<User> getUsersByTag(DataBase db) throws SQLException{
 		ArrayList<User> users = new ArrayList<User>();
@@ -236,4 +233,4 @@ public class UserDaoImpl implements UserDao {
 	}
 
 }
-}
+

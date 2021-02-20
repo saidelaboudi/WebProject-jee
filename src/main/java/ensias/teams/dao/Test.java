@@ -1,4 +1,4 @@
-
+/*
 package ensias.teams.dao;
 
 import java.sql.SQLException;
@@ -19,8 +19,8 @@ public class Test {
 		
 		
 		TeamDAO addTeam = new TeamDAO();
-		UserDAO addUser = new UserDAO();
-		GroupDAO addGroup = new GroupDAO();
+		UserDao addUser = new UserDao();
+		GroupDao addGroup = new GroupDao();
 		TagDAO addtag = new TagDAO();
 		
 		addUser.addUser(owner, db);
@@ -29,3 +29,4 @@ public class Test {
 		addtag.addTag_User(tag, db);
 	}
 }
+*/
