@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import java.io.*;
 import java.sql.*;
 import java.util.*;
-
+/*
 import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
+*/
 import ensias.teams.buzinessLayer.User;
 
 /**
@@ -165,7 +165,7 @@ public class UserDaoImpl implements UserDao {
         statement.setString(5,user.email);
         statement.execute();
 	}
-
+/*
 // has not ended yet
 	public void addExcell2Depart(String excelFilePath , DataBase db) throws IOException, SQLException {
 
@@ -209,7 +209,7 @@ public class UserDaoImpl implements UserDao {
 
 	}	
 	
-
+*/
 	public ArrayList<User> getUsersByTag(DataBase db) throws SQLException{
 		ArrayList<User> users = new ArrayList<User>();
 		System.out.print("Saisie L'etiquette");

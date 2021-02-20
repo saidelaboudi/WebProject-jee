@@ -8,11 +8,10 @@
   		<servlet-name>usersDisplay</servlet-name>
   		<servlet-class>ensias.teams.servlets.UsersDisplay</servlet-class>
   	</servlet>
-  	<servlet-mapping>
-		 <servlet-name>usersDisplay</servlet-name>
-		 <url-pattern>/usersDisplay</url-pattern>
+	<servlet-mapping>
+		<servlet-name>usersDisplay</servlet-name>
+		<url-pattern>/usersDisplay</url-pattern>
 	</servlet-mapping>
-  
   
   	<servlet>
 		<servlet-name>inscription</servlet-name>
@@ -23,6 +22,8 @@
 		<url-pattern>/inscription</url-pattern>
 	</servlet-mapping>
   
+
+  
  	<servlet>
 		<servlet-name>login</servlet-name>
 		<servlet-class>ensias.teams.servlets.Login</servlet-class>
@@ -32,6 +33,7 @@
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
   
+
   <listener>
     <listener-class>ensias.teams.config.InitialisationDaoFactory</listener-class>
 	</listener>
