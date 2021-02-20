@@ -9,9 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 /**
  * Servlet implementation class Login
  */
+@WebServlet("/login")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CONF_DAO_FACTORY = "daofactory";
@@ -20,7 +22,6 @@ public class Login extends HttpServlet {
      */
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -45,7 +46,7 @@ public class Login extends HttpServlet {
 			session.setAttribute("_SESSION", user);
 			request.setAttribute("user", user);
 
-			this.getServletContext().getRequestDispatcher("/WEB-INF/hello.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher("/WEB-INF/blank.jsp").forward( request, response );
 		}
 		else {
 	        this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward( request, response );
