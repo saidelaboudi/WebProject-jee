@@ -61,6 +61,58 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 	
+	@Override
+	public User bringUser(String email, String pass) {
+		User users = null;
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			
+			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "' and Password = '" + pass +"'");
+			while( rs.next()) {
+				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
+
+	
+	@Override
+	public void addUser(User user) {
+		Connection connection=null;
+		Statement st=null;		
+		ResultSet rs=null;
+
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (";
+			query = query.concat("'" + user.firstName + "',");
+			query = query.concat("'" + user.lastName + "',");
+			query = query.concat("'" + user.address + "',");
+			query = query.concat("'" + user.password + "',");
+			query = query.concat("'" + user.email + "')");
+			st.executeUpdate(query);
+			
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+	}
 	
 
 	public static void fermetureSilencieuse( ResultSet resultSet ) {
