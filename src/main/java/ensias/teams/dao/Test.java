@@ -40,26 +40,28 @@ public class Test {
 		Scanner sc = new Scanner(System.in);
 		//Creation du team
 		//User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
-		String TeamName = sc.nextLine();
-		String Descrption = sc.nextLine();
-		Team NewTeam = new Team(TeamName, owner);
-		addTeam.addTeam(NewTeam, db);
+		//String TeamName = sc.nextLine();
+		//String Descrption = sc.nextLine();
+		//Team NewTeam = new Team(TeamName, owner);
+		//addTeam.addTeam(NewTeam, db);
 		
 		String ExcelPath ="C:/Users/Said/Desktop/Users.xlsx ";
 		
 		ArrayList<User> users = addUser.addExcell2Depart(ExcelPath);
+		
 		 // On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
-		for(User user:users) {
+		/*for(User user:users) {
 			if(addUser.getUserID(user, db)==0) { // l utilisation n'est pas inscrit dans le system
 				addUser.addUser(user, db);
 			}else {
 				System.out.println(user.toString());
 			}
 			NewTeam.addMember(user);
-		}
+		}*/
 		// Ajjouter les memebre au team
 		for(User user:users) {
-			addTeam.addTeam_Member(NewTeam, user, db);
+			//addTeam.addTeam_Member(NewTeam, user, db);
+			System.out.println(user.toString());
 		}
 		
 		

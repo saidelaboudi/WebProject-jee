@@ -3,8 +3,8 @@ CREATE TABLE Users(
     FirstName Varchar(30),
     LastName Varchar(30),
     Address   Varchar(90),
-    Birthday    Varchar(90),
-    Email   Varchar(30),
+    Password    Varchar(90), # pour connecter au compte
+    Email   Varchar(30),  # pour connecter au compte
     created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -52,28 +52,25 @@ CREATE TABLE Groups(
     description varchar(100)
 );
 
-CREATE TABLE Team_Users(
-    ID  INTEGER AUTO_INCREMENT,
-    TeamID INTEGER references Team(ID),
-    UsersID INTEGER references Users(ID),
-    PRIMARY KEY ( TeamID,UsersID )
-);
-
 CREATE TABLE Tag(
     ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
     tag Varchar(50)
 );
 
-CREATE TABLE Tag_Users(
-    ID  INTEGER AUTO_INCREMENT,
-    TagID INTEGER references Tag(ID),
+CREATE TABLE Team_Users(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    TeamID INTEGER references Team(ID),
     UsersID INTEGER references Users(ID)
+);
+
+CREATE TABLE Tag_Users(
+    TagID INTEGER references Tag(ID),
+    UsersID INTEGER references Users(ID),
     PRIMARY KEY ( TagID,UsersID )
 );
 
 CREATE TABLE Groups_Team(
-    ID  INTEGER AUTO_INCREMENT,
     GroupsID INTEGER references Groups(ID),
-    TeamrID INTEGER references Team(ID),
-    PRIMARY KEY ( GroupsID,TeamrID )
+    TeamID INTEGER references Team(ID),
+    PRIMARY KEY (GroupsID,TeamID)
 );

@@ -61,6 +61,58 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 	
+	@Override
+	public User bringUser(String email, String pass) {
+		User users = null;
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			
+			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "' and Password = '" + pass +"'");
+			while( rs.next()) {
+				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
+
+	
+	@Override
+	public void addUser(User user) {
+		Connection connection=null;
+		Statement st=null;		
+		ResultSet rs=null;
+
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (";
+			query = query.concat("'" + user.firstName + "',");
+			query = query.concat("'" + user.lastName + "',");
+			query = query.concat("'" + user.address + "',");
+			query = query.concat("'" + user.password + "',");
+			query = query.concat("'" + user.email + "')");
+			st.executeUpdate(query);
+			
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+	}
 	
 
 	public static void fermetureSilencieuse( ResultSet resultSet ) {
@@ -114,7 +166,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 // has not ended yet
-	public ArrayList<User> addExcell2Depart(String excelFilePath) throws IOException, SQLException {
+public ArrayList<User> addExcell2Depart(String excelFilePath) throws IOException, SQLException {
 		
 		ArrayList<User> Users = new ArrayList<User>();
 
@@ -172,6 +224,70 @@ public class UserDaoImpl implements UserDao {
         return Users;
 	}
 
+
+public ArrayList<User> addExcell2Depart(InputStream inputStream) throws IOException, SQLException {
+	
+	ArrayList<User> Users = new ArrayList<User>();
+
+	//FileInputStream inputStream = new FileInputStream(excelFilePath);
+
+    Workbook workbook = new XSSFWorkbook(inputStream);
+
+    Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
+    Iterator<Row> rowIterator = firstSheet.iterator();
+
+    rowIterator.next(); // skip the header row
+    
+    String FirstName ="Not Specified" ;
+    String LastName="Not Specified" ;
+    String Address="Not Specified" ;
+    String Password="Not Specified" ;
+    String Email="Not Specified" ;
+    
+    while (rowIterator.hasNext()) {
+        Row nextRow = rowIterator.next();
+        Iterator<Cell> cellIterator = nextRow.cellIterator();
+        
+        while (cellIterator.hasNext()) {
+        	
+            Cell nextCell = cellIterator.next();
+            int columnIndex = nextCell.getColumnIndex();
+            
+            switch (columnIndex) {
+            case 0:
+                FirstName = nextCell.getStringCellValue();
+                //statement.setString(1 , FirstName);
+                break;
+            case 1:
+            	LastName = (String) nextCell.getStringCellValue();
+            	//statement.setString(2 , LastName);            
+            	break;
+            case 2:
+            	Address = (String) nextCell.getStringCellValue();
+            	//statement.setString(3 , Address);            
+            	break;
+            case 3:
+            	Password = (String) nextCell.getStringCellValue();
+            	//statement.setString(4 , Password);            
+            	break;
+            case 4:
+            	Email = (String) nextCell.getStringCellValue();
+            	//statement.setString(5 , Email);            
+            	break;
+            }
+        }
+        
+        Users.add(new User(FirstName, LastName, Address, Password, Email));
+    }
+    workbook.close();
+    return Users;
+}
+
+
+
+
+	
+	
 	public ArrayList<User> getUsersByTag(DataBase db) throws SQLException{
 		ArrayList<User> users = new ArrayList<User>();
 		System.out.print("Saisie L'etiquette");
@@ -189,7 +305,7 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	public int getUserID(User user,DataBase db) throws SQLException {
-		ResultSet set = db.Select("Users","LastName='"+user.lastName+"' AND Email = '"+user.email+"'");
+		ResultSet set = db.Select("Users","Email = '"+user.email+"'");
 		if(set.next()) {
 			return set.getInt("ID");
 		}

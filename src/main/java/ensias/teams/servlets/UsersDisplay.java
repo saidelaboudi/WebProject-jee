@@ -25,7 +25,6 @@ public class UsersDisplay extends HttpServlet {
 	
     public UsersDisplay() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

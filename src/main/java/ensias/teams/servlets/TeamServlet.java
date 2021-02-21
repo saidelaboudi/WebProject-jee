@@ -33,8 +33,7 @@ public class TeamServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+        this.getServletContext().getRequestDispatcher("/WEB-INF/AddMember.html").forward( request, response );
 	}
 
 	/**
@@ -43,6 +42,7 @@ public class TeamServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
+		System.out.println("Coonnected ");
 		String TeamName = (String)request.getParameter("teamName");
 		User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
 		Team NewTeam = new Team(TeamName, owner);

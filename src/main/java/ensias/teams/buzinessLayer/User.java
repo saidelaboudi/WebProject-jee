@@ -10,7 +10,7 @@ public  class User {
 	}
 
 	public Long id;
-	public String firstName;
+	public String firstName="";
 	public String lastName;
 	public String login;
 	public String password;
@@ -21,6 +21,9 @@ public  class User {
 	/** 
 	 * Constructor used in load all users from the DB
 	 */
+	public User() {
+		
+	}
 	public User(Long id, String name, String lastName, String login, String password ,String dateCreated){
 		
 		this.firstName   = 	name;
@@ -38,6 +41,14 @@ public  class User {
 		this.address = address;
 		this.password = password;
 		this.email = email;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	
 }

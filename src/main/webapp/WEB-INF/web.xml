@@ -4,25 +4,6 @@
 
   <display-name>Web Application</display-name>
   
- 	<servlet>
-  		<servlet-name>usersDisplay</servlet-name>
-  		<servlet-class>ensias.teams.servlets.UsersDisplay</servlet-class>
-  	</servlet>
-  	<servlet-mapping>
-		 <servlet-name>usersDisplay</servlet-name>
-		 <url-pattern>/usersDisplay</url-pattern>
-	</servlet-mapping>
-  
-  
-  	<servlet>
-		<servlet-name>App</servlet-name>
-		<servlet-class>ensias.teams.servlets.App</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>App</servlet-name>
-		<url-pattern>/App</url-pattern>
-	</servlet-mapping>
-  
   <listener>
     <listener-class>ensias.teams.config.InitialisationDaoFactory</listener-class>
 	</listener>
