@@ -1,15 +1,9 @@
 package ensias.teams.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Iterator;
+import java.io.*;
+import java.sql.*;
+import java.util.*;
 
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import ensias.teams.buzinessLayer.Group;
 import ensias.teams.buzinessLayer.Tag;
@@ -33,7 +27,6 @@ public class Test {
 		
 		
 		/*
-		addUser.addUser(owner, db);
 		addTeam.addTeam(team, db);
 		addGroup.addGroup(groupe, db);
 		addtag.addTag_User(tag, db);
@@ -42,7 +35,33 @@ public class Test {
 		addTeam.addTeam_Member(teamID, UserID, db);
 		*/
 		
+		addUser.addUser(owner, db); 
+		
+		Scanner sc = new Scanner(System.in);
+		//Creation du team
+		//User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
+		String TeamName = sc.nextLine();
+		String Descrption = sc.nextLine();
+		Team NewTeam = new Team(TeamName, owner);
+		addTeam.addTeam(NewTeam, db);
+		
 		String ExcelPath ="C:/Users/Said/Desktop/Users.xlsx ";
-		addUser.addExcell2Depart(ExcelPath, db);
+		
+		ArrayList<User> users = addUser.addExcell2Depart(ExcelPath);
+		 // On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
+		for(User user:users) {
+			if(addUser.getUserID(user, db)==0) { // l utilisation n'est pas inscrit dans le system
+				addUser.addUser(user, db);
+			}else {
+				System.out.println(user.toString());
+			}
+			NewTeam.addMember(user);
+		}
+		// Ajjouter les memebre au team
+		for(User user:users) {
+			addTeam.addTeam_Member(NewTeam, user, db);
+		}
+		
+		
 	}
 }

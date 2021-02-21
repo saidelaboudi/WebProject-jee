@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ensias.teams.buzinessLayer.Team;
+import ensias.teams.buzinessLayer.User;
 
 /**
  * TeamDAO
@@ -43,6 +44,14 @@ public class TeamDAO {
         statement.setInt(2, UserID);
         statement.execute();
 	}
+    
+    public void addTeam_Member(Team team,User user,DataBase db)throws SQLException {
+    	int TeamID = this.getTeamID(team, db);
+    	UserDaoImpl userdao = new UserDaoImpl(null);
+    	int UserID =userdao.getUserID(user, db) ;
+    	addTeam_Member(TeamID, UserID, db);
+    	
+    }
 
 
 }

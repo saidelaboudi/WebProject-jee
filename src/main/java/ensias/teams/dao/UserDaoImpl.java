@@ -114,7 +114,9 @@ public class UserDaoImpl implements UserDao {
 	}
 
 // has not ended yet
-	public void addExcell2Depart(String excelFilePath , DataBase db) throws IOException, SQLException {
+	public ArrayList<User> addExcell2Depart(String excelFilePath) throws IOException, SQLException {
+		
+		ArrayList<User> Users = new ArrayList<User>();
 
 		FileInputStream inputStream = new FileInputStream(excelFilePath);
 
@@ -123,50 +125,51 @@ public class UserDaoImpl implements UserDao {
         Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
         Iterator<Row> rowIterator = firstSheet.iterator();
 
-
-        String sql = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?,?,?,?,?)";
-        PreparedStatement statement = db.connection.prepareStatement(sql);    
-
         rowIterator.next(); // skip the header row
-
+        
+        String FirstName ="Not Specified" ;
+        String LastName="Not Specified" ;
+        String Address="Not Specified" ;
+        String Password="Not Specified" ;
+        String Email="Not Specified" ;
+        
         while (rowIterator.hasNext()) {
             Row nextRow = rowIterator.next();
             Iterator<Cell> cellIterator = nextRow.cellIterator();
-
+            
             while (cellIterator.hasNext()) {
+            	
                 Cell nextCell = cellIterator.next();
                 int columnIndex = nextCell.getColumnIndex();
-
+                
                 switch (columnIndex) {
                 case 0:
-                    String FirstName = nextCell.getStringCellValue();
-                    statement.setString(1 , FirstName);
+                    FirstName = nextCell.getStringCellValue();
+                    //statement.setString(1 , FirstName);
                     break;
                 case 1:
-                	String LastName = (String) nextCell.getStringCellValue();
-                	statement.setString(2 , LastName);            
+                	LastName = (String) nextCell.getStringCellValue();
+                	//statement.setString(2 , LastName);            
                 	break;
                 case 2:
-                	String Address = (String) nextCell.getStringCellValue();
-                	statement.setString(3 , Address);            
+                	Address = (String) nextCell.getStringCellValue();
+                	//statement.setString(3 , Address);            
                 	break;
                 case 3:
-                	String Password = (String) nextCell.getStringCellValue();
-                	statement.setString(4 , Password);            
+                	Password = (String) nextCell.getStringCellValue();
+                	//statement.setString(4 , Password);            
                 	break;
                 case 4:
-                	String Email = (String) nextCell.getStringCellValue();
-                	statement.setString(5 , Email);            
+                	Email = (String) nextCell.getStringCellValue();
+                	//statement.setString(5 , Email);            
                 	break;
                 }
-                System.out.print(statement.toString());
-                statement.execute();
             }
+            
+            Users.add(new User(FirstName, LastName, Address, Password, Email));
         }
         workbook.close();
-
-        // execute the remaining queries
-
+        return Users;
 	}
 
 	public ArrayList<User> getUsersByTag(DataBase db) throws SQLException{
