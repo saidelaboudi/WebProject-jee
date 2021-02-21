@@ -20,10 +20,11 @@ public class Test {
 		Tag tag = new Tag("Gl1", owner);
 		
 		
-		TeamDAO addTeam = new TeamDAO();
+
+		TeamDAOImp addTeam = new TeamDAOImp();
 		UserDaoImpl addUser = new UserDaoImpl(null);
 		GroupDaoImpl addGroup = new GroupDaoImpl(null);
-		TagDAO addtag = new TagDAO();
+		TagDAOImp addtag = new TagDAOImp();
 		
 		
 		/*

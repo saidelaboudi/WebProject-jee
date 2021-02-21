@@ -1,9 +1,17 @@
 package ensias.teams.dao;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import ensias.teams.buzinessLayer.Team;
+import ensias.teams.buzinessLayer.User;
+
 /**
  * TeamDAOImp
  */
 public class TeamDAOImp implements TeamDAO{
+
     public void addTeam(Team t,DataBase db) throws SQLException {
 		int OwnerID;
 		ResultSet set = db.Select("Users","Email='"+t.owner.email+"'");
