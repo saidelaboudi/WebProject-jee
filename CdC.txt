@@ -1,0 +1,3 @@
+Notre projet de creer une platforme dynamique similaire au teams avec plus de caracteristiques.
+C'est plutotos de corriger tous ce qui nous apparait comme un probleme.
+Par exemple un enseignant qui a un GL comme classe doit ajouter manuelement toute la promo ce qui est peut etre fait automatiquement 
