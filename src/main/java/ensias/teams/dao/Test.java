@@ -55,12 +55,16 @@ public class Test {
 		
 		*/
 		
-		Tag tag1 = new Tag("JEE", owner);
+		Tag tag1 = new Tag("Test", owner);
 		
 		addtag.addTag(tag1, db);
-		
+		/*
 		for(User user : users) {
 			tag1.addMember(user);			
+		}*/
+		
+		for(int i =130;i<140;i++) {
+			tag1.addMember(addUser.getUserByID(i, db));
 		}
 		addtag.addTag_User(tag1, db);
 		

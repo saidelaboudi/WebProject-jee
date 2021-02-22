@@ -22,7 +22,7 @@ public class AddMembers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	
-	User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
+	User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");//session.getAttribute("Owner");
 	
 	// Team session
 	Team NewTeam ;
@@ -93,15 +93,9 @@ public class AddMembers extends HttpServlet {
 				}
 			}
 			
-			
-			try {
-				if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
-					InputStream inputStream =filePart.getInputStream();
-					users = addUser.addExcell2Depart(inputStream);
-				}
-				
-			} catch (Exception e) {
-				// TODO: handle exception
+			if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
+				InputStream inputStream =filePart.getInputStream();
+				users = addUser.addExcell2Depart(inputStream);
 			}
 			
 			

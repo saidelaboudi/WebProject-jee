@@ -744,24 +744,27 @@ table.table .avatar {
                                     </option>                                                                	
                                 <%}%>
                                 </select>
-                    
+                    <!-- 
                                 <div>
-                                    <button type = "button submit"
+                                    <button type = "button"
                                       onclick = "showChoices()">
                                      Selectionner 
                                     </button>
                                 </div>
-                    </form>
+                    
+                     -->
+                    
                             </div>
                             
-                          </form>
+                         
                         </div>
                             <div class="container-xl">
                                 
                             </div>
-                            <button class="btn-circle  btn-lg" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;">Ajouter</button>
+                            <button class="btn-circle  btn-lg submit" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;">Ajouter</button>
                             
                         </div>
+                </form> 
                 
                     <div id="Excel" hidden>
                         <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">

@@ -68,5 +68,4 @@ public class TeamServlet extends HttpServlet {
 		
 		doGet(request, response);
 	}
-
 }
