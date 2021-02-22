@@ -24,6 +24,5 @@ public class TagDAO {
         	statement.execute();
         }
 	}
-
     
 }
