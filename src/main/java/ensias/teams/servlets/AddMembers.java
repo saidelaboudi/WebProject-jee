@@ -94,10 +94,14 @@ public class AddMembers extends HttpServlet {
 			}
 			
 			
-			
-			if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
-				InputStream inputStream =filePart.getInputStream();
-				users = addUser.addExcell2Depart(inputStream);
+			try {
+				if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
+					InputStream inputStream =filePart.getInputStream();
+					users = addUser.addExcell2Depart(inputStream);
+				}
+				
+			} catch (Exception e) {
+				// TODO: handle exception
 			}
 			
 			
