@@ -1,12 +1,10 @@
 <%@page import="org.apache.poi.util.SystemOutLogger"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+
 <%@page import="java.util.ArrayList"%> 
 <%@page import="ensias.teams.buzinessLayer.*"%> 
 <%@page import="ensias.teams.dao.*"%> 
-<%
-	Team team =(Team)session.getAttribute("TeamName");
-	session.setAttribute("TeamName", team );
-                            %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -584,7 +582,7 @@ table.table .avatar {
                                     <div class="font-weight-bold">
                                         <div class="text-truncate">Hi there! I am wondering if you can help me with a
                                             problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler ï¿½ 58m</div>
+                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -596,7 +594,7 @@ table.table .avatar {
                                     <div>
                                         <div class="text-truncate">I have the photos that you ordered last month, how
                                             would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun ï¿½ 1d</div>
+                                        <div class="small text-gray-500">Jae Chun · 1d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -608,7 +606,7 @@ table.table .avatar {
                                     <div>
                                         <div class="text-truncate">Last month's report looks great, I am very happy with
                                             the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez ï¿½ 2d</div>
+                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
@@ -620,7 +618,7 @@ table.table .avatar {
                                     <div>
                                         <div class="text-truncate">Am I a good boy? The reason I ask is because someone
                                             told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog ï¿½ 2w</div>
+                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
                                     </div>
                                 </a>
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
@@ -670,6 +668,7 @@ table.table .avatar {
                     <div class="container-fluid" style="margin : 20%;" id="choice">
                         <!-- Content Row -->
                         <div class="container row">
+
                             <div class="col-xl-3 col-md-9 mb-7">
                                 <a href="#" onclick="AddOneByOne()">
                                     <div class="card border-left-success shadow h-100 py-2">
@@ -699,7 +698,7 @@ table.table .avatar {
                                                     </div>
                                                     <div class="row no-gutters align-items-center">
                                                         <div class="col-auto">
-                                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Excel</div>
+                                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Excell</div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -717,13 +716,16 @@ table.table .avatar {
                     
                     <div id="oneByOne" hidden>
                         <div id="Tag" hidden>
-                            <form action = "http://localhost/teams/AddMembers" method="post"  MULTIPLE>
+                        
+                        
+                            <form action = "http://localhost/teams/TeamServlet#" method="post" >
+                            
                                 <div class="container">
                                 <label>
                                     Selectionner les etiquettes
                                  (<h6>CTRL </h6> pour ajouter plusieurs etiquettes )
                                 </label>
-                                <select name="TagSelected" id = "setTags" class="form-select" size="2" multiple  >
+                                <select id = "setTags" class="form-select" size="2" multiple  >
                                 <%
                                 TeamDAOImp addTeam = new TeamDAOImp();
                         		UserDaoImpl addUser = new UserDaoImpl(null);
@@ -732,7 +734,7 @@ table.table .avatar {
                         		DataBase db = new DataBase("localhost","3306","teams","root","root");
 
                                 for(Tag tag2 :addtag.getTagList(db)){%>
-                                    <option value =
+                                    <option value = 
                                     <% 
                                     out.print(tag2.tagName);
                                     %> 
@@ -744,27 +746,117 @@ table.table .avatar {
                                     </option>                                                                	
                                 <%}%>
                                 </select>
-                    <!-- 
+                    
                                 <div>
-                                    <button type = "button"
+                                    <button type = "button submit"
                                       onclick = "showChoices()">
                                      Selectionner 
                                     </button>
                                 </div>
                     
-                     -->
-                    
+                            </div>
+                               </form>
                             </div>
                             
-                         
-                        </div>
-                            <div class="container-xl">
-                                
+                        <div class="container-xl">
+                            <div class="table-responsive">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h2>Les <b>Membres</b></h2>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <a href="#addMemberModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter un membre</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <span class="custom-checkbox">
+                                                        <input type="checkbox" id="selectAll">
+                                                        <label for="selectAll"></label>
+                                                    </span>
+                                                </th>
+                                                <th>Nom Complet</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% 
+                                            ArrayList<User> user = (ArrayList<User>)request.getAttribute("user");
+                                                        		if(user!=null)
+                                            for(int i=0;i<user.size();i++){
+                                            %>
+									            <tr>  
+										            <td>
+	                                                    <span class="custom-checkbox">
+	                                                        <input type="checkbox" id="checkbox2" name="options[]" value="1">
+	                                                        <label for="checkbox2"></label>
+	                                                    </span>
+	                                                </td>    
+									                <td><%= user.get(i).firstName %><%=user.get(i).lastName %></td>
+									                <td><%= user.get(i).email %></td> 
+									                 <td>
+                                                    	<a href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                	</td>
+									            </tr>
+									            <%} %>
+                                            <tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                            <button class="btn-circle  btn-lg submit" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;">Ajouter</button>
-                            
+                          <button class="btn-circle  btn-lg" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;">Ajouter</button>
                         </div>
-                </form> 
+                        
+                        <!-- Edit Modal HTML -->
+                        <div id="addMemberModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Ajouter un membre</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">					
+                                            <div class="form-group">
+                                                <label>email</label>
+                                                <input type="text" class="form-control" name="addByEmail" required>
+                                            </div>					
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                                            <input type="submit" class="btn btn-success" value="Ajouter">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Delete Modal HTML -->
+                        <div id="deleteMemberModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form>
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Supprimer un membre</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">					
+                                            <p>Voulez-vous vraiment supprimer ce membre ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                                            <input type="submit" class="btn btn-danger" value="Supprimer">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 
                     <div id="Excel" hidden>
                         <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">
@@ -793,7 +885,7 @@ table.table .avatar {
                     </div>
                 </div>
                 <!-- /.container-fluid -->
-				<a class="btn-circle  btn-lg" style=" margin-left : 40% ;  margin-top: 0px; width: 90px ; height : 90px ;" href="http://localhost/teams/ShowTeam">Show Teams</a>
+
             </div>
             <!-- End of Main Content -->
 
@@ -826,7 +918,7 @@ table.table .avatar {
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">ï¿½</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>

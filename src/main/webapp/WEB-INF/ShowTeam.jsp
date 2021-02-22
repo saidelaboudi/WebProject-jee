@@ -1,3 +1,8 @@
+<%@page import="org.apache.poi.util.SystemOutLogger"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%> 
+<%@page import="ensias.teams.buzinessLayer.*"%> 
+<%@page import="ensias.teams.dao.*"%> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -753,27 +758,15 @@ MEDIAQUERIES
                                     </thead>
                                     <tbody>
                                         <%
-                                     // Send users List !! 
+                                     // print users List !! 
                                         
-                                        ArrayList<User> user= new ArrayList<User>();
-                                        user=(ArrayList<User>)session.getAttribute("usersListTag");
-                                        String[] tagName=(String[])request.getParameterValues("SelectOption");
-                                                            
-                                        if(tagName!=null)
-                                            for(int i=0;i<tagName.length;i++) {
-                                                System.out.println(tagName[i]);
-                                            }
-                                        
-                                        if(tagName!=null) {
-                                            for(int i=0;i<tagName.length;i++) {
-                                                user = addUser.getUsersByTag(new Tag(tagName[i],null), db);
-                                            }
-                                        }
-                                        
+                
+                        ArrayList<User> user= new ArrayList<User>();
+                        user=(ArrayList<User>) session.getAttribute("TeamMembers");
                          if(user!=null)
                                         for(int i=0;i<user.size();i++){
                                         %>
-                                            <tr>  
+                                                <tr>  
                                                 <td>
                                                     <span class="custom-checkbox">
                                                         <input type="checkbox" id="checkbox2" name="options[]" value="1">

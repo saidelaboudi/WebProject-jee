@@ -16,7 +16,7 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
-
+import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
 
 /**
@@ -45,7 +45,7 @@ public class UserDaoImpl implements UserDao {
 			st=connection.createStatement();
 			st.executeQuery("USE "+ this.daoFactory.getSchema());
 			
-			rs=st.executeQuery("SELECT * FROM user");
+			rs=st.executeQuery("SELECT * FROM users");
 			while( rs.next()) {
 				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(4) , rs.getString(5) , rs.getString(6) ));
 			}
@@ -165,141 +165,140 @@ public class UserDaoImpl implements UserDao {
         statement.execute();
 	}
 
-// has not ended yet
-public ArrayList<User> addExcell2Depart(String excelFilePath) throws IOException, SQLException {
-		
-		ArrayList<User> Users = new ArrayList<User>();
-
-		FileInputStream inputStream = new FileInputStream(excelFilePath);
-
-        Workbook workbook = new XSSFWorkbook(inputStream);
-
-        Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
-        Iterator<Row> rowIterator = firstSheet.iterator();
-
-        rowIterator.next(); // skip the header row
-        
-        String FirstName ="Not Specified" ;
-        String LastName="Not Specified" ;
-        String Address="Not Specified" ;
-        String Password="Not Specified" ;
-        String Email="Not Specified" ;
-        
-        while (rowIterator.hasNext()) {
-            Row nextRow = rowIterator.next();
-            Iterator<Cell> cellIterator = nextRow.cellIterator();
-            
-            while (cellIterator.hasNext()) {
-            	
-                Cell nextCell = cellIterator.next();
-                int columnIndex = nextCell.getColumnIndex();
-                
-                switch (columnIndex) {
-                case 0:
-                    FirstName = nextCell.getStringCellValue();
-                    //statement.setString(1 , FirstName);
-                    break;
-                case 1:
-                	LastName = (String) nextCell.getStringCellValue();
-                	//statement.setString(2 , LastName);            
-                	break;
-                case 2:
-                	Address = (String) nextCell.getStringCellValue();
-                	//statement.setString(3 , Address);            
-                	break;
-                case 3:
-                	Password = (String) nextCell.getStringCellValue();
-                	//statement.setString(4 , Password);            
-                	break;
-                case 4:
-                	Email = (String) nextCell.getStringCellValue();
-                	//statement.setString(5 , Email);            
-                	break;
-                }
-            }
-            
-            Users.add(new User(FirstName, LastName, Address, Password, Email));
-        }
-        workbook.close();
-        return Users;
-	}
-
-
-public ArrayList<User> addExcell2Depart(InputStream inputStream) throws IOException, SQLException {
 	
-	ArrayList<User> Users = new ArrayList<User>();
-
-	//FileInputStream inputStream = new FileInputStream(excelFilePath);
-
-    Workbook workbook = new XSSFWorkbook(inputStream);
-
-    Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
-    Iterator<Row> rowIterator = firstSheet.iterator();
-
-    rowIterator.next(); // skip the header row
-    
-    String FirstName ="Not Specified" ;
-    String LastName="Not Specified" ;
-    String Address="Not Specified" ;
-    String Password="Not Specified" ;
-    String Email="Not Specified" ;
-    
-    while (rowIterator.hasNext()) {
-        Row nextRow = rowIterator.next();
-        Iterator<Cell> cellIterator = nextRow.cellIterator();
-        
-        while (cellIterator.hasNext()) {
-        	
-            Cell nextCell = cellIterator.next();
-            int columnIndex = nextCell.getColumnIndex();
-            
-            switch (columnIndex) {
-            case 0:
-                FirstName = nextCell.getStringCellValue();
-                //statement.setString(1 , FirstName);
-                break;
-            case 1:
-            	LastName = (String) nextCell.getStringCellValue();
-            	//statement.setString(2 , LastName);            
-            	break;
-            case 2:
-            	Address = (String) nextCell.getStringCellValue();
-            	//statement.setString(3 , Address);            
-            	break;
-            case 3:
-            	Password = (String) nextCell.getStringCellValue();
-            	//statement.setString(4 , Password);            
-            	break;
-            case 4:
-            	Email = (String) nextCell.getStringCellValue();
-            	//statement.setString(5 , Email);            
-            	break;
-            }
-        }
-        
-        Users.add(new User(FirstName, LastName, Address, Password, Email));
-    }
-    workbook.close();
-    return Users;
+	public ArrayList<User> addExcell2Depart(String excelFilePath) throws IOException, SQLException {
+			
+			ArrayList<User> Users = new ArrayList<User>();
+	
+			FileInputStream inputStream = new FileInputStream(excelFilePath);
+	
+	        Workbook workbook = new XSSFWorkbook(inputStream);
+	
+	        Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
+	        Iterator<Row> rowIterator = firstSheet.iterator();
+	
+	        rowIterator.next(); // skip the header row
+	        
+	        String FirstName ="Not Specified" ;
+	        String LastName="Not Specified" ;
+	        String Address="Not Specified" ;
+	        String Password="Not Specified" ;
+	        String Email="Not Specified" ;
+	        
+	        while (rowIterator.hasNext()) {
+	            Row nextRow = rowIterator.next();
+	            Iterator<Cell> cellIterator = nextRow.cellIterator();
+	            
+	            while (cellIterator.hasNext()) {
+	            	
+	                Cell nextCell = cellIterator.next();
+	                int columnIndex = nextCell.getColumnIndex();
+	                
+	                switch (columnIndex) {
+	                case 0:
+	                    FirstName = nextCell.getStringCellValue();
+	                    //statement.setString(1 , FirstName);
+	                    break;
+	                case 1:
+	                	LastName = (String) nextCell.getStringCellValue();
+	                	//statement.setString(2 , LastName);            
+	                	break;
+	                case 2:
+	                	Address = (String) nextCell.getStringCellValue();
+	                	//statement.setString(3 , Address);            
+	                	break;
+	                case 3:
+	                	Password = (String) nextCell.getStringCellValue();
+	                	//statement.setString(4 , Password);            
+	                	break;
+	                case 4:
+	                	Email = (String) nextCell.getStringCellValue();
+	                	//statement.setString(5 , Email);            
+	                	break;
+	                }
+	            }
+	            
+	            Users.add(new User(FirstName, LastName, Address, Password, Email));
+	        }
+	        workbook.close();
+	        return Users;
+		}
+	
+	
+	public ArrayList<User> addExcell2Depart(InputStream inputStream) throws IOException, SQLException {
+	
+		ArrayList<User> Users = new ArrayList<User>();
+	
+		//FileInputStream inputStream = new FileInputStream(excelFilePath);
+	
+	    Workbook workbook = new XSSFWorkbook(inputStream);
+	
+	    Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
+	    Iterator<Row> rowIterator = firstSheet.iterator();
+	
+	    rowIterator.next(); // skip the header row
+	    
+	    String FirstName ="Not Specified" ;
+	    String LastName="Not Specified" ;
+	    String Address="Not Specified" ;
+	    String Password="Not Specified" ;
+	    String Email="Not Specified" ;
+	    if(workbook!=null)
+		    while (rowIterator.hasNext()) {
+		        Row nextRow = rowIterator.next();
+		        Iterator<Cell> cellIterator = nextRow.cellIterator();
+		        
+		        while (cellIterator.hasNext()) {
+		        	
+		            Cell nextCell = cellIterator.next();
+		            int columnIndex = nextCell.getColumnIndex();
+		            
+		            switch (columnIndex) {
+		            case 0:
+		                FirstName = nextCell.getStringCellValue();
+		                //statement.setString(1 , FirstName);
+		                break;
+		            case 1:
+		            	LastName = (String) nextCell.getStringCellValue();
+		            	//statement.setString(2 , LastName);            
+		            	break;
+		            case 2:
+		            	Address = (String) nextCell.getStringCellValue();
+		            	//statement.setString(3 , Address);            
+		            	break;
+		            case 3:
+		            	Password = (String) nextCell.getStringCellValue();
+		            	//statement.setString(4 , Password);            
+		            	break;
+		            case 4:
+		            	Email = (String) nextCell.getStringCellValue();
+		            	//statement.setString(5 , Email);            
+		            	break;
+		            }
+		        }
+		        
+		        Users.add(new User(FirstName, LastName, Address, Password, Email));
+		    }
+	    workbook.close();
+	    return Users;
 }
 
 
-
-
-	
-	
-	public ArrayList<User> getUsersByTag(DataBase db) throws SQLException{
+	public ArrayList<User> getUsersByTag(Tag tag1,DataBase db) throws SQLException{
 		ArrayList<User> users = new ArrayList<User>();
-		System.out.print("Saisie L'etiquette");
-		try (Scanner scanner = new Scanner(System.in)) {
-			String tag= scanner.nextLine();
+		try{
+			String tag=tag1.tagName;
 			ResultSet set = db.Select("Tag","tag='"+tag+"'");
 			set.next();
 			int TagID=set.getInt("ID");
-			set = db.Select("Tag_User","TagID='"+TagID+"'");
+			set = db.Select("Tag_Users","TagID='"+TagID+"'");
 			while(set.next()) {
-				users.add(null);/////////
+				int UserID= (int)set.getInt(2);
+				
+				users.add(getUserByID(UserID,db));
 			}
+		}catch(Exception e) {
+			
 		}
 		return users;
 	}
@@ -311,5 +310,19 @@ public ArrayList<User> addExcell2Depart(InputStream inputStream) throws IOExcept
 		}
 		return 0;
 	}
-
+	
+	public User getUserByID(int UserId,DataBase db) throws SQLException{
+		User user = null ;
+		ResultSet set;
+		try {
+			set = db.Select("Users","ID = '"+UserId+"'");
+			if(set.next()) {
+				return new User(set.getString(2),set.getString(2),set.getString(4),set.getString(5),set.getString(6));
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
 }

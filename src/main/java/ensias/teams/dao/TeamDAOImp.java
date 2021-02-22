@@ -3,6 +3,7 @@ package ensias.teams.dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 import ensias.teams.buzinessLayer.Team;
 import ensias.teams.buzinessLayer.User;
@@ -50,5 +51,21 @@ public class TeamDAOImp implements TeamDAO{
     	int UserID =userdao.getUserID(user, db) ;
     	addTeam_Member(TeamID, UserID, db);
     	
+    }
+
+    public ArrayList<User> getUsersByTeamName(String name,DataBase db) throws SQLException{
+    	int UserID;
+		UserDaoImpl addUser = new UserDaoImpl(null);
+		ArrayList<User> users = new ArrayList<User>();
+    	ResultSet set = db.Select("team","Name='"+name+"'");
+    	set.next();
+    	int TeamID=set.getInt("ID");
+    	set = db.Select("team_users","TeamID='"+TeamID+"'");
+    	
+    	while(set.next()) {
+    		UserID=set.getInt("UsersID");
+    		users.add(addUser.getUserByID(UserID, db));
+    	}
+    	return users;
     }
 }
