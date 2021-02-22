@@ -790,7 +790,7 @@ table.table .avatar {
                     </div>
                 </div>
                 <!-- /.container-fluid -->
-<a href="http://localhost/teams/ShowTeam">Show Teams</a>
+				<a class="btn-circle  btn-lg" style=" margin-left : 40% ;  margin-top: 0px; width: 90px ; height : 90px ;" href="http://localhost/teams/ShowTeam">Show Teams</a>
             </div>
             <!-- End of Main Content -->
 
