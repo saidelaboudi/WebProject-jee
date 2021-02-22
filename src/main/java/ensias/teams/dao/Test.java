@@ -17,7 +17,7 @@ public class Test {
 		Team team = new Team("test4", owner);
 		Group groupe = new Group("Teams ", "Groupe pour rassembler des equipes en un seul grps");
 		groupe.owner= owner;
-		Tag tag = new Tag("Gl1", owner);
+		Tag tag = new Tag("GL1", owner);
 		
 		
 		TeamDAOImp addTeam = new TeamDAOImp();
@@ -25,6 +25,56 @@ public class Test {
 		GroupDaoImpl addGroup = new GroupDaoImpl(null);
 		TagDAOImp addtag = new TagDAOImp();
 		
+		/*
+		for(Tag tag2 :addtag.getTagList(db)) {
+			System.out.println(tag2.tagName);
+			for(User user : addUser.getUsersByTag(tag2, db)) {
+				System.out.println(user.toString());
+			}
+		}
+		*/
+		
+		
+		String ExcelPath ="C:/Users/Said/Desktop/Users.xlsx ";
+		
+		ArrayList<User> users = addUser.addExcell2Depart(ExcelPath);
+		/*
+		 // On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
+		for(User user:users) {
+			if(addUser.getUserID(user, db)==0) { // l utilisation n'est pas inscrit dans le system
+				addUser.addUser(user, db);
+			}else {
+				System.out.println(user.toString());
+			}
+		}
+		// Ajjouter les memebre au team
+		for(User user:users) {
+			//addTeam.addTeam_Member(NewTeam, user, db);
+			System.out.println(user.toString());
+		}
+		
+		*/
+		
+		Tag tag1 = new Tag("JEE", owner);
+		
+		addtag.addTag(tag1, db);
+		
+		for(User user : users) {
+			tag1.addMember(user);			
+		}
+		addtag.addTag_User(tag1, db);
+		
+		
+		
+		
+		
+		/*
+		ArrayList<User> users=addUser.getUsersByTag(tag1, db);
+		
+		for(User user: users) {
+			System.out.println(user.toString());
+		}
+		*/
 		
 		/*
 		addTeam.addTeam(team, db);
@@ -35,35 +85,15 @@ public class Test {
 		addTeam.addTeam_Member(teamID, UserID, db);
 		*/
 		
-		addUser.addUser(owner, db); 
+		//addUser.addUser(owner, db); 
 		
-		Scanner sc = new Scanner(System.in);
+		//Scanner sc = new Scanner(System.in);
 		//Creation du team
 		//User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
 		//String TeamName = sc.nextLine();
 		//String Descrption = sc.nextLine();
 		//Team NewTeam = new Team(TeamName, owner);
 		//addTeam.addTeam(NewTeam, db);
-		
-		String ExcelPath ="C:/Users/Said/Desktop/Users.xlsx ";
-		
-		ArrayList<User> users = addUser.addExcell2Depart(ExcelPath);
-		
-		 // On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
-		/*for(User user:users) {
-			if(addUser.getUserID(user, db)==0) { // l utilisation n'est pas inscrit dans le system
-				addUser.addUser(user, db);
-			}else {
-				System.out.println(user.toString());
-			}
-			NewTeam.addMember(user);
-		}*/
-		// Ajjouter les memebre au team
-		for(User user:users) {
-			//addTeam.addTeam_Member(NewTeam, user, db);
-			System.out.println(user.toString());
-		}
-		
-		
+	
 	}
 }

@@ -1,7 +1,5 @@
 package ensias.teams.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import ensias.teams.buzinessLayer.Team;
