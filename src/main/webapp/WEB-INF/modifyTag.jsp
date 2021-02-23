@@ -50,10 +50,10 @@ import = "java.util.ArrayList"
 				for (User t : members){
 		%>
 			<form method="post" action="#tagMembers" style='flex'>
-				<input type="text" name="tagName" value='<% out.println(request.getAttribute("tagName")); %>'>			
-				<input type="text" name="Demail" value="<% out.println(t.email);%>" />
-				<input type="text" value="<% out.println(t.email);%>" readonly>
-				<input type="submit" value="Delete">
+				<input type="text" name="tagName" value='<% out.println(request.getAttribute("tagName")); %>' style='display:none;'>			
+				<input type="text" name="Demail" value="<% out.println(t.email);%>" style='display:none;'/>
+				<input type="text" value="<% out.println(t.email);%>" disabled>
+				<input type="submit" value="Delete" disabled>
 			</form>
 		<%
 				}

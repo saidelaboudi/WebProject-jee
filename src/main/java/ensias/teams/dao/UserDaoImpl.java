@@ -47,7 +47,7 @@ public class UserDaoImpl implements UserDao {
 			
 			rs=st.executeQuery("SELECT * FROM users");
 			while( rs.next()) {
-				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(4) , rs.getString(5) , rs.getString(6) ));
+				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7) ));
 			}
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -76,9 +76,9 @@ public class UserDaoImpl implements UserDao {
 			st.executeQuery("USE "+ this.daoFactory.getSchema());
 			
 			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "'");
-			while( rs.next()) {
+			if (rs.next())
 				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
-			}
+
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {

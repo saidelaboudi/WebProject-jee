@@ -64,6 +64,9 @@ public class TagMembers extends HttpServlet {
 					try {
 						db = new DataBase("localhost","3306","ensiasteams","root","root");
 							Tag t = new Tag((String)request.getAttribute("tagName"), user);
+							t.addMember(user);
+							System.out.println("user" + user.toString());
+							System.out.println("tagMem" + t.tagged.toString());
 							dao.addTag_User(t, db);
 
 					} catch (SQLException e) {
