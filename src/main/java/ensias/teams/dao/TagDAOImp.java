@@ -22,6 +22,15 @@ public class TagDAOImp implements TagDAO{
 	    statement.setString(1,t.tagName);      	
     	statement.execute();
 	}
+	
+	@Override
+	public void removeTag(Tag t, DataBase db) throws SQLException {
+		int UserID;
+		String sql="DELETE FROM tag  WHERE tag = ?";
+	    PreparedStatement statement = db.connection.prepareStatement(sql);
+	    statement.setString(1,t.tagName);      	
+    	statement.execute();
+	}
 	@Override
 	public void addTag_User(Tag t, DataBase db) throws SQLException {
 		int UserID;

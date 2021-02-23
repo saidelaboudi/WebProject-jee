@@ -62,7 +62,7 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public User bringUser(String email, String pass) {
+	public User bringUser(String email) {
 		User users = null;
 		
 		Connection connection=null;
@@ -75,7 +75,7 @@ public class UserDaoImpl implements UserDao {
 			st=connection.createStatement();
 			st.executeQuery("USE "+ this.daoFactory.getSchema());
 			
-			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "' and Password = '" + pass +"'");
+			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "'");
 			while( rs.next()) {
 				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
 			}

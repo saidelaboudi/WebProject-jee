@@ -12,6 +12,7 @@ import ensias.teams.buzinessLayer.User;
 public interface TagDAO {
 
 	public void addTag(Tag t, DataBase db) throws SQLException;
+	public void removeTag(Tag t, DataBase db) throws SQLException;
     public void addTag_User(Tag t,DataBase db) throws SQLException;
     public ArrayList<Tag> getTagList(DataBase db) throws SQLException;
     public ArrayList<User> getUsersTagged(String TagName, DataBase db) throws SQLException;

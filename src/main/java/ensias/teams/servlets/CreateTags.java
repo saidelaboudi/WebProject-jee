@@ -46,10 +46,17 @@ public class CreateTags extends HttpServlet {
 		DataBase db;
 		TagDAO dao = new TagDAOImp();
 		User o = new User("a", "b", "c", "d", "e");
-		Tag t = new Tag(request.getParameter("tagName"), o);
+		
 		try {
 			db = new DataBase("localhost","3306","ensiasteams","root","root");
-			dao.addTag(t, db);
+			System.out.println(request.getParameter("DtagName")+ "  11111");
+			if (request.getParameterMap().containsKey("DtagName")) {
+				Tag t = new Tag(request.getParameter("DtagName"), o);
+				dao.removeTag(t, db);
+			}else {
+				Tag t = new Tag(request.getParameter("tagName"), o);
+				dao.addTag(t, db);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
