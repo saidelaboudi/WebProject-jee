@@ -725,13 +725,8 @@ table.table .avatar {
                                 </label>
                                 <select name="TagSelected" id = "setTags" class="form-select" size="2" multiple  >
                                 <%
-                                TeamDAOImp addTeam = new TeamDAOImp();
-                        		UserDaoImpl addUser = new UserDaoImpl(null);
-                        		GroupDaoImpl addGroup = new GroupDaoImpl(null);
-                        		TagDAOImp addtag = new TagDAOImp();
-                        		DataBase db = new DataBase("localhost","3306","teams","root","root");
-
-                                for(Tag tag2 :addtag.getTagList(db)){%>
+                        		ArrayList<Tag> TagList=(ArrayList<Tag>)session.getAttribute("TagList");
+                                for(Tag tag2 :TagList){%>
                                     <option value =
                                     <% 
                                     out.print(tag2.tagName);

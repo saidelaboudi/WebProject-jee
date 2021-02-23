@@ -14,18 +14,17 @@ import ensias.teams.buzinessLayer.User;
 public class TagDAOImp implements TagDAO{
 
 	@Override
-	public void addTag(Tag t, DataBase db) throws SQLException {
-		int UserID;
+	public void addTag(Tag t, DAOFactory db) throws SQLException {
 		String sql="INSERT INTO tag (tag) VALUES (?)";
-	    PreparedStatement statement = db.connection.prepareStatement(sql);
+	    PreparedStatement statement = db.getConnection().prepareStatement(sql);
 	    statement.setString(1,t.tagName);      	
     	statement.execute();
 	}
 	@Override
-	public void addTag_User(Tag t, DataBase db) throws SQLException {
+	public void addTag_User(Tag t, DAOFactory db) throws SQLException {
 		int UserID;
 		String sql="INSERT INTO tag_users (TagID,UsersID) VALUES (?,?)";
-	    PreparedStatement statement = db.connection.prepareStatement(sql);
+	    PreparedStatement statement = db.getConnection().prepareStatement(sql);
 	    
 	    for(User user:t.tagged) {
 	    	ResultSet set = db.Select("Users","Email='"+user.email+"'");
@@ -41,7 +40,7 @@ public class TagDAOImp implements TagDAO{
 	}
 	
 	@Override
-	public ArrayList<Tag> getTagList(DataBase db) throws SQLException {
+	public ArrayList<Tag> getTagList(DAOFactory db) throws SQLException {
 		ArrayList<Tag> list = new ArrayList<Tag>();
 		try{
 			ResultSet set = db.Select("Tag","1");
@@ -51,12 +50,13 @@ public class TagDAOImp implements TagDAO{
 		}catch(Exception e) {
 			
 		}
+		System.out.println("Get tag List Done !");
 		return list;
 	}
 	
 	
 	@Override
-	public ArrayList<User> getUsersTagged(String TagName, DataBase db) throws SQLException {
+	public ArrayList<User> getUsersTagged(String TagName,DAOFactory db) throws SQLException {
 		int UserID;
 		UserDaoImpl addUser = new UserDaoImpl(null);
 		ArrayList<User> users = new ArrayList<User>();

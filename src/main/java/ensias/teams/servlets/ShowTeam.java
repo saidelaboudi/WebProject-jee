@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import ensias.teams.buzinessLayer.Team;
 import ensias.teams.buzinessLayer.User;
-import ensias.teams.dao.DataBase;
+import ensias.teams.dao.DAOFactory;
 import ensias.teams.dao.TeamDAOImp;
 
 /**
@@ -22,6 +22,8 @@ import ensias.teams.dao.TeamDAOImp;
 @WebServlet("/ShowTeam")
 public class ShowTeam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String CONF_DAO_FACTORY = "daofactory";
+	private DAOFactory daoF = DAOFactory.getInstance();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,11 +41,9 @@ public class ShowTeam extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Team team = (Team) session.getAttribute("TeamName");
 		String Name=team.name;
-		DataBase db;
 		try {
 			TeamDAOImp addTeam = new TeamDAOImp();
-			db = new DataBase("localhost","3306","teams","root","root");
-			ArrayList<User> users =addTeam.getUsersByTeamName(Name,db);
+			ArrayList<User> users =addTeam.getUsersByTeamName(Name,daoF);
 			
 			session.setAttribute("TeamMembers", users );
 			for(User user: users) {

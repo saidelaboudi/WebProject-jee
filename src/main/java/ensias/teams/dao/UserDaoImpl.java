@@ -154,9 +154,9 @@ public class UserDaoImpl implements UserDao {
 	    fermetureSilencieuse( connexion );
 	}
 	
-	public void addUser(User user,DataBase db) throws SQLException {
+	public void addUser(User user,DAOFactory db) throws SQLException {
 		String sql="INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?,?,?,?,?)";
-        PreparedStatement statement = db.connection.prepareStatement(sql);
+        PreparedStatement statement = db.getConnection().prepareStatement(sql);
         statement.setString(1,user.firstName);
         statement.setString(2,user.lastName);
         statement.setString(3,user.address);
@@ -284,7 +284,7 @@ public class UserDaoImpl implements UserDao {
 }
 
 
-	public ArrayList<User> getUsersByTag(Tag tag1,DataBase db) throws SQLException{
+	public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException{
 		ArrayList<User> users = new ArrayList<User>();
 		try{
 			String tag=tag1.tagName;
@@ -300,10 +300,11 @@ public class UserDaoImpl implements UserDao {
 		}catch(Exception e) {
 			
 		}
+		System.out.println("Get users by Tag done !");
 		return users;
 	}
 
-	public int getUserID(User user,DataBase db) throws SQLException {
+	public int getUserID(User user,DAOFactory db) throws SQLException {
 		ResultSet set = db.Select("Users","Email = '"+user.email+"'");
 		if(set.next()) {
 			return set.getInt("ID");
@@ -311,7 +312,7 @@ public class UserDaoImpl implements UserDao {
 		return 0;
 	}
 	
-	public User getUserByID(int UserId,DataBase db) throws SQLException{
+	public User getUserByID(int UserId,DAOFactory db) throws SQLException{
 		User user = null ;
 		ResultSet set;
 		try {
