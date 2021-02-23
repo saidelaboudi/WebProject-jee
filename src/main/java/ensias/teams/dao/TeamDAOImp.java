@@ -24,7 +24,7 @@ public class TeamDAOImp implements TeamDAO{
 			set.next();
 			OwnerID=set.getInt("ID");			
 		}
-		String sql="INSERT INTO teams.team(Name,OwnerID) VALUES (?,?)";
+		String sql="INSERT INTO team(Name,OwnerID) VALUES (?,?)";
         PreparedStatement statement = db.getConnection().prepareStatement(sql);
         statement.setString(1,t.name);   
         statement.setInt(2, OwnerID);
@@ -33,13 +33,13 @@ public class TeamDAOImp implements TeamDAO{
 
     
     public int getTeamID(Team team,DAOFactory db) throws SQLException {
-		ResultSet set = db.Select("teams.Team","Name='"+team.name+"'");
+		ResultSet set = db.Select("Team","Name='"+team.name+"'");
 		set.next();
 		return set.getInt("ID");
 	}
 
     public void addTeam_Member(int TeamID , int UserID,DAOFactory db) throws SQLException {
-		String sql="INSERT INTO teams.Team_Users (TeamID,UsersID) VALUES (?,?)";
+		String sql="INSERT INTO Team_Users (TeamID,UsersID) VALUES (?,?)";
         PreparedStatement statement = db.getConnection().prepareStatement(sql);
         statement.setInt(1,TeamID);
         statement.setInt(2, UserID);
@@ -58,10 +58,10 @@ public class TeamDAOImp implements TeamDAO{
     	int UserID;
 		UserDaoImpl addUser = new UserDaoImpl(null);
 		ArrayList<User> users = new ArrayList<User>();
-    	ResultSet set = db.Select("teams.team","Name='"+name+"'");
+    	ResultSet set = db.Select("team","Name='"+name+"'");
     	set.next();
     	int TeamID=set.getInt("ID");
-    	set = db.Select("teams.team_users","TeamID='"+TeamID+"'");
+    	set = db.Select("team_users","TeamID='"+TeamID+"'");
     	
     	while(set.next()) {
     		UserID=set.getInt("UsersID");

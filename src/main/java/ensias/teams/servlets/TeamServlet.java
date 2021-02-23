@@ -30,10 +30,11 @@ public class TeamServlet extends HttpServlet {
 	
 	private static final String CONF_DAO_FACTORY = "daofactory";
 	public DAOFactory daoF;
-	TeamDAOImp addTeam = new TeamDAOImp();
-	UserDaoImpl addUser = new UserDaoImpl(null);
-	GroupDaoImpl addGroup = new GroupDaoImpl(null);
-	TagDAOImp addtag = new TagDAOImp();
+	
+	public TeamDAOImp addTeam = new TeamDAOImp();
+	public UserDaoImpl addUser = new UserDaoImpl(null);
+	public GroupDaoImpl addGroup = new GroupDaoImpl(null);
+	public TagDAOImp addtag = new TagDAOImp();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -62,6 +63,8 @@ public class TeamServlet extends HttpServlet {
 
 		daoF =  (DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
 		String TeamName = (String)request.getParameter("teamName");
+
+		HttpSession session = request.getSession(true);
 		
 		User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
 		
@@ -80,13 +83,14 @@ public class TeamServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		ArrayList<Tag> TagList = null;
+		
 		try {
 			TagList = addtag.getTagList(daoF);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		HttpSession session = request.getSession(true);
+		
 		session.setAttribute("TeamName", NewTeam );
 		session.setAttribute("TagList", TagList);
 		

@@ -6,6 +6,7 @@
 <%
 	Team team =(Team)session.getAttribute("TeamName");
 	session.setAttribute("TeamName", team );
+	ArrayList<Tag> TagList=(ArrayList<Tag>)session.getAttribute("TagList");
                             %>
 
 <!DOCTYPE html>
@@ -713,79 +714,57 @@ table.table .avatar {
                             </div>
                         </div>
                     </div>
-                
                     
-                    <div id="oneByOne" hidden>
-                        <div id="Tag" hidden>
-                            <form action = "http://localhost/teams/AddMembers" method="post"  MULTIPLE>
-                                <div class="container">
-                                <label>
-                                    Selectionner les etiquettes
-                                 (<h6>CTRL </h6> pour ajouter plusieurs etiquettes )
-                                </label>
-                                <select name="TagSelected" id = "setTags" class="form-select" size="2" multiple  >
-                                <%
-                        		ArrayList<Tag> TagList=(ArrayList<Tag>)session.getAttribute("TagList");
-                                for(Tag tag2 :TagList){%>
-                                    <option value =
-                                    <% 
-                                    out.print(tag2.tagName);
-                                    %> 
-                                    name="SelectOption"
-                                    >
-                                    <% 
-                                    out.print(tag2.tagName);
-                                    %> 
-                                    </option>                                                                	
-                                <%}%>
-                                </select>
-                    <!-- 
-                                <div>
-                                    <button type = "button"
-                                      onclick = "showChoices()">
-                                     Selectionner 
-                                    </button>
-                                </div>
-                    
-                     -->
-                    
-                            </div>
-                            
-                         
-                        </div>
-                            <div class="container-xl">
-                                
-                            </div>
-                            <button class="btn-circle  btn-lg submit" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;">Ajouter</button>
-                            
-                        </div>
-                </form> 
-                
-                    <div id="Excel" hidden>
-                        <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">
-                        <section>
-                              <div class="row">
-                                <div class="col-lg-5 mx-auto">
-                                  <div class="p-5 bg-white shadow rounded-lg"><img src="https://res.cloudinary.com/mhmd/image/upload/v1557366994/img_epm3iz.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
-                          
-                                    <!-- Default bootstrap file upload-->
-                          
-                                    <h6 class="text-center mb-4 text-muted">
-                                        Vous pouvez ajouter les membres depuis un fichier Excel
-                                    </h6>
-                                    <div class="custom-file overflow-hidden rounded-pill mb-5">
-                                            <!-- <input id="customFile" type="file" class="custom-file-input rounded-pill" name="Excellpath"  >
-                                            <label for="customFile" class="custom-file-label rounded-pill">Choisir le fichier</label> -->
-                                            <input type="file" name="Excellpath" id="fileUpload">
-                                        </div>
-                                        <!-- End -->
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <button class="btn-circle  btn-lg" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;" type="submit">Ajouter</button>
-                    </form>
-                    </div>
+					<form action = "http://localhost/teams/AddMembers" method="post" enctype='multipart/form-data'>
+						<div id="oneByOne" hidden="true">
+							<div id="Tag" hidden="true">
+			                                <div class="container">
+					                              <label>   Selectionner les etiquettes
+					                                 ( <h6>CTRL</h6> pour ajouter plusieurs etiquettes )
+				                                 </label>
+				                                	<select name="TagSelected" id = "setTags" class="form-select" size="2" multiple  >
+					                                <%
+					                        		if(TagList!=null)
+						                                for(Tag tag2 :TagList){%>
+						                                    <option value =
+							                                    <% 
+							                                    out.print(tag2.tagName);
+							                                    %> 
+							                                    name="TagSelected"
+							                                    >
+							                                    <% 
+							                                    out.print(tag2.tagName);
+							                                    %> 
+						                                    </option>                                                                	
+						                                <%}%>
+				                                	</select>
+			                            	</div>
+				                            <div class="container-xl"></div>
+				                            <button class="btn-circle  btn-lg submit" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;">Ajouter</button>
+							</div>
+						</div>
+						<div id="Excel" hidden="true">
+	                        <section>
+	                              <div class="row">
+	                                <div class="col-lg-5 mx-auto">
+	                                  <div class="p-5 bg-white shadow rounded-lg"><img src="https://res.cloudinary.com/mhmd/image/upload/v1557366994/img_epm3iz.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
+	                                    <!-- Default bootstrap file upload-->
+	                                    <h6 class="text-center mb-4 text-muted">
+	                                        Vous pouvez ajouter les membres depuis un fichier Excel
+	                                    </h6>
+		                                    <div class="custom-file overflow-hidden rounded-pill mb-5">
+		                                            <!-- <input id="customFile" type="file" class="custom-file-input rounded-pill" name="Excellpath"  >
+		                                            <label for="customFile" class="custom-file-label rounded-pill">Choisir le fichier</label> -->
+		                                            <input type="file" name="Excellpath" id="fileUpload">
+	                                        </div>
+	                                        <!-- End -->
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </section>
+	                        <button class="btn-circle  btn-lg" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;" type="submit">Ajouter</button>
+	                    </div>					
+					</form>
                 </div>
                 <!-- /.container-fluid -->
 				<a class="btn-circle  btn-lg" style=" margin-left : 40% ;  margin-top: 0px; width: 90px ; height : 90px ;" href="http://localhost/teams/ShowTeam">Show Teams</a>

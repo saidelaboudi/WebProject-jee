@@ -78,22 +78,18 @@ public class AddMembers extends HttpServlet {
 			//Added by tag
 			String[] tagName = request.getParameterValues("TagSelected");
 			
-			
-			
-			
 			// Remplir la liste des memebres selon la methode choisie
 			
 			if(tagName!=null) {
 				ArrayList<User> userList = new ArrayList<User>();
-				session.setAttribute("TagList", tagName );
+				/*if(session.getAttribute("TagList")==null)
+					session.setAttribute("TagList", tagName );*/
 				for(int i=0;i<tagName.length;i++) {
 					System.out.println(tagName[i]);
 					userList = addtag.getUsersTagged(tagName[i], daoF);
 					users.addAll(userList);
 				}
-			}
-			
-			if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
+			}else if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
 				InputStream inputStream =filePart.getInputStream();
 				users = addUser.addExcell2Depart(inputStream);
 			}
@@ -130,7 +126,7 @@ public class AddMembers extends HttpServlet {
 			
 			
 			
-			//session.setAttribute("usersListTag", u);
+			session.setAttribute("usersListTag", users);
 			
 			/*
 		String[] tagName=(String[])request.getParameterValues("SelectOption");
