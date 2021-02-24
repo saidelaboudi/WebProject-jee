@@ -9,5 +9,5 @@ public interface UserDao {
 	public ArrayList<User> bringAllUsers();
 	public User bringUser(String email);
 	public void addUser(User user);
-	public User getUserByID(int UserId,DataBase db) throws SQLException;
+	public User getUserByID(int UserId) throws SQLException;
 }
