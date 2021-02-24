@@ -12,14 +12,8 @@ import ensias.teams.buzinessLayer.User;
  * TeamDAOImp
  */
 public class TeamDAOImp implements TeamDAO{
-<<<<<<< HEAD
-
-    public void addTeam(Team t,DataBase db) throws SQLException {
-=======
-	
 	
     public void addTeam(Team t,DAOFactory db) throws SQLException {
->>>>>>> FirstTry
 		int OwnerID;
 		ResultSet set = db.Select("Users","Email='"+t.owner.email+"'");
 		if(set.next()) {
