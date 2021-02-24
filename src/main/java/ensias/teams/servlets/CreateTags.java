@@ -12,9 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
 import ensias.teams.dao.DataBase;
+import ensias.teams.dao.TagDAO;
 import ensias.teams.dao.TagDAOImp;
+
 /**
- * Servlet implementation class Tags
+ * Servlet implementation class CreateTags
  */
 @WebServlet("/CreateTags")
 public class CreateTags extends HttpServlet {
@@ -41,21 +43,19 @@ public class CreateTags extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		User owner = new User("a", "b", "c", "d", "e");
-		Tag tag = new Tag((String)request.getParameter("tagName"), owner);
-		TagDAOImp dao = new TagDAOImp();
 		DataBase db;
+		TagDAO dao = new TagDAOImp();
+		User o = new User("a", "b", "c", "d", "e");
+		Tag t = new Tag(request.getParameter("tagName"), o);
 		try {
 			db = new DataBase("localhost","3306","ensiasteams","root","root");
-			dao.addTag(tag, db);
-			System.out.println("bkabk\nananna\nkfkfkf");
+			dao.addTag(t, db);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("1\n2\n3");
 
-        this.getServletContext().getRequestDispatcher("/WEB-INF/createTag.jsp").forward( request, response );
+		this.getServletContext().getRequestDispatcher("/WEB-INF/createTag.jsp").forward( request, response );
 
 	}
 

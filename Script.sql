@@ -58,9 +58,9 @@ CREATE TABLE Tag(
 );
 
 CREATE TABLE Team_Users(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
     TeamID INTEGER references Team(ID),
-    UsersID INTEGER references Users(ID),
-    PRIMARY KEY ( TeamID,UsersID )
+    UsersID INTEGER references Users(ID)
 );
 
 CREATE TABLE Tag_Users(

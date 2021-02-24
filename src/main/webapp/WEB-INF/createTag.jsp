@@ -27,7 +27,11 @@ import = "ensias.teams.dao.DataBase"
 					db = new DataBase("localhost","3306","ensiasteams","root","root");
 				ArrayList<Tag> tags = new TagDAOImp().getTagList(db);
 				for (Tag t : tags){
+<<<<<<< HEAD
 					out.println("<div>" + t.tagName + "</div>");
+=======
+					out.println("<form>" + t.tagName + "</div>");
+>>>>>>> main
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

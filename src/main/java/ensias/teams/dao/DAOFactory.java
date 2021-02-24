@@ -1,6 +1,5 @@
 package ensias.teams.dao;
 
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -83,5 +82,5 @@ public class DAOFactory {
 	    }
 	 public UserDao getUserDao() {
 	        return new UserDaoImpl( this );
-	   }
+	    }
 }

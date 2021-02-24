@@ -6,9 +6,7 @@ package ensias.teams.dao;
  */
 public class DAOException extends RuntimeException {
 
-    private static final long serialVersionUID = 1L;
-
-    /*
+	/*
      * Constructeurs
      */
     public DAOException( String message ) {

@@ -1,6 +1,7 @@
 package ensias.teams.dao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
@@ -8,8 +9,9 @@ import ensias.teams.buzinessLayer.User;
 /**
  * TagDAO
  */
-public class TagDAO {
+public interface TagDAO {
 
+<<<<<<< HEAD
     public void addTag_User(Tag t,DataBase db) throws SQLException{
 		int UserID;
 		String sql="INSERT INTO alias(Alias,StudentID) VALUES (?,?)";
@@ -24,5 +26,12 @@ public class TagDAO {
         	statement.execute();
         }
 	}
+=======
+	public void addTag(Tag t, DataBase db) throws SQLException;
+    public void addTag_User(Tag t,DataBase db) throws SQLException;
+    public ArrayList<Tag> getTagList(DataBase db) throws SQLException;
+    public ArrayList<User> getUsersTagged(String TagName, DataBase db) throws SQLException;
+
+>>>>>>> main
     
 }
