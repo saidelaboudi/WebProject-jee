@@ -1,7 +1,11 @@
 package ensias.teams.dao;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
 
 public interface UserDao {
