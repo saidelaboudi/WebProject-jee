@@ -66,7 +66,7 @@ public class TeamServlet extends HttpServlet {
 
 		HttpSession session = request.getSession(true);
 		
-		User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
+		User owner = (User)session.getAttribute("CurrentUser");
 		
 		Team NewTeam = new Team(TeamName, owner);
 		
