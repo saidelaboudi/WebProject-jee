@@ -18,6 +18,16 @@ import = "ensias.teams.dao.DataBase"
 			<input type="text" name="tagName" placeholder="input Tag name" id="tag"/>
 			<input type="submit" value="Create Tag"/>
 		</form>	
+		<form method="post" action="CreateTags">
+			<label id="tag"> Tag Name : </label>
+			<input type="text" name="DtagName" placeholder="input Tag name" id="tag"/>
+			<input type="submit" value="Delete Tag"/>
+		</form>	
+		<form method="post" action="TagMembers">
+			<label id="tag"> Tag Name : </label>
+			<input type="text" name="MtagName" placeholder="input Tag name" id="tag"/>
+			<input type="submit" value="Modify Members"/>
+		</form>	
 	</header>
 	
 	<main>
@@ -27,7 +37,11 @@ import = "ensias.teams.dao.DataBase"
 					db = new DataBase("localhost","3306","ensiasteams","root","root");
 				ArrayList<Tag> tags = new TagDAOImp().getTagList(db);
 				for (Tag t : tags){
-					out.println("<form>" + t.tagName + "</div>");
+		%>
+			<div>
+				<input type="text" value="<% out.println(t.tagName);%>" disabled>
+			</div>
+		<%
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

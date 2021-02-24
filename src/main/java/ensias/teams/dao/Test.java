@@ -75,7 +75,7 @@ public class Test {
 		}*/
 		/*
 		for(int i =130;i<140;i++) {
-			tag1.addMember(addUser.getUserByID(i, db));
+			tag1.addMember(addUser.getUserByID(i));
 		}
 		addtag.addTag_User(tag1, db);
 		
