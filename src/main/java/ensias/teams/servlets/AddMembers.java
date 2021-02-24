@@ -69,7 +69,7 @@ public class AddMembers extends HttpServlet {
 		
 		try {
 			
-			addUser.addUser(owner, daoF);
+			addUser.addUser(owner);
 			//addTeam.addTeam(NewTeam, daoF);   
 			
 			// Add By Excell 
@@ -100,8 +100,8 @@ public class AddMembers extends HttpServlet {
 			if(users!=null) {
 				// On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
 				for(User user:users) {
-					if(addUser.getUserID(user, daoF)==0) { // l utilisation n'est pas inscrit dans le system
-						addUser.addUser(user, daoF);
+					if(addUser.getUserID(user)==0) { // l utilisation n'est pas inscrit dans le system
+						addUser.addUser(user);
 						NewTeam.addMember(user);
 					}else {
 						System.out.println(user.toString());
@@ -118,7 +118,7 @@ public class AddMembers extends HttpServlet {
 			
 			for(User user: users) {
 				System.out.println(user.toString());
-				System.out.println(addUser.getUserID(user, daoF));
+				System.out.println(addUser.getUserID(user));
 			}
 			
 			//ArrayList<User> users = (ArrayList<User>) session.getAttribute("Users");

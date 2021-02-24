@@ -47,7 +47,7 @@ public class Login extends HttpServlet {
 			session.setAttribute("_SESSION", user);
 			request.setAttribute("user", user);
 
-			this.getServletContext().getRequestDispatcher("/WEB-INF/blank.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher("index").forward( request, response );
 		}
 		else {
 	        this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward( request, response );
