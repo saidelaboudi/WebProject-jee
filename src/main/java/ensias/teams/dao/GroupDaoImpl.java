@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.sql.*;
 
 import ensias.teams.buzinessLayer.Group;
+import ensias.teams.buzinessLayer.Tag;
+import ensias.teams.buzinessLayer.User;
 
 public class GroupDaoImpl implements GroupDao{
 	public DAOFactory daoFactory;
@@ -33,4 +35,20 @@ public class GroupDaoImpl implements GroupDao{
         System.out.print(statement.toString());
         statement.execute();
 	}
+	
+	public ArrayList<Group> getGroupList(DAOFactory db) throws SQLException {
+		ArrayList<Group> list = new ArrayList<Group>();
+		try{
+			ResultSet set = db.Select("Groups","1");
+			while(set.next()) {
+				list.add(new Group(set.getString(2), null));
+			}
+		}catch(Exception e) {
+			
+		}
+		System.out.println("Get tag List Done !");
+		return list;
+	}
+	
+	
 }

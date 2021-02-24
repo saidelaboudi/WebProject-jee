@@ -4,6 +4,10 @@
 	<%@page import="ensias.teams.dao.*"%> 
     <%
     User user = (User)session.getAttribute("CurrentUser");
+    
+    ArrayList<ensias.teams.buzinessLayer.Group> GroupList = null;
+    GroupList=(ArrayList<ensias.teams.buzinessLayer.Group>)session.getAttribute("GroupList");
+	
     %>
 
 <!DOCTYPE html>
@@ -205,7 +209,7 @@
 					
 				<%
 				
-				for(int i = 0; i < 10; i ++){
+				for(ensias.teams.buzinessLayer.Group group : GroupList ){
 				%>	
 				
 					 <div class="col-xl-3 col-md-6 mb-4 row">
@@ -214,7 +218,7 @@
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               <%=i%> 
+                                               <%=group.name%> 
                                                 </div>
                                         </div>
                                         <div class="col-auto">
