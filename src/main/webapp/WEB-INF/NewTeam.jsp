@@ -186,6 +186,69 @@ User user = (User)session.getAttribute("CurrentUser");
                 </nav>
                 <!-- End of Topbar -->
 
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                                    <div class="col-lg-7">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Créer votre équipe</h1>
+                                            </div>
+                
+                
+                
+                                            <form class="user" action="http://localhost/teams/TeamServlet" method="POST">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-user" id="teamName"
+                                                        placeholder="Nom de l'équipe " name="teamName">
+                                                </div>
+                                                <!-- <div class="form-group">
+                                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Description" name="description"></textarea>
+                                                </div> -->
+                                                <div class="btn-block">
+                                                    <a href="index.html" class="btn btn-primary btn-user ">
+                                                        Annuler
+                                                    </a>
+                                                    <input type="submit" value="Suivant" class="btn btn-primary btn-user">
+                                                </div>
+                                            </form>
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>

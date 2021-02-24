@@ -492,6 +492,409 @@ MEDIAQUERIES
                 </nav>
                 <!-- End of Topbar -->
 
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="container-fluid" id="choice">
+                        <!-- Content Row -->
+                        <div class="row">
+                            <div class="col-xl-3 col-md-9 mb-7">
+                                <a href="#" onclick="ShowFiles()">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Fichiers</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                
+                            <div class="col-xl-3 col-md-9 mb-7">
+                                <a href="#" onclick="ShowChat()">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Chat</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+                            <div class="col-xl-3 col-md-9 mb-7">
+                                <a href="#" onclick="ShowMember()">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Les Membres</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-auto">
+                                                <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="ShowMember container" id="ShowMember" hidden>
+                        <div class="table-responsive">
+                            <div class="table-wrapper">
+                                <div class="table-title">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <h2>Les <b>Membres</b></h2>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <a href="#addMemberModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter un membre</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <span class="custom-checkbox">
+                                                    <input type="checkbox" id="selectAll">
+                                                    <label for="selectAll"></label>
+                                                </span>
+                                            </th>
+                                            <th>Nom Complet</th>
+                                            <th>Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <%
+                                     // print users List !! 
+                                        
+                
+                        ArrayList<User> user= new ArrayList<User>();
+                        user=(ArrayList<User>) session.getAttribute("TeamMembers");
+                         if(user!=null)
+                                        for(int i=0;i<user.size();i++){
+                                        %>
+                                                <tr>  
+                                                <td>
+                                                    <span class="custom-checkbox">
+                                                        <input type="checkbox" id="checkbox2" name="options[]" value="1">
+                                                        <label for="checkbox2"></label>
+                                                    </span>
+                                                </td>    
+                                                <td><%= user.get(i).firstName %><%=user.get(i).lastName %></td>
+                                                <td><%= user.get(i).email %></td> 
+                                                 <td>
+                                                    <a href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                </td>
+                                            </tr>
+                                            <%} %>
+                                        <tr>
+                                    </tbody>
+                                </table>
+                                
+                            </div>
+                        </div>
+                        
+                      
+               
+                    <!-- Edit Modal HTML -->
+                    <div id="addMemberModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                
+                                <form action="http://localhost/teams/ShowTeam" method="post">
+                                    <div class="modal-header">						
+                                        <h4 class="modal-title">Ajouter un membre</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <div class="modal-body">					
+                                        <div class="form-group">
+                                            <label>email</label>
+                                            <input type="text" class="form-control" required name="email">
+                                        </div>					
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                                        <input type="submit" class="btn btn-success" value="Ajouter">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Delete Modal HTML -->
+                    <div id="deleteMemberModal" class="modal fade">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form>
+                                    <div class="modal-header">						
+                                        <h4 class="modal-title">Supprimer un membre</h4>
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                    </div>
+                                    <div class="modal-body">					
+                                        <p>Voulez-vous vraiment supprimer ce membre ?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                                        <input type="submit" class="btn btn-danger" value="Supprimer">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="chat" id="chat" !hidden >
+                        <div class="container">
+                            <div class="px-0">
+                              <div class="px-4 py-5 chat-box bg-white">
+                                <!-- Sender Message-->
+                                <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+                                  <div class="media-body ml-3">
+                                    <div class="bg-light rounded py-2 px-3 mb-2">
+                                      <p class="text-small mb-0 text-muted">Test which is a new approach all solutions</p>
+                                    </div>
+                                    <p class="small text-muted">12:00 PM | Aug 13</p>
+                                  </div>
+                                </div>
+                        
+                                <!-- Reciever Message-->
+                                <div class="media w-50 ml-auto mb-3">
+                                  <div class="media-body">
+                                    <div class="bg-primary rounded py-2 px-3 mb-2">
+                                      <p class="text-small mb-0 text-white">Test which is a new approach to have all solutions</p>
+                                    </div>
+                                    <p class="small text-muted">12:00 PM | Aug 13</p>
+                                  </div>
+                                </div>
+                        
+                                <!-- Sender Message-->
+                                <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+                                  <div class="media-body ml-3">
+                                    <div class="bg-light rounded py-2 px-3 mb-2">
+                                      <p class="text-small mb-0 text-muted">Test, which is a new approach to have</p>
+                                    </div>
+                                    <p class="small text-muted">12:00 PM | Aug 13</p>
+                                  </div>
+                                </div>
+                        
+                                <!-- Reciever Message-->
+                                <div class="media w-50 ml-auto mb-3">
+                                  <div class="media-body">
+                                    <div class="bg-primary rounded py-2 px-3 mb-2">
+                                      <p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
+                                    </div>
+                                    <p class="small text-muted">12:00 PM | Aug 13</p>
+                                  </div>
+                                </div>
+                        
+                                <!-- Sender Message-->
+                                <div class="media w-50 mb-3"><img src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" width="50" class="rounded-circle">
+                                  <div class="media-body ml-3">
+                                    <div class="bg-light rounded py-2 px-3 mb-2">
+                                      <p class="text-small mb-0 text-muted">Test, which is a new approach</p>
+                                    </div>
+                                    <p class="small text-muted">12:00 PM | Aug 13</p>
+                                  </div>
+                                </div>
+                        
+                                <!-- Reciever Message-->
+                                <div class="media w-50 ml-auto mb-3">
+                                  <div class="media-body">
+                                    <div class="bg-primary rounded py-2 px-3 mb-2">
+                                      <p class="text-small mb-0 text-white">Apollo University, Delhi, India Test</p>
+                                    </div>
+                                    <p class="small text-muted">12:00 PM | Aug 13</p>
+                                  </div>
+                                </div>
+                        
+                              </div>
+                        
+                              <!-- Typing area -->
+                              <form action="#" class="bg-light">
+                                <div class="input-group">
+                                  <input type="text" placeholder="Type a message" aria-describedby="button-addon2" class="form-control rounded-0 border-0 py-4 bg-light">
+                                  <div class="input-group-append">
+                                    <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"></i></button>
+                                  </div>
+                                </div>
+                              </form>
+                        
+                            </div>
+                          </div>
+                    </div>
+                    <div class="file" id="file" hidden>
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+                        <div class="content">
+                          <div class="container">
+                              <div class="row">
+                                  <div class="col-12">
+                                      <div class="card-box">
+                                          <div class="row">
+                                              <div class="col-lg-6 col-xl-6">
+                                                  <h4 class="header-title m-b-30">My Files</h4>
+                                              </div>
+                                          </div>
+                        
+                                          <div class="row">
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/pdf.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">invoice_project.pdf</h5>
+                                                          <p class="mb-0"><small>568.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/bmp.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Bmpfile.bmp</h5>
+                                                          <p class="mb-0"><small>845.8 mb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/psd.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Photoshop_file.ps</h5>
+                                                          <p class="mb-0"><small>684.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/avi.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Avifile.avi</h5>
+                                                          <p class="mb-0"><small>5.9 mb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/cad.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Cadfile.cad</h5>
+                                                          <p class="mb-0"><small>95.8 mb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/txt.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Mytextfile.txt</h5>
+                                                          <p class="mb-0"><small>568.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/eps.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Epsfile.eps</h5>
+                                                          <p class="mb-0"><small>568.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/dll.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Project_file.dll</h5>
+                                                          <p class="mb-0"><small>684.3 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/sql.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">Website_file.sql</h5>
+                                                          <p class="mb-0"><small>457.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/zip.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">invoice_project.pdf</h5>
+                                                          <p class="mb-0"><small>568.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/ps.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">invoice_project.pdf</h5>
+                                                          <p class="mb-0"><small>568.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <div class="col-lg-3 col-xl-2">
+                                                  <div class="file-man-box"><a href="" class="file-close"><i class="fa fa-times-circle"></i></a>
+                                                      <div class="file-img-box"><img src="https://coderthemes.com/highdmin/layouts/assets/images/file_icons/png.svg" alt="icon"></div><a href="#" class="file-download"><i class="fa fa-download"></i></a>
+                                                      <div class="file-man-title">
+                                                          <h5 class="mb-0 text-overflow">invoice_project.pdf</h5>
+                                                          <p class="mb-0"><small>568.8 kb</small></p>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="text-center mt-3">
+                                              <button type="button" class="btn btn-outline-danger w-md waves-effect waves-light"><i class="mdi mdi-refresh"></i> Load More Files</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <!-- end col -->
+                              </div>
+                              <!-- end row -->
+                          </div>
+                          <!-- container -->
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>

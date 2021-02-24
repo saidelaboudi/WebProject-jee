@@ -486,6 +486,246 @@ table.table .avatar {
                 </nav>
                 <!-- End of Topbar -->
 
+
+<!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="container-fluid" style="margin : 20%;" id="choice">
+                        <!-- Content Row -->
+                        <div class="container row">
+
+                            <div class="col-xl-3 col-md-9 mb-7">
+                                <a href="#" onclick="AddOneByOne()">
+                                    <div class="card border-left-success shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                                        Ajout des Membres</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800">Un par un/Par etiquette</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                
+                            <div class="col-xl-3 col-md-9 mb-7">
+                                <a href="#" onclick="AddByExcell()">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Ajout des Membres
+                                                    </div>
+                                                    <div class="row no-gutters align-items-center">
+                                                        <div class="col-auto">
+                                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">Excell</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                
+                    
+                    <div id="oneByOne" hidden>
+                        <div id="Tag" hidden>
+                        
+                        
+                            <form action = "http://localhost/teams/TeamServlet#" method="post" >
+                            
+                                <div class="container">
+                                <label>
+                                    Selectionner les etiquettes
+                                 (<h6>CTRL </h6> pour ajouter plusieurs etiquettes )
+                                </label>
+                                <select id = "setTags" class="form-select" size="2" multiple  >
+                                <%
+                        		ArrayList<Tag> TagList=(ArrayList<Tag>)session.getAttribute("TagList");
+                                for(Tag tag2 :TagList){%>
+                                    <option value = 
+                                    <% 
+                                    out.print(tag2.tagName);
+                                    %> 
+                                    name="SelectOption"
+                                    >
+                                    <% 
+                                    out.print(tag2.tagName);
+                                    %> 
+                                    </option>                                                                	
+                                <%}%>
+                                </select>
+                    
+                                <div>
+                                    <button type = "button submit"
+                                      onclick = "showChoices()">
+                                     Selectionner 
+                                    </button>
+                                </div>
+                    
+                            </div>
+                               </form>
+                            </div>
+                            
+                        <div class="container-xl">
+                            <div class="table-responsive">
+                                <div class="table-wrapper">
+                                    <div class="table-title">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h2>Les <b>Membres</b></h2>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <a href="#addMemberModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Ajouter un membre</span></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    <span class="custom-checkbox">
+                                                        <input type="checkbox" id="selectAll">
+                                                        <label for="selectAll"></label>
+                                                    </span>
+                                                </th>
+                                                <th>Nom Complet</th>
+                                                <th>Email</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% 
+                                            ArrayList<User> user = (ArrayList<User>)request.getAttribute("user");
+                                                        		if(user!=null)
+                                            for(int i=0;i<user.size();i++){
+                                            %>
+									            <tr>  
+										            <td>
+	                                                    <span class="custom-checkbox">
+	                                                        <input type="checkbox" id="checkbox2" name="options[]" value="1">
+	                                                        <label for="checkbox2"></label>
+	                                                    </span>
+	                                                </td>    
+									                <td><%= user.get(i).firstName %><%=user.get(i).lastName %></td>
+									                <td><%= user.get(i).email %></td> 
+									                 <td>
+                                                    	<a href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                	</td>
+									            </tr>
+									            <%} %>
+                                            <tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                          <button class="btn-circle  btn-lg" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;">Ajouter</button>
+                        </div>
+                        
+                        <!-- Edit Modal HTML -->
+                        <div id="addMemberModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Ajouter un membre</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">					
+                                            <div class="form-group">
+                                                <label>email</label>
+                                                <input type="text" class="form-control" name="addByEmail" required>
+                                            </div>					
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                                            <input type="submit" class="btn btn-success" value="Ajouter">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Delete Modal HTML -->
+                        <div id="deleteMemberModal" class="modal fade">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <form>
+                                        <div class="modal-header">						
+                                            <h4 class="modal-title">Supprimer un membre</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                        </div>
+                                        <div class="modal-body">					
+                                            <p>Voulez-vous vraiment supprimer ce membre ?</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+                                            <input type="submit" class="btn btn-danger" value="Supprimer">
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div id="Excel" hidden>
+                        <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">
+                        <section>
+                              <div class="row">
+                                <div class="col-lg-5 mx-auto">
+                                  <div class="p-5 bg-white shadow rounded-lg"><img src="https://res.cloudinary.com/mhmd/image/upload/v1557366994/img_epm3iz.png" alt="" width="200" class="d-block mx-auto mb-4 rounded-pill">
+                          
+                                    <!-- Default bootstrap file upload-->
+                          
+                                    <h6 class="text-center mb-4 text-muted">
+                                        Vous pouvez ajouter les membres depuis un fichier Excel
+                                    </h6>
+                                    <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                            <!-- <input id="customFile" type="file" class="custom-file-input rounded-pill" name="Excellpath"  >
+                                            <label for="customFile" class="custom-file-label rounded-pill">Choisir le fichier</label> -->
+                                            <input type="file" name="Excellpath" id="fileUpload">
+                                        </div>
+                                        <!-- End -->
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <button class="btn-circle  btn-lg" style=" margin-left : 90% ;  margin-top: 0px; width: 90px ; height : 90px ;" type="submit">Ajouter</button>
+                    </form>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; ENSIAS TEAMS 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+
+
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
