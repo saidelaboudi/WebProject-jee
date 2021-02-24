@@ -78,7 +78,7 @@ public class TagDAOImp implements TagDAO{
     	while(set.next()) {
     		UserID=set.getInt("UsersID");
     		System.out.println("------------");
-    		users.add(addUser.getUserByID(UserID));
+    		users.add(addUser.getUserByID(UserID,db));
     	}
 		return users;
 	}

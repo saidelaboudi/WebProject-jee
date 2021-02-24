@@ -98,7 +98,11 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 
-	
+	@Override
+	public User bringUser(String email, String pass) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	@Override
 	public void addUser(User user) {
 		Connection connection=null;
@@ -441,4 +445,5 @@ public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException
 
 			return users;
 		}
+	
 }
