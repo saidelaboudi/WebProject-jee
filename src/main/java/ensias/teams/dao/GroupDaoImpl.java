@@ -6,8 +6,7 @@ import java.sql.*;
 import ensias.teams.buzinessLayer.Group;
 
 public class GroupDaoImpl implements GroupDao{
-	private DAOFactory daoFactory;
-	
+	public DAOFactory daoFactory;
 	public GroupDaoImpl(DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
 	}
