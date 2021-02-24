@@ -69,4 +69,14 @@ public class TeamDAOImp implements TeamDAO{
     	}
     	return users;
     }
+    
+    public Team getTeamByID(int ID,DAOFactory db) throws SQLException{
+    	Team team = null;
+    	UserDaoImpl addUser = new UserDaoImpl(db);
+    	ResultSet set = db.Select("team","ID="+ID);
+    	while(set.next()) {
+    		team= new Team(set.getString(2),addUser.getUserByID(set.getInt(4), db));
+    	}
+    	return team;
+    }
 }
