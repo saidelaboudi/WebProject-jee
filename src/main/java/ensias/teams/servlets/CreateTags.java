@@ -11,11 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
-<<<<<<< HEAD
-import ensias.teams.dao.DataBase;
-=======
+
 import ensias.teams.dao.DAOFactory;
->>>>>>> FirstTry
 import ensias.teams.dao.TagDAO;
 import ensias.teams.dao.TagDAOImp;
 
@@ -46,22 +43,13 @@ public class CreateTags extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-<<<<<<< HEAD
-		DataBase db;
-=======
 		DAOFactory db;
->>>>>>> FirstTry
 		TagDAO dao = new TagDAOImp();
 		User o = new User("a", "b", "c", "d", "e");
 		
 		try {
-<<<<<<< HEAD
-			db = new DataBase("localhost","3306","ensiasteams","root","root");
-=======
 			db = DAOFactory.getInstance();
->>>>>>> FirstTry
-			System.out.println(request.getParameter("DtagName")+ "  11111");
+			System.out.println(request.getParameterMap().containsKey("DtagName")+ "  11111");
 			if (request.getParameterMap().containsKey("DtagName")) {
 				Tag t = new Tag(request.getParameter("DtagName"), o);
 				dao.removeTag(t, db);

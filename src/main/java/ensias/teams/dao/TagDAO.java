@@ -17,6 +17,7 @@ public interface TagDAO {
     public ArrayList<Tag> getTagList(DAOFactory db) throws SQLException;
     public ArrayList<User> getUsersTagged(String TagName, DAOFactory db) throws SQLException;
 	public void removeTag(Tag t, DAOFactory db);
+	void removeTag_User(Tag t, String email) throws SQLException;
 
     
 }

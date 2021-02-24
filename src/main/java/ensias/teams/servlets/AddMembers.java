@@ -68,15 +68,9 @@ public class AddMembers extends HttpServlet {
 		
 		
 		try {
-			
-<<<<<<< HEAD
-			db = new DataBase("localhost","3306","teams","root","root");
-			addUser.addUser(owner);
-			//addTeam.addTeam(NewTeam, db);   
-=======
+
 			addUser.addUser(owner, daoF);
 			//addTeam.addTeam(NewTeam, daoF);   
->>>>>>> FirstTry
 			
 			// Add By Excell 
 			Part filePart = request.getPart("Excellpath");
@@ -106,13 +100,9 @@ public class AddMembers extends HttpServlet {
 			if(users!=null) {
 				// On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
 				for(User user:users) {
-<<<<<<< HEAD
-					if(addUser.getUserID(user)==0) { // l utilisation n'est pas inscrit dans le system
-						addUser.addUser(user);
-=======
+
 					if(addUser.getUserID(user, daoF)==0) { // l utilisation n'est pas inscrit dans le system
 						addUser.addUser(user, daoF);
->>>>>>> FirstTry
 						NewTeam.addMember(user);
 					}else {
 						System.out.println(user.toString());
@@ -129,11 +119,8 @@ public class AddMembers extends HttpServlet {
 			
 			for(User user: users) {
 				System.out.println(user.toString());
-<<<<<<< HEAD
-				System.out.println(addUser.getUserID(user));
-=======
+
 				System.out.println(addUser.getUserID(user, daoF));
->>>>>>> FirstTry
 			}
 			
 			//ArrayList<User> users = (ArrayList<User>) session.getAttribute("Users");

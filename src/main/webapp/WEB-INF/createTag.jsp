@@ -2,12 +2,7 @@
 import = "java.util.ArrayList"
 import = "ensias.teams.buzinessLayer.Tag"
 import = "ensias.teams.dao.TagDAOImp"
-<<<<<<< HEAD
-import = "ensias.teams.dao.DataBase"
-=======
 import = "ensias.teams.dao.DAOFactory"
->>>>>>> FirstTry
-
 %>
 <!DOCTYPE html>
 <html>
@@ -36,16 +31,10 @@ import = "ensias.teams.dao.DAOFactory"
 	
 	<main>
 		<%
-<<<<<<< HEAD
-			DataBase db;
-			try{
-					db = new DataBase("localhost","3306","ensiasteams","root","root");
-=======
 			DAOFactory db;
 			try{
 					db = DAOFactory.getInstance();
->>>>>>> FirstTry
-				ArrayList<Tag> tags = new TagDAOImp().getTagList(db);
+				ArrayList<Tag> tags = new TagDAOImp().getTagList();
 				for (Tag t : tags){
 		%>
 			<div>

@@ -82,9 +82,9 @@ public class UserDaoImpl implements UserDao {
 			st=connection.prepareStatement(setDb);
 			st.executeQuery(setDb);
 			st.close();
+			
 			st=connection.prepareStatement(query);
 			st.setString(1, email);
-			
 			rs=st.executeQuery(query);
 			if (rs.next())
 				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
@@ -98,31 +98,7 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 
-	public User bringUser(String email) {
-		User users = null;
-		
-		Connection connection=null;
-		Statement st=null;
-		ResultSet rs=null;
-		
-		
-		try {
-			connection = this.daoFactory.getConnection();
-			st=connection.createStatement();
-			st.executeQuery("USE "+ this.daoFactory.getSchema());
-			
-			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "'");
-			while( rs.next()) {
-				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
-			}
-		}catch ( SQLException e ) {
-	        throw new DAOException( e );
-	    } finally {
-	        fermeturesSilencieuses( rs ,st, connection );
-	    }
-
-		return users;
-	}
+	
 	
 	@Override
 	public void addUser(User user) {
@@ -193,8 +169,7 @@ public class UserDaoImpl implements UserDao {
 	    fermetureSilencieuse( connexion );
 	}
 	
-<<<<<<< HEAD
-=======
+
 	public void addUser(User user,DAOFactory db) throws SQLException {
 		String sql="INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?,?,?,?,?)";
         PreparedStatement statement = db.getConnection().prepareStatement(sql);
@@ -206,7 +181,6 @@ public class UserDaoImpl implements UserDao {
         statement.execute();
 	}
 
->>>>>>> FirstTry
 	
 	public ArrayList<User> addExcell2Depart(String excelFilePath) throws IOException, SQLException {
 			
@@ -326,7 +300,6 @@ public class UserDaoImpl implements UserDao {
 }
 
 
-<<<<<<< HEAD
 	public ArrayList<User> getUsersByTag(Tag tag1) throws SQLException{
 		ArrayList<User> users = new ArrayList<>();
 		
@@ -356,7 +329,15 @@ public class UserDaoImpl implements UserDao {
 			while(rs.next()) {
 				int UserID= (int)rs.getInt(2);
 				users.add(getUserByID(UserID));
-=======
+			}
+			st.close();
+		}catch(Exception e) {
+			
+		}
+		System.out.println("Get users by Tag done !");
+		return users;
+	}
+
 	public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException{
 		ArrayList<User> users = new ArrayList<User>();
 		try{
@@ -369,9 +350,8 @@ public class UserDaoImpl implements UserDao {
 				int UserID= (int)set.getInt(2);
 				
 				users.add(getUserByID(UserID,db));
->>>>>>> FirstTry
 			}
-			st.close();
+			set.close();
 		}catch(Exception e) {
 			
 		}
@@ -379,7 +359,6 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 
-<<<<<<< HEAD
 	public int getUserID(User user) throws SQLException {
 		int id = 0;
 
@@ -440,7 +419,7 @@ public class UserDaoImpl implements UserDao {
 		    }
 
 			return users;
-=======
+	}
 	public int getUserID(User user,DAOFactory db) throws SQLException {
 		ResultSet set = db.Select("Users","Email = '"+user.email+"'");
 		if(set.next()) {
@@ -460,6 +439,7 @@ public class UserDaoImpl implements UserDao {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
->>>>>>> FirstTry
 		}
+		return user;
+	}
 }

@@ -10,12 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ensias.teams.buzinessLayer.Tag;
-<<<<<<< HEAD
 import ensias.teams.buzinessLayer.User;
-import ensias.teams.dao.DataBase;
-=======
 import ensias.teams.dao.DAOFactory;
->>>>>>> FirstTry
 import ensias.teams.dao.TagDAO;
 import ensias.teams.dao.TagDAOImp;
 
@@ -47,34 +43,28 @@ public class TagMembers extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ensias.teams.dao.DAOFactory daoF =  (ensias.teams.dao.DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
+
 		// if we use modifyTag form in createTag.jsp, MtagName is send with request
 		if (request.getParameterMap().containsKey("MtagName")) {
 			request.setAttribute("tagName", request.getParameter("MtagName"));
 			request.setAttribute("firstTime", true);
 		}else {
+			Tag t = new Tag((String)request.getAttribute("tagName"), (User) request.getSession().getAttribute("_Session"));
 			// refresh tagName attribut
 						request.setAttribute("tagName", request.getParameter("tagName"));
 			// after we come from createTag.jsp
 			// if we use addMember form, Nmember is send with request
 			if (request.getParameterMap().containsKey("Nmember")) {
 				// recovering the user if he exists
-				ensias.teams.dao.DAOFactory daoF =  (ensias.teams.dao.DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
 				ensias.teams.buzinessLayer.User user = daoF.getUserDao().bringUser(request.getParameter("Nmember"));
 				request.setAttribute("member", user);
 				if (user != null) {
 					// adding the user to tag_users
-<<<<<<< HEAD
-					DataBase db;
-					TagDAO dao = new TagDAOImp();					
-					try {
-						db = new DataBase("localhost","3306","ensiasteams","root","root");
-=======
 					DAOFactory db;
 					TagDAO dao = new TagDAOImp();					
 					try {
 						db = DAOFactory.getInstance();
->>>>>>> FirstTry
-							Tag t = new Tag((String)request.getAttribute("tagName"), user);
 							t.addMember(user);
 							System.out.println("user" + user.toString());
 							System.out.println("tagMem" + t.tagged.toString());
@@ -87,8 +77,25 @@ public class TagMembers extends HttpServlet {
 				}
 				//
 			}
+			else {
+				// if Dmail exist then we attempting to delete a member
+				if (request.getParameterMap().containsKey("Dmail")) {
+					// recovering the user if he exists
+						// delete the user from tag_users
+						TagDAO dao = new TagDAOImp();					
+						try {
+							dao.removeTag_User(t, request.getParameter("DMail"));
+	
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					//
+				}
+			}
 			
-		}
+		
 		this.getServletContext().getRequestDispatcher("/WEB-INF/modifyTag.jsp").forward(request, response);
 	}
 
