@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
-import ensias.teams.dao.DataBase;
 import ensias.teams.dao.TagDAO;
 import ensias.teams.dao.TagDAOImp;
 
@@ -21,7 +20,8 @@ import ensias.teams.dao.TagDAOImp;
 @WebServlet("/CreateTags")
 public class CreateTags extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final String CONF_DAO_FACTORY = "daofactory";
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -40,12 +40,11 @@ public class CreateTags extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		DataBase db;
+		ensias.teams.dao.DAOFactory db =  (ensias.teams.dao.DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
 		TagDAO dao = new TagDAOImp();
 		User o = new User("a", "b", "c", "d", "e");
 		
 		try {
-			db = new DataBase("localhost","3306","ensiasteams","root","root");
 			System.out.println(request.getParameter("DtagName")+ "  11111");
 			if (request.getParameterMap().containsKey("DtagName")) {
 				Tag t = new Tag(request.getParameter("DtagName"), o);

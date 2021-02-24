@@ -71,9 +71,9 @@ public class ShowTeam extends HttpServlet {
 		
 		try {
 			String email = (String)request.getParameter("email");
-			int UserID = addUser.getUserID(new User(null,null,null,null, email), daoF);
+			int UserID = addUser.getUserID(new User(null,null,null,null, email));
 			System.out.println(UserID);
-			User user = addUser.getUserByID(UserID, daoF);
+			User user = addUser.getUserByID(UserID);
 			HttpSession session = request.getSession(true);
 			Team team = (Team) session.getAttribute("TeamName");
 			addTeam.addTeam_Member(team, user, daoF);

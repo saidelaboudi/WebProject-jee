@@ -1,5 +1,6 @@
 package ensias.teams.dao;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,10 +24,12 @@ public class TagDAOImp implements TagDAO{
 	}
 
 
-	public void removeTag(Tag t, DataBase db) throws SQLException {
-		int UserID;
+	public void removeTag(Tag t, DAOFactory db) throws SQLException {
+		//int UserID;
 		String sql="DELETE FROM tag  WHERE tag = ?";
-	    PreparedStatement statement = db.connection.prepareStatement(sql);
+		Connection connection = db.getConnection();
+
+	    PreparedStatement statement = connection.prepareStatement(sql);
 	    statement.setString(1,t.tagName);      	
     	statement.execute();
 	}

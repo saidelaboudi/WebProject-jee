@@ -584,10 +584,10 @@ MEDIAQUERIES
                                      // print users List !! 
                                         
                 
-                        ArrayList<User> user= new ArrayList<User>();
-                        user=(ArrayList<User>) session.getAttribute("TeamMembers");
+                        ArrayList<User> users= new ArrayList<User>();
+                        users=(ArrayList<User>) session.getAttribute("TeamMembers");
                          if(user!=null)
-                                        for(int i=0;i<user.size();i++){
+                                        for(int i=0;i<users.size();i++){
                                         %>
                                                 <tr>  
                                                 <td>
@@ -596,8 +596,8 @@ MEDIAQUERIES
                                                         <label for="checkbox2"></label>
                                                     </span>
                                                 </td>    
-                                                <td><%= user.get(i).firstName %><%=user.get(i).lastName %></td>
-                                                <td><%= user.get(i).email %></td> 
+                                                <td><%= users.get(i).firstName %><%=users.get(i).lastName %></td>
+                                                <td><%= users.get(i).email %></td> 
                                                  <td>
                                                     <a href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                                 </td>

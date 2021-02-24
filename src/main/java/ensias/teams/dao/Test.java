@@ -39,7 +39,7 @@ public class Test {
 		
 		for(Tag tag2 :addtag.getTagList(db)) {
 			System.out.println(tag2.tagName);
-			for(User user : addUser.getUsersByTag(tag2, db)) {
+			for(User user : addUser.getUsersByTag(tag2)) {
 				System.out.println(user.toString());
 			}
 		}
