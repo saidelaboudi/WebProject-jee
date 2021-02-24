@@ -78,10 +78,10 @@ public class DAOFactory {
 	        return null;
 		  } 
 	 
-	 public GroupDao getGroupDao() {
+	 public GroupDaoImpl getGroupDao() {
 	        return new GroupDaoImpl( this );
 	    }
-	 public UserDao getUserDao() {
+	 public UserDaoImpl getUserDao() {
 	        return new UserDaoImpl( this );
 	    }
 
