@@ -15,8 +15,7 @@ public class GroupDaoImpl implements GroupDao{
 		ArrayList<Group> list = new ArrayList<>(); 
 		return list;
 	}
-
-	public void addGroup(Group g,DataBase db) throws SQLException {
+	public void addGroup(Group g,DAOFactory db) throws SQLException {
 		int OwnerID;
 		ResultSet set = db.Select("Users","Email='"+g.owner.email+"'");
 		if(set.next()) {
@@ -27,7 +26,7 @@ public class GroupDaoImpl implements GroupDao{
 			OwnerID=set.getInt("ID");			
 		}
 		String sql="INSERT INTO Groups (NAME,OwnerID,description) VALUES (?,?,?)";
-        PreparedStatement statement = db.connection.prepareStatement(sql);
+        PreparedStatement statement = db.getConnection().prepareStatement(sql);
         statement.setString(1,g.name);   
         statement.setInt(2, OwnerID);  
         statement.setString(3,g.description);  

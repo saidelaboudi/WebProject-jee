@@ -208,6 +208,7 @@
 				for(int i = 0; i < 10; i ++){
 				%>	
 				
+					<a href="http://localhost/teams/ShowTeam">
 					 <div class="col-xl-3 col-md-6 mb-4 row">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
