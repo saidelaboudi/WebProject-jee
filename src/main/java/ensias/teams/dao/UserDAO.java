@@ -10,4 +10,5 @@ public interface UserDao {
 	public User bringUser(String email, String pass);
 	public void addUser(User user);
 	public User getUserByID(int UserId,DAOFactory db) throws SQLException;
+	public User bringUser(String parameter);
 }

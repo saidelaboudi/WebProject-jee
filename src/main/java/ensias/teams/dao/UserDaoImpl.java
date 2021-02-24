@@ -88,6 +88,31 @@ public class UserDaoImpl implements UserDao {
 		return users;
 	}
 
+	public User bringUser(String email) {
+		User users = null;
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			
+			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "'");
+			while( rs.next()) {
+				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
 	
 	@Override
 	public void addUser(User user) {

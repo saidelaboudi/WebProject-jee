@@ -1,6 +1,5 @@
 package ensias.teams.dao;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
@@ -70,6 +69,7 @@ public class DAOFactory {
 	}
 	
 	 public Connection getConnection()  {
+		 System.out.println(url + " " + username + " " + password);
 	        try {
 				return DriverManager.getConnection( url, username, password );
 			} catch (SQLException e) {

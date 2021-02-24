@@ -72,6 +72,21 @@ public class TagDAOImp implements TagDAO{
     	}
 		return users;
 	}
+	@Override
+	public void removeTag(Tag t, DAOFactory db) {
+		String sql="REMOVE TROM tag WHERE tag = ? ";
+	    PreparedStatement statement;
+		try {
+			statement = db.getConnection().prepareStatement(sql);
+			statement.setString(1,t.tagName);      	
+		    statement.execute();
+				
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	   
+	}
 	
 	
 
