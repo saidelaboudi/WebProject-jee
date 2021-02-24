@@ -10,8 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ensias.teams.buzinessLayer.Tag;
+<<<<<<< HEAD
 import ensias.teams.buzinessLayer.User;
 import ensias.teams.dao.DataBase;
+=======
+import ensias.teams.dao.DAOFactory;
+>>>>>>> FirstTry
 import ensias.teams.dao.TagDAO;
 import ensias.teams.dao.TagDAOImp;
 
@@ -59,10 +63,17 @@ public class TagMembers extends HttpServlet {
 				request.setAttribute("member", user);
 				if (user != null) {
 					// adding the user to tag_users
+<<<<<<< HEAD
 					DataBase db;
 					TagDAO dao = new TagDAOImp();					
 					try {
 						db = new DataBase("localhost","3306","ensiasteams","root","root");
+=======
+					DAOFactory db;
+					TagDAO dao = new TagDAOImp();					
+					try {
+						db = DAOFactory.getInstance();
+>>>>>>> FirstTry
 							Tag t = new Tag((String)request.getAttribute("tagName"), user);
 							t.addMember(user);
 							System.out.println("user" + user.toString());

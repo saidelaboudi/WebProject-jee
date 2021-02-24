@@ -1,6 +1,10 @@
 <%@page
 import="ensias.teams.buzinessLayer.User" 
+<<<<<<< HEAD
 import="ensias.teams.dao.DataBase"
+=======
+import="ensias.teams.dao.DAOFactory"
+>>>>>>> FirstTry
 import = "ensias.teams.dao.TagDAOImp"
 import = "java.util.ArrayList"
 
@@ -43,9 +47,15 @@ import = "java.util.ArrayList"
 		
 		<main>
 			<%
+<<<<<<< HEAD
 			DataBase db;
 			try{
 				db = new DataBase("localhost","3306","ensiasteams","root","root");
+=======
+			DAOFactory db;
+			try{
+				db = DAOFactory.getInstance();
+>>>>>>> FirstTry
 				ArrayList<User> members = new TagDAOImp().getUsersTagged((String)request.getAttribute("tagName"), db);
 				for (User t : members){
 		%>

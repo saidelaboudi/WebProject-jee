@@ -5,9 +5,9 @@ import java.sql.*;
 
 import ensias.teams.buzinessLayer.Group;
 
+
 public class GroupDaoImpl implements GroupDao{
-	private DAOFactory daoFactory;
-	
+	public DAOFactory daoFactory;
 	public GroupDaoImpl(DAOFactory daoFactory) {
 		this.daoFactory = daoFactory;
 	}
@@ -16,8 +16,7 @@ public class GroupDaoImpl implements GroupDao{
 		ArrayList<Group> list = new ArrayList<>(); 
 		return list;
 	}
-
-	public void addGroup(Group g,DataBase db) throws SQLException {
+	public void addGroup(Group g,DAOFactory db) throws SQLException {
 		int OwnerID;
 		ResultSet set = db.Select("Users","Email='"+g.owner.email+"'");
 		if(set.next()) {
@@ -28,11 +27,27 @@ public class GroupDaoImpl implements GroupDao{
 			OwnerID=set.getInt("ID");			
 		}
 		String sql="INSERT INTO Groups (NAME,OwnerID,description) VALUES (?,?,?)";
-        PreparedStatement statement = db.connection.prepareStatement(sql);
+        PreparedStatement statement = db.getConnection().prepareStatement(sql);
         statement.setString(1,g.name);   
         statement.setInt(2, OwnerID);  
         statement.setString(3,g.description);  
         System.out.print(statement.toString());
         statement.execute();
 	}
+	
+	public ArrayList<Group> getGroupList(DAOFactory db) throws SQLException {
+		ArrayList<Group> list = new ArrayList<Group>();
+		try{
+			ResultSet set = db.Select("Groups","1");
+			while(set.next()) {
+				list.add(new Group(set.getString(2), null));
+			}
+		}catch(Exception e) {
+			
+		}
+		System.out.println("Get tag List Done !");
+		return list;
+	}
+	
+	
 }

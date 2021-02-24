@@ -1,11 +1,11 @@
 package ensias.teams.dao;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.*;
 import java.util.Properties;
 
 
@@ -24,13 +24,14 @@ public class DAOFactory {
 	 private String username;
 	 private String password;
 	 private String schema;
+
 	 DAOFactory( String url, String username, String password ,String schema ) {
 	        this.url = url;
 	        this.username = username;
 	        this.password = password;
 	        this.schema=schema;
 	 }
-     public static DAOFactory getInstance()   {
+      public static DAOFactory getInstance()   {
 	        String url;
 	        String driver;
 	        String nomUtilisateur;
@@ -63,19 +64,19 @@ public class DAOFactory {
 	        
 	        return instance;
 	    }
-
 	 public String getSchema() {
 		return schema;
 	}
 	
-	Connection getConnection()  {
-        try {
-			return DriverManager.getConnection( url, username, password );
-		} catch (SQLException e) {
-			System.out.println("Loading the connexion failed !!");
-		}
-        return null;
-	  } 
+	 public Connection getConnection()  {
+		 System.out.println(url + " " + username + " " + password);
+	        try {
+				return DriverManager.getConnection( url, username, password );
+			} catch (SQLException e) {
+				System.out.println("Loading the connexion failed !!");
+			}
+	        return null;
+		  } 
 	 
 	 public GroupDao getGroupDao() {
 	        return new GroupDaoImpl( this );
@@ -83,4 +84,63 @@ public class DAOFactory {
 	 public UserDao getUserDao() {
 	        return new UserDaoImpl( this );
 	    }
+
+		
+	public void Query(String query) throws SQLException {
+		Statement statement=getConnection().createStatement();
+		statement.executeUpdate(query);
+	}
+	
+	public ResultSet Select(String TableName,String condition){		
+		ResultSet result = null;
+		try {
+			String query="SELECT * FROM "+TableName+" WHERE "+condition;
+			System.out.println(query);
+			Statement statement =this.getConnection().createStatement();
+			result=statement.executeQuery(query);		
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return result;
+	}
+	
+	public void Insert(String value,String TableName) throws SQLException{
+		String sql="INSERT INTO "+TableName+" VALUES("+value+");";
+
+		System.out.println(sql);
+		PreparedStatement statement=getConnection().prepareStatement(sql);
+		//INSERT STAEMENT 
+		/**
+		 * INSERT INTO TABLENAME VALUES(--O-*-*)
+		 */
+		//System.out.println(statement.toString());
+		try{
+			statement.executeUpdate();
+		}catch (Exception e) {
+			// TODO: handle exception
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void Delete(String condition,String TableName)  throws SQLException  {
+		
+		String sql="DELETE FROM "+TableName+" WHERE "+condition;
+		Statement statement=getConnection().createStatement();
+		/**
+		 * DELLET FROM TABLENAME WHERE CONDITION(-- -*-*o)
+		 */
+		System.out.println(sql);
+		statement.executeUpdate(sql);
+
+		System.out.println(sql);
+	}
+	
+	public void DropTable(String TableName) throws SQLException {
+		String sql="DROP TABLE "+TableName;
+		Statement statement=getConnection().createStatement();
+		System.out.println(sql);
+		statement.execute(sql);
+	}
+
+	
 }

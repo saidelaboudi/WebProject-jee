@@ -13,8 +13,11 @@ import javax.servlet.http.HttpSession;
 
 import ensias.teams.buzinessLayer.Team;
 import ensias.teams.buzinessLayer.User;
-import ensias.teams.dao.DataBase;
+import ensias.teams.dao.DAOFactory;
+import ensias.teams.dao.GroupDaoImpl;
+import ensias.teams.dao.TagDAOImp;
 import ensias.teams.dao.TeamDAOImp;
+import ensias.teams.dao.UserDaoImpl;
 
 /**
  * Servlet implementation class ShowTeam
@@ -22,7 +25,13 @@ import ensias.teams.dao.TeamDAOImp;
 @WebServlet("/ShowTeam")
 public class ShowTeam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static final String CONF_DAO_FACTORY = "daofactory";
+	private DAOFactory daoF = DAOFactory.getInstance();
+	TeamDAOImp addTeam = new TeamDAOImp();
+		
+	UserDaoImpl addUser = new UserDaoImpl(daoF);
+	GroupDaoImpl addGroup = new GroupDaoImpl(daoF);
+	TagDAOImp addtag = new TagDAOImp();
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -39,12 +48,9 @@ public class ShowTeam extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		Team team = (Team) session.getAttribute("TeamName");
 		String Name=team.name;
-		DataBase db;
 		try {
 			TeamDAOImp addTeam = new TeamDAOImp();
-			db = new DataBase("localhost","3306","teams","root","root");
-			ArrayList<User> users =addTeam.getUsersByTeamName(Name,db);
-			
+			ArrayList<User> users =addTeam.getUsersByTeamName(Name,daoF);
 			session.setAttribute("TeamMembers", users );
 			for(User user: users) {
 				System.out.println(user.toString());
@@ -62,7 +68,19 @@ public class ShowTeam extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
+		
+		try {
+			String email = (String)request.getParameter("email");
+			int UserID = addUser.getUserID(new User(null,null,null,null, email), daoF);
+			System.out.println(UserID);
+			User user = addUser.getUserByID(UserID, daoF);
+			HttpSession session = request.getSession(true);
+			Team team = (Team) session.getAttribute("TeamName");
+			addTeam.addTeam_Member(team, user, daoF);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		doGet(request, response);
 	}
