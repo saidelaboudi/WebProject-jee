@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/*
-=======
->>>>>>> main
 package ensias.teams.dao;
 
 import java.io.*;
@@ -61,19 +57,12 @@ public class Test {
 		*/
 		
 		Tag tag1 = new Tag("Test", owner);
-		
-<<<<<<< HEAD
-		TeamDAO addTeam = new TeamDAO();
-		UserDao addUser = new UserDao();
-		GroupDao addGroup = new GroupDao();
-		TagDAO addtag = new TagDAO();
-=======
+
 		addtag.addTag(tag1, db);
 		/*
 		for(User user : users) {
 			tag1.addMember(user);			
 		}*/
->>>>>>> main
 		
 		for(int i =130;i<140;i++) {
 			tag1.addMember(addUser.getUserByID(i));
@@ -113,4 +102,3 @@ public class Test {
 	
 	}
 }
-*/

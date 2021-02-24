@@ -44,7 +44,6 @@ import = "ensias.teams.dao.DataBase"
 		<%
 				}
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		%>

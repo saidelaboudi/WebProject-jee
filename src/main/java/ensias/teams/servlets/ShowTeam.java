@@ -28,14 +28,12 @@ public class ShowTeam extends HttpServlet {
      */
     public ShowTeam() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
 		Team team = (Team) session.getAttribute("TeamName");
 		String Name=team.name;
@@ -51,7 +49,6 @@ public class ShowTeam extends HttpServlet {
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         this.getServletContext().getRequestDispatcher("/WEB-INF/ShowTeam.jsp").forward( request, response );
@@ -61,8 +58,6 @@ public class ShowTeam extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-
 		
 		doGet(request, response);
 	}

@@ -28,14 +28,12 @@ public class TagMembers extends HttpServlet {
      */
     public TagMembers() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		this.getServletContext().getRequestDispatcher("/WEB-INF/createTag.jsp").forward(request, response);
 	}
 
@@ -70,7 +68,6 @@ public class TagMembers extends HttpServlet {
 							dao.addTag_User(t, db);
 
 					} catch (SQLException e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}

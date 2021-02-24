@@ -39,13 +39,11 @@ public class AddMembers extends HttpServlet {
      */
     public AddMembers() {
         super();
-        // TODO Auto-generated constructor stub
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 
 		
         this.getServletContext().getRequestDispatcher("/WEB-INF/team.jsp").forward( request, response );
@@ -54,9 +52,7 @@ public class AddMembers extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
 
 		HttpSession session = request.getSession(true);
 		NewTeam =(Team)session.getAttribute("TeamName");
@@ -156,7 +152,6 @@ public class AddMembers extends HttpServlet {
 				addTeam.addTeam_Member(NewTeam, user, db);
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

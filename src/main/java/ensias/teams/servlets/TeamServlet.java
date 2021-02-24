@@ -29,7 +29,6 @@ public class TeamServlet extends HttpServlet {
      */
     public TeamServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -43,8 +42,6 @@ public class TeamServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
 		String TeamName = (String)request.getParameter("teamName");
 		
 		User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
@@ -59,7 +56,6 @@ public class TeamServlet extends HttpServlet {
 			if(TeamName!=null)
 				addTeam.addTeam(NewTeam, db);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
