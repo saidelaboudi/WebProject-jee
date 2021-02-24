@@ -38,7 +38,7 @@ public class Signin extends HttpServlet {
 		String email = (String)request.getParameter("email");
 		
 		ensias.teams.dao.DAOFactory daoF =  (ensias.teams.dao.DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
-		ensias.teams.buzinessLayer.User user = daoF.getUserDao().bringUser(email, pass);
+		ensias.teams.buzinessLayer.User user = daoF.getUserDao().bringUser(email);
 		
 		if (pass.equals(cpass) && pass != null && user == null) {
 			ensias.teams.buzinessLayer.User user1 = new ensias.teams.buzinessLayer.User(

@@ -1,4 +1,4 @@
-package ensias.teams.buzinessWebTest;
+package ensias.teams.servlets;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,35 +8,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Test
+ * Servlet implementation class CreateTeam
  */
-@WebServlet("/Test")
-public class Test extends HttpServlet {
+@WebServlet("/CreateTeam")
+public class CreateTeam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Test() {
+    public CreateTeam() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// TODO Auto-generated method stub
+        this.getServletContext().getRequestDispatcher("/WEB-INF/NewTeam.jsp").forward( request, response );
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String name = request.getParameter("firstName");
-		System.out.print(name);
-		System.out.print(name);
-		System.out.print(name);
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

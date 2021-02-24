@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
 		String email = (String)request.getParameter("email");
 		
 		ensias.teams.dao.DAOFactory daoF =  (ensias.teams.dao.DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
-		ensias.teams.buzinessLayer.User user = daoF.getUserDao().bringUser(email, pass);
+		ensias.teams.buzinessLayer.User user = daoF.getUserDao().bringUser(email);
 		
 		if (user != null) {
 			HttpSession session = request.getSession();

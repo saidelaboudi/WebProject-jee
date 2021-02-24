@@ -92,7 +92,6 @@ public class DataBase {
 			{
 			Query(query);
 			}catch (Exception e) {
-				// TODO: handle exception
 				System.out.println(e.getMessage());
 			}
 	}
@@ -110,7 +109,7 @@ public class DataBase {
 			Statement statement =getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			result=statement.executeQuery(query);		
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return result;
 	}
@@ -126,7 +125,6 @@ public class DataBase {
 		try{
 			statement.executeUpdate();
 		}catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}
 	}

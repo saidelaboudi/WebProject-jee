@@ -11,13 +11,13 @@ import ensias.teams.buzinessLayer.User;
 public interface TeamDAO {
 
 
-    public void addTeam(Team t,DataBase db) throws SQLException ;
+    public void addTeam(Team t,DAOFactory db) throws SQLException ;
 
-    public int getTeamID(Team team,DataBase db) throws SQLException ;
+    public int getTeamID(Team team,DAOFactory db) throws SQLException ;
 
-    public void addTeam_Member(int TeamID , int UserID,DataBase db) throws SQLException ;
+    public void addTeam_Member(int TeamID , int UserID,DAOFactory db) throws SQLException ;
     
-    public void addTeam_Member(Team team,User user,DataBase db)throws SQLException ;
+    public void addTeam_Member(Team team,User user,DAOFactory db)throws SQLException ;
 
 
 }
