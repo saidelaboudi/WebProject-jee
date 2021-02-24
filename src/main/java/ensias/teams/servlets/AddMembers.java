@@ -20,6 +20,8 @@ import ensias.teams.dao.*;
 @MultipartConfig
 public class AddMembers extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private static final String CONF_DAO_FACTORY = "daofactory";
+	private DAOFactory daoF =  DAOFactory.getInstance();
 	
 	
 	User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");//session.getAttribute("Owner");
@@ -30,20 +32,21 @@ public class AddMembers extends HttpServlet {
 	
 	TeamDAOImp addTeam = new TeamDAOImp();
 	
-	UserDaoImpl addUser = new UserDaoImpl(null);
-	GroupDaoImpl addGroup = new GroupDaoImpl(null);
+	UserDaoImpl addUser = new UserDaoImpl(daoF);
+	GroupDaoImpl addGroup = new GroupDaoImpl(daoF);
 	TagDAOImp addtag = new TagDAOImp();
-	DataBase db;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AddMembers() {
         super();
+        // TODO Auto-generated constructor stub
     }
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 
 		
         this.getServletContext().getRequestDispatcher("/WEB-INF/team.jsp").forward( request, response );
@@ -52,7 +55,9 @@ public class AddMembers extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 
 		HttpSession session = request.getSession(true);
 		NewTeam =(Team)session.getAttribute("TeamName");
@@ -64,9 +69,8 @@ public class AddMembers extends HttpServlet {
 		
 		try {
 			
-			db = new DataBase("localhost","3306","teams","root","root");
-			addUser.addUser(owner);
-			//addTeam.addTeam(NewTeam, db);   
+			addUser.addUser(owner, daoF);
+			//addTeam.addTeam(NewTeam, daoF);   
 			
 			// Add By Excell 
 			Part filePart = request.getPart("Excellpath");
@@ -74,22 +78,18 @@ public class AddMembers extends HttpServlet {
 			//Added by tag
 			String[] tagName = request.getParameterValues("TagSelected");
 			
-			
-			
-			
 			// Remplir la liste des memebres selon la methode choisie
 			
 			if(tagName!=null) {
 				ArrayList<User> userList = new ArrayList<User>();
-				session.setAttribute("TagList", tagName );
+				/*if(session.getAttribute("TagList")==null)
+					session.setAttribute("TagList", tagName );*/
 				for(int i=0;i<tagName.length;i++) {
 					System.out.println(tagName[i]);
-					userList = addtag.getUsersTagged(tagName[i], db);
+					userList = addtag.getUsersTagged(tagName[i], daoF);
 					users.addAll(userList);
 				}
-			}
-			
-			if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
+			}else if(filePart!=null) {// Si l'utilisateur a choisie de creere par une etiquette
 				InputStream inputStream =filePart.getInputStream();
 				users = addUser.addExcell2Depart(inputStream);
 			}
@@ -100,8 +100,8 @@ public class AddMembers extends HttpServlet {
 			if(users!=null) {
 				// On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
 				for(User user:users) {
-					if(addUser.getUserID(user)==0) { // l utilisation n'est pas inscrit dans le system
-						addUser.addUser(user);
+					if(addUser.getUserID(user, daoF)==0) { // l utilisation n'est pas inscrit dans le system
+						addUser.addUser(user, daoF);
 						NewTeam.addMember(user);
 					}else {
 						System.out.println(user.toString());
@@ -110,7 +110,7 @@ public class AddMembers extends HttpServlet {
 				}
 				// Ajjouter les memebre au team
 				for(User user:users) {
-					addTeam.addTeam_Member(NewTeam, user, db);
+					addTeam.addTeam_Member(NewTeam, user, daoF);
 					System.out.println("----"+user.toString());
 				}
 			}
@@ -118,7 +118,7 @@ public class AddMembers extends HttpServlet {
 			
 			for(User user: users) {
 				System.out.println(user.toString());
-				System.out.println(addUser.getUserID(user));
+				System.out.println(addUser.getUserID(user, daoF));
 			}
 			
 			//ArrayList<User> users = (ArrayList<User>) session.getAttribute("Users");
@@ -126,7 +126,7 @@ public class AddMembers extends HttpServlet {
 			
 			
 			
-			//session.setAttribute("usersListTag", u);
+			session.setAttribute("usersListTag", users);
 			
 			/*
 		String[] tagName=(String[])request.getParameterValues("SelectOption");
@@ -138,20 +138,21 @@ public class AddMembers extends HttpServlet {
 			/*
 		if(tagName!=null) {
 			ArrayList<User> users;
-			users = addUser.getUsersByTag(new Tag(tagName,null), db);
+			users = addUser.getUsersByTag(new Tag(tagName,null), daoF);
 			request.setAttribute("user", users);
 		}*/
 			
 			
 			// Classical Added 
 			
-			String email = (String) request.getAttribute("addByEmail");
+			String email = (String) request.getAttribute("addaoFyEmail");
 			if(email!=null) {
 				User user = new User(null,null,null,null,email);
 				System.out.println(email);
-				addTeam.addTeam_Member(NewTeam, user, db);
+				addTeam.addTeam_Member(NewTeam, user, daoF);
 			}
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

@@ -11,8 +11,18 @@ import ensias.teams.buzinessLayer.Team;
 import ensias.teams.buzinessLayer.User;
 
 public class Test {
+	
+	private static final String URL="jdbc.url";
+	private static final String DRIVER="jdbc.driverClass";
+	private static final String LOGIN="jdbc.login";
+	private static final String PASSWORD="jdbc.password";
+	private static final String FICHIER_PROPERTIES = "/dao.properties";
+	private static final String SCHEMA = "jdbc.schema";
+	private static final String CONF_DAO_FACTORY = "daofactory";
+	private static DAOFactory db =  new DAOFactory(URL, LOGIN, PASSWORD, SCHEMA);
+	
 	public static void main(String[] args) throws SQLException, IOException {
-		DataBase db = new DataBase("localhost","3306","teams","root","root");
+
 		User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
 		Team team = new Team("test4", owner);
 		Group groupe = new Group("Teams ", "Groupe pour rassembler des equipes en un seul grps");
@@ -26,16 +36,16 @@ public class Test {
 		GroupDaoImpl addGroup = new GroupDaoImpl(null);
 		TagDAOImp addtag = new TagDAOImp();
 		
-		/*
+		
 		for(Tag tag2 :addtag.getTagList(db)) {
 			System.out.println(tag2.tagName);
 			for(User user : addUser.getUsersByTag(tag2, db)) {
 				System.out.println(user.toString());
 			}
 		}
-		*/
 		
 		
+		/*
 		String ExcelPath ="C:/Users/Said/Desktop/Users.xlsx ";
 		
 		ArrayList<User> users = addUser.addExcell2Depart(ExcelPath);
@@ -55,7 +65,7 @@ public class Test {
 		}
 		
 		*/
-		
+		/*
 		Tag tag1 = new Tag("Test", owner);
 
 		addtag.addTag(tag1, db);
@@ -63,13 +73,13 @@ public class Test {
 		for(User user : users) {
 			tag1.addMember(user);			
 		}*/
-		
+		/*
 		for(int i =130;i<140;i++) {
 			tag1.addMember(addUser.getUserByID(i));
 		}
 		addtag.addTag_User(tag1, db);
 		
-		
+		*/
 		
 		
 		
