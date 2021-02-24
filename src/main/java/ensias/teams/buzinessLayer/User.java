@@ -12,7 +12,6 @@ public  class User {
 	public Long id;
 	public String firstName="";
 	public String lastName;
-	public String login;
 	public String password;
 	public String dateCreated;
 	public String address;
@@ -28,7 +27,7 @@ public  class User {
 		
 		this.firstName   = 	name;
 		this.lastName    =	lastName;
-		this.login	     = 	login;
+		this.email	     = 	login;
 		this.password    = 	password;
 		this.id 	     = 	id;
 		this.dateCreated =  dateCreated;

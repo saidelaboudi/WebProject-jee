@@ -5,18 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.io.*;
-import java.sql.*;
-import java.util.*;
-/*
-import org.apache.poi.sl.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-*/
-=======
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -29,7 +17,6 @@ import java.sql.*;
 import java.util.*;
 
 import ensias.teams.buzinessLayer.Tag;
->>>>>>> main
 import ensias.teams.buzinessLayer.User;
 
 /**
@@ -49,26 +36,24 @@ public class UserDaoImpl implements UserDao {
 		ArrayList<User> users = new ArrayList<>();
 		
 		Connection connection=null;
-		Statement st=null;
+		PreparedStatement st=null;
 		ResultSet rs=null;
 		
 		
 		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
 			connection = this.daoFactory.getConnection();
-			st=connection.createStatement();
-			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
 			
-<<<<<<< HEAD
-			rs=st.executeQuery("SELECT * FROM Users");
+			String query = "SELECT * FROM users";
+			st=connection.prepareStatement(setDb);
+			rs=st.executeQuery(query);
 			while( rs.next()) {
 				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7) ));
-			
-=======
-			rs=st.executeQuery("SELECT * FROM users");
-			while( rs.next()) {
-				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(4) , rs.getString(5) , rs.getString(6) ));
->>>>>>> main
 			}
+			st.close();
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
@@ -82,23 +67,28 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public User bringUser(String email, String pass) {
+	public User bringUser(String email) {
 		User users = null;
 		
 		Connection connection=null;
-		Statement st=null;
+		PreparedStatement st=null;
 		ResultSet rs=null;
 		
 		
 		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			String query = "SELECT * FROM Users WHERE Email = ?";
 			connection = this.daoFactory.getConnection();
-			st=connection.createStatement();
-			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			st=connection.prepareStatement(query);
+			st.setString(1, email);
 			
-			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "' and Password = '" + pass +"'");
-			while( rs.next()) {
+			rs=st.executeQuery(query);
+			if (rs.next())
 				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
-			}
+			st.close();
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
@@ -112,20 +102,24 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void addUser(User user) {
 		Connection connection=null;
-		Statement st=null;		
+		PreparedStatement st=null;		
 		ResultSet rs=null;
 
 		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?, ?, ?, ?, ?)";
 			connection = this.daoFactory.getConnection();
-			st=connection.createStatement();
-			st.executeQuery("USE "+ this.daoFactory.getSchema());
-			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (";
-			query = query.concat("'" + user.firstName + "',");
-			query = query.concat("'" + user.lastName + "',");
-			query = query.concat("'" + user.address + "',");
-			query = query.concat("'" + user.password + "',");
-			query = query.concat("'" + user.email + "')");
-			st.executeUpdate(query);
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			st=connection.prepareStatement(query);
+			st.setString(1, user.firstName);
+			st.setString(2, user.lastName );
+			st.setString(3, user.address);
+			st.setString(4, user.password);
+			st.setString(5, user.email);
+			st.executeQuery(query);
+			st.close();
 			
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -133,13 +127,6 @@ public class UserDaoImpl implements UserDao {
 	        fermeturesSilencieuses( rs ,st, connection );
 	    }
 	}
-<<<<<<< HEAD
-
-		
-
-	
-=======
->>>>>>> main
 	
 
 	public static void fermetureSilencieuse( ResultSet resultSet ) {
@@ -147,7 +134,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            resultSet.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "ï¿½chec de la fermeture du ResultSet : " + e.getMessage() );
+	            System.out.println( "�chec de la fermeture du ResultSet : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -157,7 +144,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            statement.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "ï¿½chec de la fermeture du Statement : " + e.getMessage() );
+	            System.out.println( "�chec de la fermeture du Statement : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -166,7 +153,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            connexion.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "ï¿½chec de la fermeture de la connexion : " + e.getMessage() );
+	            System.out.println( "�chec de la fermeture de la connexion : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -181,65 +168,6 @@ public class UserDaoImpl implements UserDao {
 	    fermetureSilencieuse( connexion );
 	}
 	
-	public void addUser(User user,DataBase db) throws SQLException {
-		String sql="INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?,?,?,?,?)";
-        PreparedStatement statement = db.connection.prepareStatement(sql);
-        statement.setString(1,user.firstName);
-        statement.setString(2,user.lastName);
-        statement.setString(3,user.address);
-        statement.setString(4,user.password);
-        statement.setString(5,user.email);
-        statement.execute();
-	}
-<<<<<<< HEAD
-/*
-// has not ended yet
-	public void addExcell2Depart(String excelFilePath , DataBase db) throws IOException, SQLException {
-
-		FileInputStream inputStream = new FileInputStream(excelFilePath);
-
-        Workbook workbook = new XSSFWorkbook(inputStream);
-
-        Sheet firstSheet = (Sheet) workbook.getSheetAt(0);
-        Iterator<Row> rowIterator = firstSheet.iterator();
-
-        String sql = "INSERT INTO User (NAME,CheifID) VALUES (?, ?)";
-        PreparedStatement statement = db.connection.prepareStatement(sql);    
-
-        rowIterator.next(); // skip the header row
-
-        while (rowIterator.hasNext()) {
-            Row nextRow = rowIterator.next();
-            Iterator<Cell> cellIterator = nextRow.cellIterator();
-
-            while (cellIterator.hasNext()) {
-                Cell nextCell = cellIterator.next();
-
-                int columnIndex = nextCell.getColumnIndex();
-
-                switch (columnIndex) {
-                case 0:
-                    String name = nextCell.getStringCellValue();
-                    statement.setString(1, name);
-                    break;
-                case 1:
-                	int chiefID = (int) nextCell.getNumericCellValue();
-                	statement.setInt(2, chiefID);            
-                	break;
-                }
-            }
-        }
-        workbook.close();
-
-        // execute the remaining queries
-        statement.executeBatch();
-
-	}	
-	
-*/
-	public ArrayList<User> getUsersByTag(DataBase db) throws SQLException{
-=======
-
 	
 	public ArrayList<User> addExcell2Depart(String excelFilePath) throws IOException, SQLException {
 			
@@ -359,52 +287,102 @@ public class UserDaoImpl implements UserDao {
 }
 
 
-	public ArrayList<User> getUsersByTag(Tag tag1,DataBase db) throws SQLException{
->>>>>>> main
-		ArrayList<User> users = new ArrayList<User>();
-		try{
-			String tag=tag1.tagName;
-			ResultSet set = db.Select("Tag","tag='"+tag+"'");
-			set.next();
-			int TagID=set.getInt("ID");
-			set = db.Select("Tag_Users","TagID='"+TagID+"'");
-			while(set.next()) {
-				int UserID= (int)set.getInt(2);
-				
-				users.add(getUserByID(UserID,db));
+	public ArrayList<User> getUsersByTag(Tag tag1) throws SQLException{
+		ArrayList<User> users = new ArrayList<>();
+		
+		Connection connection=null;
+		PreparedStatement st=null;
+		ResultSet rs=null;
+		
+		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			connection = this.daoFactory.getConnection();
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			
+			String query = "SELECT * FROM tag WHERE tag = ?";
+			st=connection.prepareStatement(query);
+			st.setString(1, tag1.tagName);
+			rs = st.executeQuery(query);
+			rs.next();
+			st.close();
+			
+			int TagID=rs.getInt("ID");
+			query = "SELECT * FROM tag_users WHERE TagID = ?";
+			st=connection.prepareStatement(query);
+			st.setLong(1, TagID);
+			rs = st.executeQuery(query);
+			while(rs.next()) {
+				int UserID= (int)rs.getInt(2);
+				users.add(getUserByID(UserID));
 			}
+			st.close();
 		}catch(Exception e) {
 			
 		}
 		return users;
 	}
 
-	public int getUserID(User user,DataBase db) throws SQLException {
-		ResultSet set = db.Select("Users","Email = '"+user.email+"'");
-		if(set.next()) {
-			return set.getInt("ID");
-		}
-		return 0;
+	public int getUserID(User user) throws SQLException {
+		int id = 0;
+
+		Connection connection=null;
+		PreparedStatement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			connection = this.daoFactory.getConnection();
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			
+			String query = "SELECT * FROM Users WHERE Email = ?";
+			st=connection.prepareStatement(query);
+			st.setString(1, user.email);
+			
+			rs=st.executeQuery(query);
+			if (rs.next())
+				id = (int) rs.getLong(1);
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return (int) id;
 	}
 	
-	public User getUserByID(int UserId,DataBase db) throws SQLException{
-		User user = null ;
-		ResultSet set;
-		try {
-			set = db.Select("Users","ID = '"+UserId+"'");
-			if(set.next()) {
-				return new User(set.getString(2),set.getString(2),set.getString(4),set.getString(5),set.getString(6));
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	public User getUserByID(int UserId) throws SQLException{
+			User users = null;
+			
+			Connection connection=null;
+			PreparedStatement st=null;
+			ResultSet rs=null;
+			
+			
+			try {
+				String setDb = "USE "+ this.daoFactory.getSchema();
+				String query = "SELECT * FROM Users WHERE ID = ?";
+				connection = this.daoFactory.getConnection();
+				st=connection.prepareStatement(setDb);
+				st.executeQuery(setDb);
+				st.close();
+				st=connection.prepareStatement(query);
+				st.setLong(1, UserId);
+				
+				rs=st.executeQuery(query);
+				if (rs.next())
+					users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
+				st.close();
+			}catch ( SQLException e ) {
+		        throw new DAOException( e );
+		    } finally {
+		        fermeturesSilencieuses( rs ,st, connection );
+		    }
+
+			return users;
 		}
-		return user;
-	}
-<<<<<<< HEAD
-
 }
-
-=======
-}
->>>>>>> main
