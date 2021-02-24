@@ -36,19 +36,24 @@ public class UserDaoImpl implements UserDao {
 		ArrayList<User> users = new ArrayList<>();
 		
 		Connection connection=null;
-		Statement st=null;
+		PreparedStatement st=null;
 		ResultSet rs=null;
 		
 		
 		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
 			connection = this.daoFactory.getConnection();
-			st=connection.createStatement();
-			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
 			
-			rs=st.executeQuery("SELECT * FROM users");
+			String query = "SELECT * FROM users";
+			st=connection.prepareStatement(setDb);
+			rs=st.executeQuery(query);
 			while( rs.next()) {
-				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(4) , rs.getString(5) , rs.getString(6) ));
+				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7) ));
 			}
+			st.close();
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
@@ -62,23 +67,28 @@ public class UserDaoImpl implements UserDao {
 	}
 	
 	@Override
-	public User bringUser(String email, String pass) {
+	public User bringUser(String email) {
 		User users = null;
 		
 		Connection connection=null;
-		Statement st=null;
+		PreparedStatement st=null;
 		ResultSet rs=null;
 		
 		
 		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			String query = "SELECT * FROM Users WHERE Email = ?";
 			connection = this.daoFactory.getConnection();
-			st=connection.createStatement();
-			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			st=connection.prepareStatement(query);
+			st.setString(1, email);
 			
-			rs=st.executeQuery("SELECT * FROM Users WHERE Email = '" + email + "' and Password = '" + pass +"'");
-			while( rs.next()) {
+			rs=st.executeQuery(query);
+			if (rs.next())
 				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
-			}
+			st.close();
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
 	    } finally {
@@ -92,20 +102,24 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void addUser(User user) {
 		Connection connection=null;
-		Statement st=null;		
+		PreparedStatement st=null;		
 		ResultSet rs=null;
 
 		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?, ?, ?, ?, ?)";
 			connection = this.daoFactory.getConnection();
-			st=connection.createStatement();
-			st.executeQuery("USE "+ this.daoFactory.getSchema());
-			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (";
-			query = query.concat("'" + user.firstName + "',");
-			query = query.concat("'" + user.lastName + "',");
-			query = query.concat("'" + user.address + "',");
-			query = query.concat("'" + user.password + "',");
-			query = query.concat("'" + user.email + "')");
-			st.executeUpdate(query);
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			st=connection.prepareStatement(query);
+			st.setString(1, user.firstName);
+			st.setString(2, user.lastName );
+			st.setString(3, user.address);
+			st.setString(4, user.password);
+			st.setString(5, user.email);
+			st.executeQuery(query);
+			st.close();
 			
 		}catch ( SQLException e ) {
 	        throw new DAOException( e );
@@ -283,26 +297,65 @@ public class UserDaoImpl implements UserDao {
 	    return Users;
 }
 
+public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException{
+	ArrayList<User> users = new ArrayList<User>();
+	try{
+		String tag=tag1.tagName;
+		ResultSet set = db.Select("Tag","tag='"+tag+"'");
+		set.next();
+		int TagID=set.getInt("ID");
+		set = db.Select("Tag_Users","TagID='"+TagID+"'");
+		while(set.next()) {
+			int UserID= (int)set.getInt(2);
+			
+			users.add(getUserByID(UserID,db));
+		}
+	}catch(Exception e) {
+		
+	}
+	System.out.println("Get users by Tag done !");
+	return users;
+}
 
-	public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException{
-		ArrayList<User> users = new ArrayList<User>();
-		try{
-			String tag=tag1.tagName;
-			ResultSet set = db.Select("Tag","tag='"+tag+"'");
-			set.next();
-			int TagID=set.getInt("ID");
-			set = db.Select("Tag_Users","TagID='"+TagID+"'");
-			while(set.next()) {
-				int UserID= (int)set.getInt(2);
-				
-				users.add(getUserByID(UserID,db));
+
+	public ArrayList<User> getUsersByTag(Tag tag1) throws SQLException{
+		ArrayList<User> users = new ArrayList<>();
+		
+		Connection connection=null;
+		PreparedStatement st=null;
+		ResultSet rs=null;
+		
+		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			connection = this.daoFactory.getConnection();
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			
+			String query = "SELECT * FROM tag WHERE tag = ?";
+			st=connection.prepareStatement(query);
+			st.setString(1, tag1.tagName);
+			rs = st.executeQuery(query);
+			rs.next();
+			st.close();
+			
+			int TagID=rs.getInt("ID");
+			query = "SELECT * FROM tag_users WHERE TagID = ?";
+			st=connection.prepareStatement(query);
+			st.setLong(1, TagID);
+			rs = st.executeQuery(query);
+			while(rs.next()) {
+				int UserID= (int)rs.getInt(2);
+				users.add(getUserByID(UserID));
 			}
+			st.close();
 		}catch(Exception e) {
 			
 		}
 		System.out.println("Get users by Tag done !");
 		return users;
 	}
+
 
 	public int getUserID(User user,DAOFactory db) throws SQLException {
 		ResultSet set = db.Select("Users","Email = '"+user.email+"'");
@@ -326,4 +379,66 @@ public class UserDaoImpl implements UserDao {
 		}
 		return user;
 	}
+
+	public int getUserID(User user) throws SQLException {
+		int id = 0;
+
+		Connection connection=null;
+		PreparedStatement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			String setDb = "USE "+ this.daoFactory.getSchema();
+			connection = this.daoFactory.getConnection();
+			st=connection.prepareStatement(setDb);
+			st.executeQuery(setDb);
+			st.close();
+			
+			String query = "SELECT * FROM Users WHERE Email = ?";
+			st=connection.prepareStatement(query);
+			st.setString(1, user.email);
+			
+			rs=st.executeQuery(query);
+			if (rs.next())
+				id = (int) rs.getLong(1);
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return (int) id;
+	}
+	
+	public User getUserByID(int UserId) throws SQLException{
+			User users = null;
+			
+			Connection connection=null;
+			PreparedStatement st=null;
+			ResultSet rs=null;
+			
+			
+			try {
+				String setDb = "USE "+ this.daoFactory.getSchema();
+				String query = "SELECT * FROM Users WHERE ID = ?";
+				connection = this.daoFactory.getConnection();
+				st=connection.prepareStatement(setDb);
+				st.executeQuery(setDb);
+				st.close();
+				st=connection.prepareStatement(query);
+				st.setLong(1, UserId);
+				
+				rs=st.executeQuery(query);
+				if (rs.next())
+					users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
+				st.close();
+			}catch ( SQLException e ) {
+		        throw new DAOException( e );
+		    } finally {
+		        fermeturesSilencieuses( rs ,st, connection );
+		    }
+
+			return users;
+		}
 }

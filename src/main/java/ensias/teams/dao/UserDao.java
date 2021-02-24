@@ -19,4 +19,7 @@ public interface UserDao {
 	public int getUserID(User user,DAOFactory db) throws SQLException;
 	public User getUserByID(int UserId,DAOFactory db) throws SQLException;
 	
+	public User bringUser(String email);
+	public void addUser(User user);
+	public User getUserByID(int UserId) throws SQLException;
 }
