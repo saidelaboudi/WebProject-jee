@@ -355,7 +355,7 @@ table.table .avatar {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="http://localhost:8541/teams/Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -399,7 +399,6 @@ table.table .avatar {
             </div>
 
         </ul>
-
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -605,9 +604,9 @@ table.table .avatar {
                                         </thead>
                                         <tbody>
                                             <% 
-                                            ArrayList<User> user = (ArrayList<User>)request.getAttribute("user");
+                                            ArrayList<User> users = (ArrayList<User>)request.getAttribute("user");
                                                         		if(user!=null)
-                                            for(int i=0;i<user.size();i++){
+                                            for(int i=0;i<users.size();i++){
                                             %>
 									            <tr>  
 										            <td>
@@ -616,8 +615,8 @@ table.table .avatar {
 	                                                        <label for="checkbox2"></label>
 	                                                    </span>
 	                                                </td>    
-									                <td><%= user.get(i).firstName %><%=user.get(i).lastName %></td>
-									                <td><%= user.get(i).email %></td> 
+									                <td><%= users.get(i).firstName %><%=users.get(i).lastName %></td>
+									                <td><%= users.get(i).email %></td> 
 									                 <td>
                                                     	<a href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                                 	</td>

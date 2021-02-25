@@ -60,7 +60,6 @@ public class TagDAOImp implements TagDAO{
 		}catch(Exception e) {
 			
 		}
-		System.out.println("Get tag List Done !");
 		return list;
 	}
 	
@@ -77,8 +76,8 @@ public class TagDAOImp implements TagDAO{
     	
     	while(set.next()) {
     		UserID=set.getInt("UsersID");
-    		System.out.println("------------");
-    		users.add(addUser.getUserByID(UserID,db));
+    		users.add(addUser.getUserByID(UserID, db));
+
     	}
 		return users;
 	}

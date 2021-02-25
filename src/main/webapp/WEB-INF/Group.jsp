@@ -5,8 +5,8 @@
     <%
     User user = (User)session.getAttribute("CurrentUser");
     
-    ArrayList<ensias.teams.buzinessLayer.Group> GroupList = null;
-    GroupList=(ArrayList<ensias.teams.buzinessLayer.Group>)session.getAttribute("GroupList");
+    ArrayList<ensias.teams.buzinessLayer.Team> TeamList = null;
+    TeamList=(ArrayList<ensias.teams.buzinessLayer.Team>)session.getAttribute("TeamList");
 	
     %>
 
@@ -208,49 +208,27 @@
 			<div class="container row">
 				<%
 				
-				for(ensias.teams.buzinessLayer.Group group : GroupList ){
-				%>	
-					 <div class="col-xl-3 col-md-6 mb-4 row">
-						<a href="http://localhost:8541/teams/Group?GroupSelected=<%=group.name%>">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               <%=group.name%> 
-                                                </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-						</a>
-					</div>			
-				<%} %>     
-				
-				
-				<div class="col-xl-3 col-md-6 mb-4 row">
-					<a href="http://localhost:8541/teams/CreateGroup">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                        Creer un nouveau Groupe	
-                                                </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                        	
-					</a>
-				</div>		
-					
-					           
+				for(ensias.teams.buzinessLayer.Team team : TeamList ){
+					%>	
+						 <div class="col-xl-3 col-md-6 mb-4 row">
+							<a href="http://localhost/teams/ShowTeam?TeamName=<%=team.name%>">
+	                            <div class="card border-left-warning shadow h-100 py-2">
+	                                <div class="card-body">
+	                                    <div class="row no-gutters align-items-center">
+	                                        <div class="col mr-2">
+	                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+	                                               <%=team.name%> 
+	                                                </div>
+	                                        </div>
+	                                        <div class="col-auto">
+	                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                            </div>
+							</a>
+						</div>			
+				<%} %>                
 			</div>
                         
                 </div>

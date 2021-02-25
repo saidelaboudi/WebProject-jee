@@ -109,6 +109,8 @@ public class Test {
 		//String Descrption = sc.nextLine();
 		//Team NewTeam = new Team(TeamName, owner);
 		//addTeam.addTeam(NewTeam, db);
-	
+		Group group = new Group("Group Test ", "New Group");
+		group.owner=owner;
+		addGroup.addGroup(group, db);
 	}
 }

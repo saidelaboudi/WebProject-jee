@@ -19,7 +19,7 @@ User user = (User)session.getAttribute("CurrentUser");
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Creation d'une équipe</title>
+    <title>Creation d'une ï¿½quipe</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -41,7 +41,6 @@ User user = (User)session.getAttribute("CurrentUser");
 <body id="page-top">
 
     <div id="wrapper">
-
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
                 <div class="sidebar-brand-icon rotate-n-15">
@@ -55,7 +54,7 @@ User user = (User)session.getAttribute("CurrentUser");
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="http://localhost:8541/teams/Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -196,7 +195,7 @@ User user = (User)session.getAttribute("CurrentUser");
                                     <div class="col-lg-7">
                                         <div class="p-5">
                                             <div class="text-center">
-                                                <h1 class="h4 text-gray-900 mb-4">Créer votre équipe</h1>
+                                                <h1 class="h4 text-gray-900 mb-4">Crï¿½er votre ï¿½quipe</h1>
                                             </div>
                 
                 
@@ -204,7 +203,7 @@ User user = (User)session.getAttribute("CurrentUser");
                                             <form class="user" action="http://localhost/teams/TeamServlet" method="POST">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-user" id="teamName"
-                                                        placeholder="Nom de l'équipe " name="teamName">
+                                                        placeholder="Nom de l'ï¿½quipe " name="teamName">
                                                 </div>
                                                 <!-- <div class="form-group">
                                                     <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Description" name="description"></textarea>

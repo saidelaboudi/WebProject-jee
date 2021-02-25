@@ -1,15 +1,13 @@
-    <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-	<%@page import="java.util.ArrayList"%> 
-	<%@page import="ensias.teams.buzinessLayer.*"%> 
-	<%@page import="ensias.teams.dao.*"%> 
-    <%
-    User user = (User)session.getAttribute("CurrentUser");
-    
-    ArrayList<ensias.teams.buzinessLayer.Group> GroupList = null;
-    GroupList=(ArrayList<ensias.teams.buzinessLayer.Group>)session.getAttribute("GroupList");
-	
-    %>
+<%@page import="org.apache.poi.util.SystemOutLogger"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 
+<%@page import="java.util.ArrayList"%> 
+<%@page import="ensias.teams.buzinessLayer.*"%> 
+<%@page import="ensias.teams.dao.*"%> 
+<%
+    User user = (User)session.getAttribute("CurrentUser");
+    %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ENSIAS TEAMS</title>
+    <title>Ajouter des membres</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -34,8 +32,8 @@
 
 </head>
 
-<body id="page-top">
 
+<body id="page-top">
 
     <div id="wrapper">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -182,116 +180,59 @@
                 <!-- End of Topbar -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                <!-- Begin Page Content -->
+<!-- Begin Page Content -->
                 <div class="container-fluid">
+                    <div class="container-fluid" style="margin : 20%;" id="choice">
+                        <!-- Content Row -->
+                        <div class="container row">
                 
-			<div class="container row">
-				<%
-				
-				for(ensias.teams.buzinessLayer.Group group : GroupList ){
-				%>	
-					 <div class="col-xl-3 col-md-6 mb-4 row">
-						<a href="http://localhost:8541/teams/Group?GroupSelected=<%=group.name%>">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               <%=group.name%> 
-                                                </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-						</a>
-					</div>			
-				<%} %>     
-				
-				
-				<div class="col-xl-3 col-md-6 mb-4 row">
-					<a href="http://localhost:8541/teams/CreateGroup">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                        Creer un nouveau Groupe	
-                                                </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                        	
-					</a>
-				</div>		
-					
-					           
-			</div>
+                    
+                    <div  >
+                        <div >
                         
+                        
+                            <form action="http://localhost/teams/AddTeams" method="post" >
+                            
+                                <div class="container">
+                                <label>
+                                    Selectionner les equipes
+                                 (<h6>CTRL </h6> pour ajouter plusieurs equipes )
+                                </label>
+                                <select id = "setTags" class="form-select" size="2" multiple  name="TeamsSelected">
+                                <%
+                        		ArrayList<Team> TeamList=(ArrayList<Team>)session.getAttribute("teamsList");
+                                for(Team team :TeamList){%>
+                                    <option value = 
+                                    <% 
+                                    out.print(team.name);
+                                    %> 
+                                    name="TeamsSelected"
+                                    >
+                                    <% 
+                                    out.print(team.name);
+                                    %>
+                                    </option>                                                                	
+                                <%}%>
+                                </select>
+                    
+                                <div>
+                                    <button type = "button submit" >
+                                     Selectionner 
+                                    </button>
+                                </div>
+                    
+                            </div>
+                           </form>
+                            </div>
                 </div>
                 <!-- /.container-fluid -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
             <!-- End of Main Content -->
 
+
+        </div>
+        <!-- End of Content Wrapper -->
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
@@ -302,29 +243,31 @@
             </footer>
             <!-- End of Footer -->
 
-        </div>
-        <!-- End of Content Wrapper -->
-
     </div>
+    <!-- End of Page Wrapper -->
 
+
+
+    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">voulez vous se quitter ?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">�</span>
                     </button>
                 </div>
-                <div class="modal-body">S�lectionnez �D�connexion� ci-dessous si vous �tes pr�t � mettre fin � votre session en cours.</div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="login.html">D�connexion</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>

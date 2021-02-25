@@ -11,31 +11,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import ensias.teams.buzinessLayer.Team;
 import ensias.teams.buzinessLayer.User;
+import ensias.teams.buzinessLayer.Team;
 import ensias.teams.dao.DAOFactory;
 import ensias.teams.dao.GroupDaoImpl;
 import ensias.teams.dao.TagDAOImp;
 import ensias.teams.dao.TeamDAOImp;
 import ensias.teams.dao.UserDaoImpl;
+import ensias.teams.buzinessLayer.Group;
 
 /**
- * Servlet implementation class ShowTeam
+ * Servlet implementation class GroupServlet
  */
-@WebServlet("/ShowTeam")
-public class ShowTeam extends HttpServlet {
+@WebServlet("/GroupServlet")
+public class GroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CONF_DAO_FACTORY = "daofactory";
-	private DAOFactory daoF = DAOFactory.getInstance();
-	TeamDAOImp addTeam = new TeamDAOImp();
-		
-	UserDaoImpl addUser = new UserDaoImpl(daoF);
-	GroupDaoImpl addGroup = new GroupDaoImpl(daoF);
-	TagDAOImp addtag = new TagDAOImp();
+	public DAOFactory daoF;
+	
+	public TeamDAOImp addTeam = new TeamDAOImp();
+	public UserDaoImpl addUser = new UserDaoImpl(null);
+	public GroupDaoImpl addGroup = new GroupDaoImpl(null);
+	public TagDAOImp addtag = new TagDAOImp();
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShowTeam() {
+    public GroupServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,21 +46,35 @@ public class ShowTeam extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		
+		//
+		
 		HttpSession session = request.getSession(true);
-		String Name=request.getParameter("TeamName");
 		try {
-			TeamDAOImp addTeam = new TeamDAOImp();
-			ArrayList<User> users =addTeam.getUsersByTeamName(Name,daoF);
-			session.setAttribute("TeamMembers", users );
-			/*for(User user: users) {
-				System.out.println(user.toString());
-			}
-			*/
+			
+			ArrayList<Team> teams = addTeam.getTeamList(daoF);
+			
+			session.setAttribute("teamsList", teams);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        this.getServletContext().getRequestDispatcher("/WEB-INF/ShowTeam.jsp").forward( request, response );
+		 // Updatytin the List 
+		
+		
+		ArrayList<ensias.teams.buzinessLayer.Group> GroupList = null;
+		
+		try {
+			GroupList = addGroup.getGroupList(daoF);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		session.setAttribute("GroupList", GroupList);
+		
+        this.getServletContext().getRequestDispatcher("/WEB-INF/addTeams.jsp").forward( request, response );
 	}
 
 	/**
@@ -67,20 +82,22 @@ public class ShowTeam extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		daoF =  (DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
 		
+		String GroupName = (String)request.getParameter("groupName");
+		
+		//System.out.println(GroupName);
+		HttpSession session = request.getSession(true);
 		try {
-			String email = (String)request.getParameter("email");
-			int UserID = addUser.getUserID(new User(null,null,null,null, email), daoF);
-			//System.out.println(UserID);
-			User user = addUser.getUserByID(UserID, daoF);
-			HttpSession session = request.getSession(true);
-			Team team = (Team) session.getAttribute("TeamName");
-			addTeam.addTeam_Member(team, user, daoF);
+			User owner = (User) session.getAttribute("CurrentUser");
+			Group group = new Group(GroupName, null);
+			group.owner=owner;
+			addGroup.addGroup(group, daoF);
+			session.setAttribute("CurrentGroup", group);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		doGet(request, response);
 	}
 

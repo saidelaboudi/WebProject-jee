@@ -356,7 +356,6 @@ public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException
 		}catch(Exception e) {
 			
 		}
-		System.out.println("Get users by Tag done !");
 		return users;
 	}
 
