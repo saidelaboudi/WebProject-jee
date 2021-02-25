@@ -51,26 +51,14 @@ public class AddTeams extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 
-		
-        this.getServletContext().getRequestDispatcher("/WEB-INF/Groups.jsp").forward( request, response );
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
-		
 		String[] TeamName = request.getParameterValues("TeamsSelected");
 		
 		
 		HttpSession session = request.getSession(true);
-		Group groupe = (Group) session.getAttribute("GroupSelected");
+		Group groupe = (Group) session.getAttribute("CurrentGroup");
+		System.out.println("From AddTeams"+groupe.name);
 		
 		try {
-			
-			System.out.println("---------------------------");
 			for(int i = 0; i< TeamName.length ; i++) {
 				System.out.println(TeamName[i]);
 			}
@@ -89,6 +77,14 @@ public class AddTeams extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        this.getServletContext().getRequestDispatcher("/WEB-INF/Groups.jsp").forward( request, response );
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

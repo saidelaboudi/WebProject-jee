@@ -658,7 +658,10 @@ MEDIAQUERIES
                         </div>
                     </div>
                     </div>
+                    
+                    
                     <div class="chat" id="chat" !hidden >
+                        
                         <div class="container">
                             <div class="px-0">
                               <div class="px-4 py-5 chat-box bg-white">

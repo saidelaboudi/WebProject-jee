@@ -47,7 +47,7 @@ public class GroupDaoImpl implements GroupDao{
 		}catch(Exception e) {
 			
 		}
-		System.out.println("Get tag List Done !");
+		System.out.println("Get Group List Done !");
 		return list;
 	}
 	
@@ -94,5 +94,16 @@ public class GroupDaoImpl implements GroupDao{
         statement.setInt(2, TeamID);
         statement.execute();
 	}
+	public Group getGroupByName(String groupName,DAOFactory daoF) {
+		Group group = null;
+		try{
+			ResultSet set = daoF.Select("Groups","Name='"+groupName+"'");
+			set.next();
+			group = new Group(set.getString(2), null);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+	}
+		return group;
 	
 }
+	}

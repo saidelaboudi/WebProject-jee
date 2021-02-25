@@ -71,8 +71,9 @@ public class Groups extends HttpServlet {
 		// TODO Auto-generated method stub
 		daoF =  (DAOFactory)getServletContext().getAttribute(CONF_DAO_FACTORY);
 		
-		String GroupName = (String)request.getParameter("GrouName");
+		String GroupName = (String)request.getParameter("GroupName");
 
+		System.out.println("From Groups"+GroupName);
 		HttpSession session = request.getSession(true);
 		
 		User owner = (User)session.getAttribute("CurrentUser");
@@ -84,6 +85,7 @@ public class Groups extends HttpServlet {
 			if(GroupName!=null)
 				group = new ensias.teams.buzinessLayer.Group(GroupName, GroupName);
 				group.owner=owner;
+				session.setAttribute("GroupSelected", group);
 				addGroup.addGroup(group, daoF);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
