@@ -46,8 +46,7 @@ public class ShowTeam extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
-		Team team = (Team) session.getAttribute("TeamName");
-		String Name=team.name;
+		String Name=request.getParameter("TeamName");
 		try {
 			TeamDAOImp addTeam = new TeamDAOImp();
 			ArrayList<User> users =addTeam.getUsersByTeamName(Name,daoF);

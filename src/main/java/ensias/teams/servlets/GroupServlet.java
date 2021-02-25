@@ -49,9 +49,8 @@ public class GroupServlet extends HttpServlet {
 		
 		//
 		
+		HttpSession session = request.getSession(true);
 		try {
-
-			HttpSession session = request.getSession(true);
 			
 			ArrayList<Team> teams = addTeam.getTeamList(daoF);
 			
@@ -61,7 +60,20 @@ public class GroupServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		 // Updatytin the List 
+		
+		
+		ArrayList<ensias.teams.buzinessLayer.Group> GroupList = null;
+		
+		try {
+			GroupList = addGroup.getGroupList(daoF);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		session.setAttribute("GroupList", GroupList);
+		
         this.getServletContext().getRequestDispatcher("/WEB-INF/addTeams.jsp").forward( request, response );
 	}
 

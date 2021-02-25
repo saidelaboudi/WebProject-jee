@@ -59,9 +59,10 @@ public class AddTeams extends HttpServlet {
 		System.out.println("From AddTeams"+groupe.name);
 		
 		try {
-			for(int i = 0; i< TeamName.length ; i++) {
-				System.out.println(TeamName[i]);
-			}
+			/*if(TeamName!=null)
+				for(int i = 0; i< TeamName.length ; i++) {
+					System.out.println(TeamName[i]);
+				}*/
 			ArrayList<Team> teamsList = new ArrayList<Team>();
 			if(TeamName!=null) {
 				for(int i=0;i<TeamName.length;i++) {
