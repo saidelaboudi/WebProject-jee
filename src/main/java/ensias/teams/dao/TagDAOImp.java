@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
 
@@ -17,6 +18,15 @@ public class TagDAOImp implements TagDAO{
 	public void addTag(Tag t, DAOFactory db) throws SQLException {
 		String sql="INSERT INTO tag (tag) VALUES (?)";
 	    PreparedStatement statement = db.getConnection().prepareStatement(sql);
+	    statement.setString(1,t.tagName);      	
+    	statement.execute();
+	}
+
+
+	public void removeTag(Tag t, DataBase db) throws SQLException {
+		int UserID;
+		String sql="DELETE FROM tag  WHERE tag = ?";
+	    PreparedStatement statement = db.connection.prepareStatement(sql);
 	    statement.setString(1,t.tagName);      	
     	statement.execute();
 	}
@@ -67,6 +77,7 @@ public class TagDAOImp implements TagDAO{
     	while(set.next()) {
     		UserID=set.getInt("UsersID");
     		users.add(addUser.getUserByID(UserID, db));
+
     	}
 		return users;
 	}
