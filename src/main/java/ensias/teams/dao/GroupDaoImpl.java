@@ -32,8 +32,7 @@ public class GroupDaoImpl implements GroupDao{
         PreparedStatement statement = db.getConnection().prepareStatement(sql);
         statement.setString(1,g.name);   
         statement.setInt(2, OwnerID);  
-        statement.setString(3,g.description);  
-        System.out.print(statement.toString());
+        statement.setString(3,g.description);
         statement.execute();
 	}
 	
@@ -45,9 +44,8 @@ public class GroupDaoImpl implements GroupDao{
 				list.add(new Group(set.getString(2), null));
 			}
 		}catch(Exception e) {
-			
+			e.getMessage();
 		}
-		System.out.println("Get Group List Done !");
 		return list;
 	}
 	
@@ -71,7 +69,6 @@ public class GroupDaoImpl implements GroupDao{
 		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
-		System.out.println("Get tag List Done !");
 		return list;
 	}
 

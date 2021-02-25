@@ -51,10 +51,10 @@ public class ShowTeam extends HttpServlet {
 			TeamDAOImp addTeam = new TeamDAOImp();
 			ArrayList<User> users =addTeam.getUsersByTeamName(Name,daoF);
 			session.setAttribute("TeamMembers", users );
-			for(User user: users) {
+			/*for(User user: users) {
 				System.out.println(user.toString());
 			}
-			
+			*/
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,7 +71,7 @@ public class ShowTeam extends HttpServlet {
 		try {
 			String email = (String)request.getParameter("email");
 			int UserID = addUser.getUserID(new User(null,null,null,null, email), daoF);
-			System.out.println(UserID);
+			//System.out.println(UserID);
 			User user = addUser.getUserByID(UserID, daoF);
 			HttpSession session = request.getSession(true);
 			Team team = (Team) session.getAttribute("TeamName");

@@ -56,7 +56,7 @@ public class AddTeams extends HttpServlet {
 		
 		HttpSession session = request.getSession(true);
 		Group groupe = (Group) session.getAttribute("CurrentGroup");
-		System.out.println("From AddTeams"+groupe.name);
+		//System.out.println("From AddTeams"+groupe.name);
 		
 		try {
 			/*if(TeamName!=null)
@@ -66,9 +66,9 @@ public class AddTeams extends HttpServlet {
 			ArrayList<Team> teamsList = new ArrayList<Team>();
 			if(TeamName!=null) {
 				for(int i=0;i<TeamName.length;i++) {
-					System.out.println(TeamName[i]);
+					//System.out.println(TeamName[i]);
 					int teamID = addTeam.getTeamID(new Team(TeamName[i], null), daoF);
-					System.out.println(teamID);
+					//System.out.println(teamID);
 					if(teamID>0)
 						teamsList.add(addTeam.getTeamByID(teamID, daoF));
 				}

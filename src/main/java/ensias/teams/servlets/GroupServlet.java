@@ -86,7 +86,7 @@ public class GroupServlet extends HttpServlet {
 		
 		String GroupName = (String)request.getParameter("groupName");
 		
-		System.out.println(GroupName);
+		//System.out.println(GroupName);
 		HttpSession session = request.getSession(true);
 		try {
 			User owner = (User) session.getAttribute("CurrentUser");

@@ -63,7 +63,6 @@ public class AddMembers extends HttpServlet {
 		NewTeam =(Team)session.getAttribute("TeamName");
 		ArrayList<User> users = new ArrayList<User>();
 		
-		System.out.println(NewTeam.toString());
 		
 		
 		
@@ -85,7 +84,7 @@ public class AddMembers extends HttpServlet {
 				/*if(session.getAttribute("TagList")==null)
 					session.setAttribute("TagList", tagName );*/
 				for(int i=0;i<tagName.length;i++) {
-					System.out.println(tagName[i]);
+					//System.out.println(tagName[i]);
 					userList = addtag.getUsersTagged(tagName[i], daoF);
 					users.addAll(userList);
 				}
@@ -104,7 +103,7 @@ public class AddMembers extends HttpServlet {
 						addUser.addUser(user, daoF);
 						NewTeam.addMember(user);
 					}else {
-						System.out.println(user.toString());
+						//System.out.println(user.toString());
 					}
 					NewTeam.addMember(user);
 				}
@@ -115,12 +114,12 @@ public class AddMembers extends HttpServlet {
 				}
 			}
 			
-			
+			/*
 			for(User user: users) {
 				System.out.println(user.toString());
 				System.out.println(addUser.getUserID(user, daoF));
 			}
-			
+			*/
 			//ArrayList<User> users = (ArrayList<User>) session.getAttribute("Users");
 			// Send users List !! 
 			
@@ -148,7 +147,7 @@ public class AddMembers extends HttpServlet {
 			String email = (String) request.getAttribute("addaoFyEmail");
 			if(email!=null) {
 				User user = new User(null,null,null,null,email);
-				System.out.println(email);
+				//System.out.println(email);
 				addTeam.addTeam_Member(NewTeam, user, daoF);
 			}
 		} catch (Exception e) {

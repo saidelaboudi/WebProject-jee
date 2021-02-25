@@ -53,14 +53,14 @@ public class Group extends HttpServlet {
 			
 			User owner = (User)session.getAttribute("CurrentUser");
 			String GroupName = (String) request.getParameter("GroupSelected");
-			System.out.println("From Group"+GroupName);
+			//System.out.println("From Group"+GroupName);
 			ensias.teams.buzinessLayer.Group group = addGroup.getGroupByName(GroupName, daoF);
 			//ensias.teams.buzinessLayer.Group group = (ensias.teams.buzinessLayer.Group) session.getAttribute("GroupSelected");
 			//session.setAttribute("GroupSelected", group);
 			//(ensias.teams.buzinessLayer.Group) session.getAttribute("GroupSelected");
 			ArrayList<Team> teamsList = new ArrayList<Team>();
 			teamsList=addGroup.getTeamsByGroup(group,daoF);
-			System.out.println(teamsList.size());
+			//System.out.println(teamsList.size());
 			session.setAttribute("TeamList", teamsList);
 			
 		} catch (SQLException e) {

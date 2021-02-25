@@ -300,7 +300,6 @@ public class UserDaoImpl implements UserDao {
 		}catch(Exception e) {
 			
 		}
-		System.out.println("Get users by Tag done !");
 		return users;
 	}
 
