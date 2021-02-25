@@ -32,7 +32,7 @@ public class AddMembers extends HttpServlet {
 	
 	TeamDAOImp addTeam = new TeamDAOImp();
 	
-	UserDaoImpl addUser = new UserDaoImpl(daoF);
+	UserDaoImpl addUser = new UserDaoImpl();
 	GroupDaoImpl addGroup = new GroupDaoImpl(daoF);
 	TagDAOImp addtag = new TagDAOImp();
     /**

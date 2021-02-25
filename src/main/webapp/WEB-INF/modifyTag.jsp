@@ -1,6 +1,7 @@
 <%@page
 import="ensias.teams.buzinessLayer.User" 
-import="ensias.teams.dao.DataBase"
+import="ensias.teams.buzinessLayer.Tag" 
+import="ensias.teams.dao.DAOFactory"
 import = "ensias.teams.dao.TagDAOImp"
 import = "java.util.ArrayList"
 
@@ -14,7 +15,7 @@ import = "java.util.ArrayList"
 <body>
 	<%
 			User member = (User)request.getAttribute("member");
-			if (member == null && request.getAttribute("firstTime") == null){
+			if (member == null && request.getAttribute("marker") == null){
 		%>
 			<script>
 				alert("le membre que vous essayez d'ajouter n'existe pas!");
@@ -23,7 +24,10 @@ import = "java.util.ArrayList"
 			}
 		
 	%>
-	<h2> tag name : <% out.println((String)request.getAttribute("tagName")); %> </h2>
+	<h2> tag name : 
+	<%
+	Tag tg = (Tag) request.getAttribute("_TAG");
+	out.println(tg.tagName +" " + tg.tagId); %> </h2>
 	<section>
 		<header>
 			<div>
@@ -33,8 +37,8 @@ import = "java.util.ArrayList"
 				Add Members from another Tag
 			</div>
 			<div>
-				<form method='post' action="TagMembers">
-					<input type="text" name="tagName" value='<% out.println(request.getAttribute("tagName")); %>' style='display:none;'>
+				<form method='post' action="ModifyTags">
+					<input type="text" name="tagName" value='<% out.println(tg.tagName); %>' style='display:none;'>
 					<input type="text" name="Nmember" placeholder="Email du membre a ajouter">
 					<input type="submit" value="Ajouter">
 				</form>
@@ -43,14 +47,13 @@ import = "java.util.ArrayList"
 		
 		<main>
 			<%
-			DataBase db;
+			DAOFactory db = DAOFactory.getInstance();
 			try{
-				db = new DataBase("localhost","3306","ensiasteams","root","root");
-				ArrayList<User> members = new TagDAOImp().getUsersTagged((String)request.getAttribute("tagName"), db);
+				ArrayList<User> members = tg.tagged;
 				for (User t : members){
 		%>
 			<form method="post" action="#tagMembers" style='flex'>
-				<input type="text" name="tagName" value='<% out.println(request.getAttribute("tagName")); %>' style='display:none;'>			
+				<input type="text" name="tagName" value='<% out.println(tg.tagName); %>' style='display:none;'>			
 				<input type="text" name="Demail" value="<% out.println(t.email);%>" style='display:none;'/>
 				<input type="text" value="<% out.println(t.email);%>" disabled>
 				<input type="submit" value="Delete" disabled>

@@ -30,7 +30,7 @@ public class GroupServlet extends HttpServlet {
 	public DAOFactory daoF;
 	
 	public TeamDAOImp addTeam = new TeamDAOImp();
-	public UserDaoImpl addUser = new UserDaoImpl(null);
+	public UserDaoImpl addUser = new UserDaoImpl();
 	public GroupDaoImpl addGroup = new GroupDaoImpl(null);
 	public TagDAOImp addtag = new TagDAOImp();
     /**

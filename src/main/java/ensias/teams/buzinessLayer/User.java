@@ -9,7 +9,7 @@ public  class User {
 				+ password + ", Email=" + email + "]";
 	}
 
-	public Long id;
+	public Long id = 13l;
 	public String firstName="";
 	public String lastName;
 	public String password;
@@ -42,12 +42,5 @@ public  class User {
 		this.email = email;
 	}
 
-	public String getFirstName() {
-		return firstName;
-	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	
 }

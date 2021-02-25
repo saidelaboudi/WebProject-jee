@@ -32,7 +32,7 @@ public class TeamServlet extends HttpServlet {
 	public DAOFactory daoF;
 	
 	public TeamDAOImp addTeam = new TeamDAOImp();
-	public UserDaoImpl addUser = new UserDaoImpl(null);
+	public UserDaoImpl addUser = new UserDaoImpl();
 	public GroupDaoImpl addGroup = new GroupDaoImpl(null);
 	public TagDAOImp addtag = new TagDAOImp();
 	
@@ -85,7 +85,7 @@ public class TeamServlet extends HttpServlet {
 		ArrayList<Tag> TagList = null;
 		
 		try {
-			TagList = addtag.getTagList(daoF);
+			TagList = addtag.getTagList(daoF, owner);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -82,7 +82,7 @@ public class DAOFactory {
 	        return new GroupDaoImpl( this );
 	    }
 	 public UserDaoImpl getUserDao() {
-	        return new UserDaoImpl( this );
+	        return new UserDaoImpl();
 	    }
 
 		

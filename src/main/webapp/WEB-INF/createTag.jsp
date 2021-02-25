@@ -1,8 +1,9 @@
 <%@page
 import = "java.util.ArrayList"
 import = "ensias.teams.buzinessLayer.Tag"
+import = "ensias.teams.buzinessLayer.User"
 import = "ensias.teams.dao.TagDAOImp"
-import = "ensias.teams.dao.DataBase"
+import = "ensias.teams.dao.DAOFactory"
 
 %>
 <!DOCTYPE html>
@@ -18,24 +19,24 @@ import = "ensias.teams.dao.DataBase"
 			<input type="text" name="tagName" placeholder="input Tag name" id="tag"/>
 			<input type="submit" value="Create Tag"/>
 		</form>	
-		<form method="post" action="CreateTags">
+		<form method="post" action="RemoveTags">
 			<label id="tag"> Tag Name : </label>
-			<input type="text" name="DtagName" placeholder="input Tag name" id="tag"/>
+			<input type="text" name="tagName" placeholder="input Tag name" id="tag"/>
 			<input type="submit" value="Delete Tag"/>
 		</form>	
-		<form method="post" action="TagMembers">
+		<form method="post" action="ModifyTags">
 			<label id="tag"> Tag Name : </label>
-			<input type="text" name="MtagName" placeholder="input Tag name" id="tag"/>
+			<input type="text" name="tagName" placeholder="input Tag name" id="tag"/>
+			<input type="text" name="marker" value="1" style="display:none;">
 			<input type="submit" value="Modify Members"/>
 		</form>	
 	</header>
 	
 	<main>
 		<%
-			DataBase db;
+			DAOFactory db = DAOFactory.getInstance();
 			try{
-					db = new DataBase("localhost","3306","ensiasteams","root","root");
-				ArrayList<Tag> tags = new TagDAOImp().getTagList(db);
+				ArrayList<Tag> tags = new TagDAOImp().getTagList(db, (User) request.getSession().getAttribute("_SESSION"));
 				for (Tag t : tags){
 		%>
 			<div>
