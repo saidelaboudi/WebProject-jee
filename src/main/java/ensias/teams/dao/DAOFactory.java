@@ -95,7 +95,7 @@ public class DAOFactory {
 		ResultSet result = null;
 		try {
 			String query="SELECT * FROM "+TableName+" WHERE "+condition;
-			System.out.println(query);
+			//System.out.println(query);
 			Statement statement =this.getConnection().createStatement();
 			result=statement.executeQuery(query);		
 		} catch (Exception e) {
@@ -129,16 +129,16 @@ public class DAOFactory {
 		/**
 		 * DELLET FROM TABLENAME WHERE CONDITION(-- -*-*o)
 		 */
-		System.out.println(sql);
+		//System.out.println(sql);
 		statement.executeUpdate(sql);
 
-		System.out.println(sql);
+		//System.out.println(sql);
 	}
 	
 	public void DropTable(String TableName) throws SQLException {
 		String sql="DROP TABLE "+TableName;
 		Statement statement=getConnection().createStatement();
-		System.out.println(sql);
+		//System.out.println(sql);
 		statement.execute(sql);
 	}
 
