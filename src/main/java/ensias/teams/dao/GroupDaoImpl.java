@@ -74,6 +74,25 @@ public class GroupDaoImpl implements GroupDao{
 		System.out.println("Get tag List Done !");
 		return list;
 	}
+
 	
+	
+	public void addTeamsGroup(Group groupe, ArrayList<Team> teamsList, DAOFactory daoF)  throws SQLException {
+		for(Team team : teamsList) {
+			addTeamGroup(groupe, team, daoF);
+		}
+	}
+	
+	public void addTeamGroup(Group groupe, Team team, DAOFactory daoF)  throws SQLException {
+		GroupDaoImpl addGroup = new GroupDaoImpl(daoF);
+		TeamDAOImp addTeam = new TeamDAOImp();
+		int GroupID=addGroup.getGroupID(groupe, daoF);
+		int TeamID= addTeam.getTeamID(team, daoF) ;
+		String sql="INSERT INTO groups_team (GroupsID,TeamID) VALUES (?,?)";
+        PreparedStatement statement = daoF.getConnection().prepareStatement(sql);
+        statement.setInt(1,GroupID);
+        statement.setInt(2, TeamID);
+        statement.execute();
+	}
 	
 }

@@ -1,14 +1,12 @@
-    <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-	<%@page import="java.util.ArrayList"%> 
-	<%@page import="ensias.teams.buzinessLayer.*"%> 
-	<%@page import="ensias.teams.dao.*"%> 
-    <%
-    User user = (User)session.getAttribute("CurrentUser");
-    
-    ArrayList<ensias.teams.buzinessLayer.Group> GroupList = null;
-    GroupList=(ArrayList<ensias.teams.buzinessLayer.Group>)session.getAttribute("GroupList");
-	
-    %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%> 
+<%@page import="ensias.teams.buzinessLayer.*"%> 
+<%@page import="ensias.teams.dao.*"%> 
+<%
+User user = (User)session.getAttribute("CurrentUser");
+%>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -21,7 +19,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>ENSIAS TEAMS</title>
+    <title>Creation d'un nouveau groupe</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -33,9 +31,14 @@
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
-
+<script>
+    $(document).ready(function(){
+    $("a.submit").click(function(){
+        document.getElementById("myForm").submit();
+    }); 
+});
+</script>
 <body id="page-top">
-
 
     <div id="wrapper">
 
@@ -52,7 +55,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8541/teams/Group">
+                <a class="nav-link" href="">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -183,118 +186,50 @@
                 </nav>
                 <!-- End of Topbar -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
+                        <div class="card o-hidden border-0 shadow-lg my-5">
+                            <div class="card-body p-0">
+                                <!-- Nested Row within Card Body -->
+                                <div class="row">
+                                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                                    <div class="col-lg-7">
+                                        <div class="p-5">
+                                            <div class="text-center">
+                                                <h1 class="h4 text-gray-900 mb-4">Créer un nouveau Groupe</h1>
+                                            </div>
                 
-			<div class="container row">
-				<%
-				
-				for(ensias.teams.buzinessLayer.Group group : GroupList ){
-				%>	
-				<a href="http://localhost:8541/teams//Group">
-					 <div class="col-xl-3 col-md-6 mb-4 row">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                               <%=group.name%> 
+                
+                
+                                            <form class="user" action="http://localhost/teams/GroupServlet" method="POST">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control form-control-user" id="groupName"
+                                                        placeholder="Nom du groupe " name="groupName" />
                                                 </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                                <!-- <div class="form-group">
+                                                    <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Description" name="description"></textarea>
+                                                </div> -->
+                                                <div class="btn-block">
+                                                    <a href="index.html" class="btn btn-primary btn-user ">
+                                                        Annuler
+                                                    </a>
+                                                    <input type="submit" value="Suivant" class="btn btn-primary btn-user">
+                                                </div>
+                                            </form>
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            <hr>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>		
-                        
-                        <%
-                        	session.setAttribute("GroupSelected", group);
-                        %>			
-					</a>
-				<%} %>     
-				
-				
-				<a href="http://localhost:8541/teams/CreateGroup">
-					 <div class="col-xl-3 col-md-6 mb-4 row">
-                            <div class="card border-left-warning shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                        Creer un nouveau Groupe	
-                                                </div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>		
-                        	
-					</a>
-					
-					           
-			</div>
-                        
+                        </div>
                 </div>
                 <!-- /.container-fluid -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             </div>
             <!-- End of Main Content -->
@@ -303,7 +238,7 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; ENSIAS TEAMS 2021</span>
+                        <span>Copyright &copy; Your Website 2020</span>
                     </div>
                 </div>
             </footer>
@@ -313,25 +248,27 @@
         <!-- End of Content Wrapper -->
 
     </div>
-
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
 
+    <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">voulez vous se quitter ?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">ï¿½</span>
+                        <span aria-hidden="true">Ã—</span>
                     </button>
                 </div>
-                <div class="modal-body">Sï¿½lectionnez ï¿½Dï¿½connexionï¿½ ci-dessous si vous ï¿½tes prï¿½t ï¿½ mettre fin ï¿½ votre session en cours.</div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="login.html">Dï¿½connexion</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
