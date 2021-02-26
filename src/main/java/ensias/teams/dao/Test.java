@@ -32,12 +32,12 @@ public class Test {
 		
 
 		TeamDAOImp addTeam = new TeamDAOImp();
-		UserDaoImpl addUser = new UserDaoImpl(null);
+		UserDaoImpl addUser = new UserDaoImpl();
 		GroupDaoImpl addGroup = new GroupDaoImpl(null);
 		TagDAOImp addtag = new TagDAOImp();
 		
 		
-		for(Tag tag2 :addtag.getTagList(db)) {
+		for(Tag tag2 :addtag.getTagList(db, owner)) {
 			System.out.println(tag2.tagName);
 			for(User user : addUser.getUsersByTag(tag2, db)) {
 				System.out.println(user.toString());

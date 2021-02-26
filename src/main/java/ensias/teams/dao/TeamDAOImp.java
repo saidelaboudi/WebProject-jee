@@ -49,7 +49,7 @@ public class TeamDAOImp implements TeamDAO{
     
     public void addTeam_Member(Team team,User user,DAOFactory db)throws SQLException {
     	int TeamID = this.getTeamID(team, db);
-    	UserDaoImpl userdao = new UserDaoImpl(null);
+    	UserDaoImpl userdao = new UserDaoImpl();
     	int UserID =userdao.getUserID(user,db) ;
     	addTeam_Member(TeamID, UserID, db);
     	
@@ -57,7 +57,7 @@ public class TeamDAOImp implements TeamDAO{
 
     public ArrayList<User> getUsersByTeamName(String name,DAOFactory db) throws SQLException{
     	int UserID;
-		UserDaoImpl addUser = new UserDaoImpl(null);
+		UserDaoImpl addUser = new UserDaoImpl();
 		ArrayList<User> users = new ArrayList<User>();
     	ResultSet set = db.Select("team","Name='"+name+"'");
     	set.next();
@@ -73,7 +73,7 @@ public class TeamDAOImp implements TeamDAO{
     
     public Team getTeamByID(int ID,DAOFactory db) throws SQLException{
     	Team team = null;
-    	UserDaoImpl addUser = new UserDaoImpl(db);
+    	UserDaoImpl addUser = new UserDaoImpl();
     	ResultSet set = db.Select("team","ID="+ID);
     	while(set.next()) {
     		team= new Team(set.getString(2),addUser.getUserByID(set.getInt(4), db));

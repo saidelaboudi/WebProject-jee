@@ -26,11 +26,8 @@ import ensias.teams.buzinessLayer.User;
  *
  */
 public class UserDaoImpl implements UserDao {
-	private DAOFactory daoFactory;
+	private DAOFactory daoFactory = DAOFactory.getInstance();
 	
-	public UserDaoImpl(DAOFactory daoFactory) {
-		this.daoFactory = daoFactory;
-	}
 	@Override
 	public ArrayList<User> bringAllUsers() {
 		ArrayList<User> users = new ArrayList<>();
@@ -77,20 +74,24 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			String setDb = "USE "+ this.daoFactory.getSchema();
-			String query = "SELECT * FROM Users WHERE Email = ?";
 			connection = this.daoFactory.getConnection();
 			st=connection.prepareStatement(setDb);
-			st.executeQuery(setDb);
+			st.execute();
 			st.close();
+			
+			String query = "SELECT * FROM Users WHERE Email = ?";
 			st=connection.prepareStatement(query);
 			st.setString(1, email);
+			rs=st.executeQuery();
 			
-			rs=st.executeQuery(query);
-			if (rs.next())
+			if (rs.next()) {
+				System.out.println("blbl");
 				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
+			}
 			st.close();
+
 		}catch ( SQLException e ) {
-	        throw new DAOException( e );
+	        e.printStackTrace();;
 	    } finally {
 	        fermeturesSilencieuses( rs ,st, connection );
 	    }
