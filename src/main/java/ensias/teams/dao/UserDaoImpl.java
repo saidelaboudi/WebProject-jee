@@ -17,6 +17,7 @@ import java.sql.*;
 import java.util.*;
 
 import ensias.teams.buzinessLayer.Tag;
+import ensias.teams.buzinessLayer.Team;
 import ensias.teams.buzinessLayer.User;
 
 /**
@@ -58,7 +59,6 @@ public class UserDaoImpl implements UserDao {
 	    }
 
 	
-		
 		
 		return users;
 	}
@@ -316,7 +316,7 @@ public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException
 			users.add(getUserByID(UserID,db));
 		}
 	}catch(Exception e) {
-		
+		System.out.println(e.getMessage());
 	}
 	System.out.println("Get users by Tag done !");
 	return users;
@@ -446,4 +446,19 @@ public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException
 			return users;
 		}
 	
+	public ArrayList<Team> getTeamsByUser(User user  ,DAOFactory db) throws SQLException{
+		ArrayList<Team> list = new ArrayList<Team>();
+		int UserID=this.getUserID(user,db);
+		TeamDAOImp addTeam = new TeamDAOImp();
+		try{
+			ResultSet set = db.Select("team_users","UsersID='"+UserID+"'");
+			while(set.next()) {
+				int TeamID=set.getInt("TeamID");
+				list.add(addTeam.getTeamByID(TeamID, db));
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return list ;
+	}
 }
