@@ -34,6 +34,9 @@ public class CreateTags extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		User owner = new User("a", "b", "ab", "ab", "a@b.c");
+		request.getSession().setAttribute("_SESSION", owner);
+
         this.getServletContext().getRequestDispatcher("/WEB-INF/createTag.jsp").forward( request, response );
 	}
 

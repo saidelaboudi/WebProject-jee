@@ -13,14 +13,23 @@ import = "java.util.ArrayList"
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-			User member = (User)request.getAttribute("member");
-			if (member == null && request.getAttribute("marker") == null){
+		<%
+			if (request.getAttribute("ownerDeleteError") != null){
 		%>
 			<script>
-				alert("le membre que vous essayez d'ajouter n'existe pas!");
+				alert("vous ne pouvez pas supprimer votre compte des utilisateur de ce Tag");
 			</script>
 		<%
+			}
+			else{
+				User member = (User)request.getAttribute("member");
+				if (member == null && request.getAttribute("marker") == null){
+		%>
+				<script>
+					alert("le membre que vous avez saisit n'existe pas!");
+				</script>
+		<%
+				}
 			}
 		
 	%>
@@ -52,11 +61,11 @@ import = "java.util.ArrayList"
 				ArrayList<User> members = tg.tagged;
 				for (User t : members){
 		%>
-			<form method="post" action="#tagMembers" style='flex'>
+			<form method="post" action="ModifyTags" style='flex'>
 				<input type="text" name="tagName" value='<% out.println(tg.tagName); %>' style='display:none;'>			
 				<input type="text" name="Demail" value="<% out.println(t.email);%>" style='display:none;'/>
 				<input type="text" value="<% out.println(t.email);%>" disabled>
-				<input type="submit" value="Delete" disabled>
+				<input type="submit" value="Delete" >
 			</form>
 		<%
 				}

@@ -56,18 +56,37 @@ public class ModifyTags extends HttpServlet {
 
 			if (!request.getParameterMap().containsKey("marker")) {
 				// if request does not have key marker then this is not first time visiting from create jsp, so members are added 	
-				String mail = (String) request.getParameter("Nmember");
-				System.out.println(mail);
-
-				DAOFactory db = DAOFactory.getInstance();
-				User added = db.getUserDao().bringUser(mail);
-				
-					if (added != null) {
-						dao.addTag_User(tag, db, mail);
-						tag.addMember(added);
-					}
+				if (request.getParameterMap().containsKey("Nmember")) {
+					String mail = (String) request.getParameter("Nmember");
+					System.out.println(mail);
+	
+					DAOFactory db = DAOFactory.getInstance();
+					User added = db.getUserDao().bringUser(mail);
 					
-				request.setAttribute("member", added);
+						if (added != null) {
+							dao.addTag_User(tag, db, mail);
+							tag.addMember(added);
+						}
+						
+					request.setAttribute("member", added);
+				}
+				else if (request.getParameterMap().containsKey("Demail")) {
+					String mail = (String) request.getParameter("Demail");
+					System.out.println("Del " + mail);
+					if (!mail.equals(owner.email)) {
+						DAOFactory db = DAOFactory.getInstance();
+						User deleted = db.getUserDao().bringUser(mail);
+					
+						if (deleted != null) {
+							dao.removeTag_User(tag, db, mail);
+							tag.removeMember(deleted);
+						}
+					request.setAttribute("member", deleted);
+					}
+					else {
+						request.setAttribute("ownerDeleteError", true);
+					}
+				}
 			}
 			else {
 				request.setAttribute("marker", true);

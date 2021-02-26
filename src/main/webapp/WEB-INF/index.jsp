@@ -58,18 +58,18 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="http://localhost:8541/teams/CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
+                <a class="nav-link collapsed" href="CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Crï¿½er une ï¿½quipe</span>
+                    <span>Creer une equipe</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="CreateTags" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Crï¿½er une etiquette</span>
+                    <span>Creer une etiquette</span>
                 </a>
             </li>
 
@@ -168,7 +168,7 @@
 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Dï¿½connexion
+                                    Déconnexion
                                 </a>
 
                             </div>
@@ -274,10 +274,10 @@
                         <span aria-hidden="true">ï¿½</span>
                     </button>
                 </div>
-                <div class="modal-body">Sï¿½lectionnez ï¿½Dï¿½connexionï¿½ ci-dessous si vous ï¿½tes prï¿½t ï¿½ mettre fin ï¿½ votre session en cours.</div>
+                <div class="modal-body">Selectionnez Deconnexion ci-dessous si vous etes pret à mettre fin à votre session en cours.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="login.html">Dï¿½connexion</a>
+                    <a class="btn btn-primary" href="login">Deconnexion</a>
                 </div>
             </div>
         </div>

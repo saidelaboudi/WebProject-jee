@@ -26,6 +26,10 @@ public class Tag {
 		this.tagged.add(person);
 	}
 	
+	public void removeMember(User person) {
+		this.tagged.remove(person);
+	}
+	
 	public ArrayList<User> _getTagged() throws SQLException {
 		ArrayList<User> tg = new ArrayList<User>();
 		TagDAO dao = new TagDAOImp();

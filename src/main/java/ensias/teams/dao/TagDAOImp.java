@@ -80,7 +80,36 @@ public class TagDAOImp implements TagDAO{
 		ResultSet rs = st.executeQuery();
 		if (rs.next()) {
 			int UserID = rs.getInt(1);
+			st.close();
+
 			sql="INSERT INTO tag_users (TagID,UsersID) VALUES (?,?)";
+			st = connection.prepareStatement(sql);
+			st.setInt(1, t.tagId);
+			st.setInt(2, UserID);
+			st.execute();
+			st.close();
+		}
+	}
+	
+	@Override
+	public void removeTag_User(Tag t, DAOFactory db, String mail) throws SQLException {
+		// connect to database
+		Connection connection = db.getConnection();
+		String sql = "USE " + db.getSchema();
+		PreparedStatement st = connection.prepareStatement(sql);
+		st.execute();
+		st.close();
+		
+		// get mail user id
+		sql = "select * from users where Email = ?";
+		st = connection.prepareStatement(sql);
+		st.setString(1, mail);
+		ResultSet rs = st.executeQuery();
+		if (rs.next()) {
+			int UserID = rs.getInt(1);
+			st.close();
+
+			sql="DELETE FROM tag_users WHERE TagID = ? AND UsersID = ?";
 			st = connection.prepareStatement(sql);
 			st.setInt(1, t.tagId);
 			st.setInt(2, UserID);
