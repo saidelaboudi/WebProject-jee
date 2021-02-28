@@ -359,7 +359,7 @@ table.table .avatar {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8541/teams/Groups">
+                <a class="nav-link" href="Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -369,7 +369,7 @@ table.table .avatar {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="http://localhost:8541/teams/CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
+                <a class="nav-link collapsed" href="CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Cr�er une �quipe</span>
                 </a>
@@ -539,7 +539,7 @@ table.table .avatar {
                         </div>
                     </div>
                     
-					<form action = "http://localhost/teams/AddMembers" method="post" enctype='multipart/form-data'>
+					<form action = "AddMembers" method="post" enctype='multipart/form-data'>
 						<div id="oneByOne" hidden="true">
 							<div id="Tag" hidden="true">
 			                                <div class="container">
@@ -591,7 +591,7 @@ table.table .avatar {
 					</form>
                 </div>
                 <!-- /.container-fluid -->
-				<a class="btn-circle  btn-lg" style=" margin-left : 40% ;  margin-top: 0px; width: 90px ; height : 90px ;" href="http://localhost/teams/ShowTeam">Show Teams</a>
+				<a class="btn-circle  btn-lg" style=" margin-left : 40% ;  margin-top: 0px; width: 90px ; height : 90px ;" href="ShowTeam">Show Teams</a>
             </div>
             <!-- End of Main Content -->
 

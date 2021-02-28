@@ -51,7 +51,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8541/teams/Groups">
+                <a class="nav-link" href="Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -61,7 +61,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="http://localhost:8541/teams/CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
+                <a class="nav-link collapsed" href="CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Cr�er une �quipe</span>
                 </a>
@@ -211,7 +211,7 @@
 				for(ensias.teams.buzinessLayer.Group group : GroupList ){
 				%>	
 					 <div class="col-xl-3 col-md-6 mb-4 row">
-						<a href="http://localhost:8541/teams/Group?GroupSelected=<%=group.name%>">
+						<a href="Group?GroupSelected=<%=group.name%>">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
@@ -232,7 +232,7 @@
 				
 				
 				<div class="col-xl-3 col-md-6 mb-4 row">
-					<a href="http://localhost:8541/teams/CreateGroup">
+					<a href="CreateGroup">
                             <div class="card border-left-warning shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">

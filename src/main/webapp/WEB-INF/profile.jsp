@@ -191,7 +191,7 @@ body{
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8541/teams/Groups">
+                <a class="nav-link" href="Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -201,7 +201,7 @@ body{
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="http://localhost:8541/teams/CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
+                <a class="nav-link collapsed" href="CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Cr�er une �quipe</span>
                 </a>

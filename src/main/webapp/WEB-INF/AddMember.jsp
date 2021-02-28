@@ -355,7 +355,7 @@ table.table .avatar {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8541/teams/Groups">
+                <a class="nav-link" href="Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -365,7 +365,7 @@ table.table .avatar {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="http://localhost:8541/teams/CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
+                <a class="nav-link collapsed" href="CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Cr�er une �quipe</span>
                 </a>
@@ -541,7 +541,7 @@ table.table .avatar {
                         <div id="Tag" hidden>
                         
                         
-                            <form action = "http://localhost/teams/TeamServlet#" method="post" >
+                            <form action = "TeamServlet#" method="post" >
                             
                                 <div class="container">
                                 <label>
@@ -634,7 +634,7 @@ table.table .avatar {
                         <div id="addMemberModal" class="modal fade">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">
+                                    <form action="AddMembers" method="post" enctype="multipart/form-data">
                                         <div class="modal-header">						
                                             <h4 class="modal-title">Ajouter un membre</h4>
                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -677,7 +677,7 @@ table.table .avatar {
                     </div>
                 
                     <div id="Excel" hidden>
-                        <form action="http://localhost/teams/AddMembers" method="post" enctype="multipart/form-data">
+                        <form action="AddMembers" method="post" enctype="multipart/form-data">
                         <section>
                               <div class="row">
                                 <div class="col-lg-5 mx-auto">

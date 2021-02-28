@@ -50,7 +50,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8541/teams/Groups">
+                <a class="nav-link" href="Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -170,7 +170,7 @@
 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Déconnexion
+                                    Dï¿½connexion
                                 </a>
 
                             </div>
@@ -289,7 +289,7 @@
                         <span aria-hidden="true">ï¿½</span>
                     </button>
                 </div>
-                <div class="modal-body">Selectionnez Deconnexion ci-dessous si vous etes pret à mettre fin à votre session en cours.</div>
+                <div class="modal-body">Selectionnez Deconnexion ci-dessous si vous etes pret ï¿½ mettre fin ï¿½ votre session en cours.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                     <a class="btn btn-primary" href="login">Deconnexion</a>

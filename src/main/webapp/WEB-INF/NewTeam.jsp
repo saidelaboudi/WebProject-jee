@@ -54,7 +54,7 @@ User user = (User)session.getAttribute("CurrentUser");
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="http://localhost:8541/teams/Groups">
+                <a class="nav-link" href="Groups">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Mes Groupes</span></a>
             </li>
@@ -64,7 +64,7 @@ User user = (User)session.getAttribute("CurrentUser");
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="http://localhost:8541/teams/CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
+                <a class="nav-link collapsed" href="CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Cr�er une �quipe</span>
                 </a>
@@ -200,7 +200,7 @@ User user = (User)session.getAttribute("CurrentUser");
                 
                 
                 
-                                            <form class="user" action="http://localhost/teams/TeamServlet" method="POST">
+                                            <form class="user" action="TeamServlet" method="POST">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-user" id="teamName"
                                                         placeholder="Nom de l'�quipe " name="teamName">
