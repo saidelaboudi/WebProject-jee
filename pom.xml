@@ -92,7 +92,7 @@
         <configuration>
           <webApp>
             <defaultsDescriptor>${basedir}/src/main/resources/webdefault.xml</defaultsDescriptor>
-            <contextPath>/teams</contextPath>
+            <contextPath>/teams/Index</contextPath>
           </webApp>
           <classesDirectory>${basedir}/src/main/webapp/WEB-INF/classes</classesDirectory>
           <webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>

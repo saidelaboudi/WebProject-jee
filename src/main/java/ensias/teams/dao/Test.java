@@ -1,8 +1,7 @@
 package ensias.teams.dao;
-
+/*
 import java.io.*;
 import java.sql.*;
-import java.util.*;
 
 
 import ensias.teams.buzinessLayer.Group;
@@ -13,14 +12,11 @@ import ensias.teams.buzinessLayer.User;
 public class Test {
 	
 	private static final String URL="jdbc.url";
-	private static final String DRIVER="jdbc.driverClass";
 	private static final String LOGIN="jdbc.login";
 	private static final String PASSWORD="jdbc.password";
-	private static final String FICHIER_PROPERTIES = "/dao.properties";
 	private static final String SCHEMA = "jdbc.schema";
-	private static final String CONF_DAO_FACTORY = "daofactory";
 	private static DAOFactory db =  new DAOFactory(URL, LOGIN, PASSWORD, SCHEMA);
-	
+/*	
 	public static void main(String[] args) throws SQLException, IOException {
 
 		User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
@@ -109,8 +105,9 @@ public class Test {
 		//String Descrption = sc.nextLine();
 		//Team NewTeam = new Team(TeamName, owner);
 		//addTeam.addTeam(NewTeam, db);
-		Group group = new Group("Group Test ", "New Group");
+/*		Group group = new Group("Group Test ", "New Group");
 		group.owner=owner;
 		addGroup.addGroup(group, db);
 	}
 }
+ */

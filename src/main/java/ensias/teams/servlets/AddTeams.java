@@ -1,7 +1,6 @@
 package ensias.teams.servlets;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import ensias.teams.buzinessLayer.Team;
-import ensias.teams.buzinessLayer.User;
 import ensias.teams.buzinessLayer.Group;
 import ensias.teams.dao.DAOFactory;
 import ensias.teams.dao.GroupDaoImpl;
@@ -27,7 +24,6 @@ import ensias.teams.dao.UserDaoImpl;
 @WebServlet("/AddTeams")
 public class AddTeams extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String CONF_DAO_FACTORY = "daofactory";
 	private DAOFactory daoF =  DAOFactory.getInstance();
 	
 	

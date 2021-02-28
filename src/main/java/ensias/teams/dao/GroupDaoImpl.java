@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.sql.*;
 
 import ensias.teams.buzinessLayer.Group;
-import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.Team;
-import ensias.teams.buzinessLayer.User;
 
 public class GroupDaoImpl implements GroupDao{
 	public DAOFactory daoFactory;

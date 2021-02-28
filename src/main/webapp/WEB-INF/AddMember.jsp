@@ -343,7 +343,7 @@ table.table .avatar {
     <div id="wrapper">
 
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="Index">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -537,8 +537,8 @@ table.table .avatar {
                     </div>
                 
                     
-                    <div id="oneByOne" hidden>
-                        <div id="Tag" hidden>
+                    <div id="oneByOne" hidden="true">
+                        <div id="Tag" hidden="true">
                         
                         
                             <form action = "TeamServlet#" method="post" >
@@ -676,7 +676,7 @@ table.table .avatar {
                         </div>
                     </div>
                 
-                    <div id="Excel" hidden>
+                    <div id="Excel" hidden="true">
                         <form action="AddMembers" method="post" enctype="multipart/form-data">
                         <section>
                               <div class="row">

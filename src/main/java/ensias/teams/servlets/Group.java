@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ensias.teams.buzinessLayer.Team;
-import ensias.teams.buzinessLayer.User;
 import ensias.teams.dao.DAOFactory;
 import ensias.teams.dao.GroupDaoImpl;
 import ensias.teams.dao.TagDAOImp;
@@ -25,7 +24,6 @@ import ensias.teams.dao.UserDaoImpl;
 @WebServlet("/Group")
 public class Group extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String CONF_DAO_FACTORY = "daofactory";
 	private DAOFactory daoF =  DAOFactory.getInstance();
 	
 	
@@ -51,7 +49,7 @@ public class Group extends HttpServlet {
 		try {
 			HttpSession session = request.getSession(true);
 			
-			User owner = (User)session.getAttribute("CurrentUser");
+			//User owner = (User)session.getAttribute("CurrentUser");
 			String GroupName = (String) request.getParameter("GroupSelected");
 			//System.out.println("From Group"+GroupName);
 			ensias.teams.buzinessLayer.Group group = addGroup.getGroupByName(GroupName, daoF);

@@ -18,7 +18,6 @@ import ensias.teams.dao.GroupDaoImpl;
 import ensias.teams.dao.TagDAOImp;
 import ensias.teams.dao.TeamDAOImp;
 import ensias.teams.dao.UserDaoImpl;
-import ensias.teams.buzinessLayer.Group;
 
 /**
  * Servlet implementation class Profile
@@ -27,7 +26,6 @@ import ensias.teams.buzinessLayer.Group;
 public class Profile extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private static final String CONF_DAO_FACTORY = "daofactory";
 	private DAOFactory daoF =  DAOFactory.getInstance();
 	
 	

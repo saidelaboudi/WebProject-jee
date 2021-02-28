@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-import ensias.teams.buzinessLayer.Group;
 import ensias.teams.buzinessLayer.Team;
 import ensias.teams.buzinessLayer.User;
 

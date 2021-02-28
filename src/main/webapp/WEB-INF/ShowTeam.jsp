@@ -550,7 +550,7 @@ MEDIAQUERIES
                         </div>
                     </div>
 
-                    <div class="ShowMember container" id="ShowMember" hidden>
+                    <div class="ShowMember container" id="ShowMember" hidden="true" >
                         <div class="table-responsive">
                             <div class="table-wrapper">
                                 <div class="table-title">
@@ -738,7 +738,7 @@ MEDIAQUERIES
                             </div>
                           </div>
                     </div>
-                    <div class="file" id="file" hidden>
+                    <div class="file" id="file" hidden="true" >
                         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
                         <div class="content">
                           <div class="container">

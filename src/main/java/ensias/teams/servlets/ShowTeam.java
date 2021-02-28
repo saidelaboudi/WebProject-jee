@@ -25,7 +25,6 @@ import ensias.teams.dao.UserDaoImpl;
 @WebServlet("/ShowTeam")
 public class ShowTeam extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String CONF_DAO_FACTORY = "daofactory";
 	private DAOFactory daoF = DAOFactory.getInstance();
 	TeamDAOImp addTeam = new TeamDAOImp();
 		
