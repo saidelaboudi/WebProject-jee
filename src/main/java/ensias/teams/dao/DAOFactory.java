@@ -20,18 +20,26 @@ public class DAOFactory {
 	private static final String PASSWORD="jdbc.password";
 	private static final String FICHIER_PROPERTIES = "/dao.properties";
 	private static final String SCHEMA = "jdbc.schema";
+	private static final String URL_TEST = "jdbc:mysql://localhost:3306?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	 private String url;
 	 private String username;
 	 private String password;
 	 private String schema;
 
-	 DAOFactory( String url, String username, String password ,String schema ) {
+	public DAOFactory( String url, String username, String password ,String schema ) {
 	        this.url = url;
 	        this.username = username;
 	        this.password = password;
 	        this.schema=schema;
 	 }
-      public static DAOFactory getInstance()   {
+
+	 public static DAOFactory getInstanceTest()   {
+		 DAOFactory instance = new DAOFactory( URL_TEST, "root", "root","ensiasteams" );  
+		 return instance;
+	 
+	 }
+
+     public static DAOFactory getInstance()   {
 	        String url;
 	        String driver;
 	        String nomUtilisateur;
@@ -61,9 +69,9 @@ public class DAOFactory {
 				System.out.println("Loading the class Driver failed !!");
 			}
 	        DAOFactory instance = new DAOFactory( url, nomUtilisateur, motDePasse,schema );
-	        
 	        return instance;
 	    }
+
 	 public String getSchema() {
 		return schema;
 	}
@@ -77,13 +85,17 @@ public class DAOFactory {
 	        return null;
 		  } 
 	 
-	 public GroupDaoImpl getGroupDao() {
-	        return new GroupDaoImpl( this );
-	    }
+
 	 public UserDaoImpl getUserDao() {
 	        return new UserDaoImpl();
+	 }
+	 public MessagePersoDao getMessagePersoDao() {
+	        return new MessagePersoDaoImpl( this );
 	    }
-
+	/* public GroupDaoImpl getUserDao() {
+	        return new UserDaoImpl( this );
+	    }
+*/
 		
 	public void Query(String query) throws SQLException {
 		Statement statement=getConnection().createStatement();
