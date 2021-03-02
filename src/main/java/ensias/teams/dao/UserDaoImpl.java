@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -16,6 +15,8 @@ import java.io.*;
 import java.sql.*;
 import java.util.*;
 
+import ensias.teams.buzinessLayer.ChatPersoUser;
+import ensias.teams.buzinessLayer.Message;
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
 
@@ -60,6 +61,33 @@ public class UserDaoImpl implements UserDao {
 		
 		return users;
 	}
+	@Override
+	public User bringUser(int id) {
+		User users = null;
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			
+			rs=st.executeQuery("SELECT * FROM Users WHERE id =" + id);
+			if( rs.next()) {
+				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
+
 	
 	@Override
 	public User bringUser(String email, String pass) {
@@ -325,4 +353,143 @@ public class UserDaoImpl implements UserDao {
 		}
 		return user;
 	}
+	@Override
+	public List bringMessagerie(User user) {
+		List<User> users = new ArrayList<>();
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			rs= st.executeQuery("SELECT DISTINCT if(senderId ="  +user.id+", receiverid , senderID)   from  Message_perso ");
+			
+			while(rs.next()) {
+				User u = bringUser(rs.getInt(1));
+				System.out.println(u);
+				if ( u != null )
+					users.add(u);
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
+	@Override
+	public List<ChatPersoUser> bringAllMessagerie(User user) {
+		List<ChatPersoUser> users = new ArrayList<>();
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			rs= st.executeQuery("SELECT * from users U, message_perso M where " + 
+					"( M.senderId =" +user.id +" or M.receiverId = " +user.id +" ) AND  ( M.senderId = U.id or M.receiverId = u.id ) and ( U.id <> "+user.id +" ) " + 
+					"order by U.id, M.created_at; ");
+			Long id = -1l;
+			
+			ChatPersoUser currentUserBox = null;
+			while(rs.next()) {
+				if (id != rs.getLong(1) ) {
+					id = rs.getLong(1);
+					currentUserBox = new ChatPersoUser(new User(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(6),null,null), new ArrayList<Message>());
+					users.add(currentUserBox);
+					currentUserBox.getMessages().add(new Message(rs.getLong(8), rs.getLong(11), rs.getLong(12), rs.getString(9), rs.getString(10)));
+				}else {
+					currentUserBox.getMessages().add(new Message(rs.getLong(8), rs.getLong(11), rs.getLong(12), rs.getString(9), rs.getString(10)));
+				}
+				
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
+	@Override
+	public List bringAllMessagerie(User user, Long idMax) {
+		List<ChatPersoUser> users = new ArrayList<>();
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			rs= st.executeQuery("SELECT * from users U, message_perso M where " + 
+					"( M.senderId =" +user.id +" or M.receiverId = " +user.id +" ) AND  ( M.senderId = U.id or M.receiverId = u.id ) and ( U.id <> "+user.id +" )and M.id>"+idMax+ 
+					" order by U.id, M.created_at ; ");
+			Long id = -1l;
+			
+			ChatPersoUser currentUserBox = null;
+			while(rs.next()) {
+				if (id != rs.getLong(1) ) {
+					id = rs.getLong(1);
+					currentUserBox = new ChatPersoUser(new User(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(6),null,null), new ArrayList<Message>());
+					users.add(currentUserBox);
+					currentUserBox.getMessages().add(new Message(rs.getLong(8), rs.getLong(11), rs.getLong(12), rs.getString(9), rs.getString(10)));
+				}else {
+					currentUserBox.getMessages().add(new Message(rs.getLong(8), rs.getLong(11), rs.getLong(12), rs.getString(9), rs.getString(10)));
+				}
+				
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
+	@Override
+	public List<User> bringUsersHavingValue(User user, String value) {
+		List<User> users = new ArrayList<User>();
+		
+		Connection connection=null;
+		Statement st=null;
+		ResultSet rs=null;
+		
+		
+		try {
+			connection = this.daoFactory.getConnection();
+			st=connection.createStatement();
+			st.executeQuery("USE "+ this.daoFactory.getSchema());
+			String values[] = value.split(" ");
+			String condition = "";
+			for ( String str : values) {
+				condition += " and (firstName like '%"+str+"%' or lastName like '%"+str+"%' or email like '%"+str+"%@%' ) ";
+			}
+			String query = " SELECT * from users where id <> "+user.id+"  " + condition;
+			System.out.println(query);
+			rs= st.executeQuery( query );
+			
+			while(rs.next()) {
+				users.add( new User(rs.getLong(1),rs.getString(2),rs.getString(3),rs.getString(6),null,null) );
+			}
+		}catch ( SQLException e ) {
+	        throw new DAOException( e );
+	    } finally {
+	        fermeturesSilencieuses( rs ,st, connection );
+	    }
+
+		return users;
+	}
+	
 }

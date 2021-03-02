@@ -20,6 +20,7 @@ public class DAOFactory {
 	private static final String PASSWORD="jdbc.password";
 	private static final String FICHIER_PROPERTIES = "/dao.properties";
 	private static final String SCHEMA = "jdbc.schema";
+	private static final String URL_TEST = "jdbc:mysql://localhost:3306?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	 private String url;
 	 private String username;
 	 private String password;
@@ -29,6 +30,11 @@ public class DAOFactory {
 	        this.username = username;
 	        this.password = password;
 	        this.schema=schema;
+	 }
+	 public static DAOFactory getInstanceTest()   {
+		 DAOFactory instance = new DAOFactory( URL_TEST, "root", "root","ensiasteams" );  
+		 return instance;
+	 
 	 }
      public static DAOFactory getInstance()   {
 	        String url;
@@ -60,7 +66,6 @@ public class DAOFactory {
 				System.out.println("Loading the class Driver failed !!");
 			}
 	        DAOFactory instance = new DAOFactory( url, nomUtilisateur, motDePasse,schema );
-	        
 	        return instance;
 	    }
 
@@ -79,6 +84,9 @@ public class DAOFactory {
 	 
 	 public GroupDao getGroupDao() {
 	        return new GroupDaoImpl( this );
+	    }
+	 public MessagePersoDao getMessagePersoDao() {
+	        return new MessagePersoDaoImpl( this );
 	    }
 	 public UserDao getUserDao() {
 	        return new UserDaoImpl( this );
