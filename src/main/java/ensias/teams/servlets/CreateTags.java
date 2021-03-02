@@ -8,11 +8,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
 import ensias.teams.dao.DAOFactory;
-import ensias.teams.dao.DataBase;
 import ensias.teams.dao.TagDAO;
 import ensias.teams.dao.TagDAOImp;
 
@@ -34,7 +34,12 @@ public class CreateTags extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User owner = new User("a", "b", "ab", "ab", "a@b.c");
+		
+
+		HttpSession session = request.getSession(true);
+		
+		User owner = (User)session.getAttribute("CurrentUser");
+		
 		request.getSession().setAttribute("_SESSION", owner);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/createTag.jsp").forward( request, response );

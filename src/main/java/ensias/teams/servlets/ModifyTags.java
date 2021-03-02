@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import ensias.teams.buzinessLayer.Tag;
 import ensias.teams.buzinessLayer.User;
@@ -46,7 +47,9 @@ public class ModifyTags extends HttpServlet {
 		String tagName = request.getParameter("tagName");
 		System.out.println(tagName);
 		//User owner = (User) request.getSession().getAttribute("_SESSION");
-		User owner = new User("a", "b", "ab", "ab", "a@b.c");
+		HttpSession session = request.getSession(true);
+		
+		User owner = (User)session.getAttribute("CurrentUser");
 		request.getSession().setAttribute("_SESSION", owner);
 		try {
 			Tag tag = new Tag(tagName, owner);

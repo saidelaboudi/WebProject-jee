@@ -54,7 +54,8 @@ CREATE TABLE Groups(
 
 CREATE TABLE Tag(
     ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
-    tag Varchar(50)
+    tag Varchar(50),
+    owner INTEGER references Users(ID)
 );
 
 CREATE TABLE Team_Users(
