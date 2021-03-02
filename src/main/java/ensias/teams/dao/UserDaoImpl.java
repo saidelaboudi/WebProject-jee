@@ -33,12 +33,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public ArrayList<User> bringAllUsers() {
 		ArrayList<User> users = new ArrayList<>();
-		
 		Connection connection=null;
 		PreparedStatement st=null;
 		ResultSet rs=null;
-		
-		
 		try {
 			String setDb = "USE "+ this.daoFactory.getSchema();
 			connection = this.daoFactory.getConnection();
@@ -352,7 +349,7 @@ public class UserDaoImpl implements UserDao {
 	    return Users;
 }
 
-public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException{
+	public ArrayList<User> getUsersByTag(Tag tag1,DAOFactory db) throws SQLException{
 	ArrayList<User> users = new ArrayList<User>();
 	try{
 		String tag=tag1.tagName;

@@ -54,8 +54,7 @@ CREATE TABLE Groups(
 
 CREATE TABLE Tag(
     ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
-    tag Varchar(50),
-    owner INTEGER references Users(ID)
+    tag Varchar(50)
 );
 
 CREATE TABLE Team_Users(
@@ -75,11 +74,3 @@ CREATE TABLE Groups_Team(
     TeamID INTEGER references Team(ID),
     PRIMARY KEY (GroupsID,TeamID)
 );
-CREATE TABLE Message_Perso(
-    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
-    Message    Varchar(300),
-    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-    SenderID INTEGER references Users(ID),
-   	ReceiverID INTEGER references Users(ID)
-);
-

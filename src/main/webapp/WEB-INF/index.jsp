@@ -132,8 +132,21 @@
                                 </form>
                             </div>
                         </li>
-
-
+                        
+                        
+                          <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            
+                            <a class="nav-link dropdown-toggle" href="/BoiteMessages" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            
+                        </li>
+                        
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -168,7 +181,7 @@
 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Déconnexion
+                                    Deconnexion
                                 </a>
 
                             </div>
@@ -274,7 +287,7 @@
                         <span aria-hidden="true">ï¿½</span>
                     </button>
                 </div>
-                <div class="modal-body">Selectionnez Deconnexion ci-dessous si vous etes pret à mettre fin à votre session en cours.</div>
+                <div class="modal-body">Selectionnez Deconnexion ci-dessous si vous etes pret ï¿½ mettre fin ï¿½ votre session en cours.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
                     <a class="btn btn-primary" href="login">Deconnexion</a>

@@ -10,10 +10,10 @@ public interface UserDao {
 	public ArrayList<User> bringAllUsers();
 	public User bringUser(String email, String pass);
 	public void addUser(User user);
-	public User getUserByID(int UserId,DataBase db) throws SQLException;
 	public List bringMessagerie(User user);
 	User bringUser(int id);
 	List bringAllMessagerie(User user);
 	public List bringAllMessagerie(User user, Long id);
 	public List<User> bringUsersHavingValue(User user, String value);
+	public User bringUser(String email);
 }

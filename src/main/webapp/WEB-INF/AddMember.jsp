@@ -340,6 +340,7 @@ table.table .avatar {
 </style>
 <body id="page-top">
 
+
     <div id="wrapper">
 
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -367,16 +368,16 @@ table.table .avatar {
             <li class="nav-item">
                 <a class="nav-link collapsed" href="CreateTeam"  data-target="#collapseTwo" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Cr�er une �quipe</span>
+                    <span>Creer une equipe</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
 
             <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <a class="nav-link collapsed" href="CreateTags" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Cr�er une etiquette</span>
+                    <span>Creer une etiquette</span>
                 </a>
             </li>
 
@@ -399,6 +400,7 @@ table.table .avatar {
             </div>
 
         </ul>
+
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
 
@@ -438,8 +440,21 @@ table.table .avatar {
                                 </form>
                             </div>
                         </li>
-
-
+                        
+                        
+                          <!-- Nav Item - Messages -->
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            
+                            <a class="nav-link dropdown-toggle" href="/BoiteMessages" id="messagesDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                                <span class="badge badge-danger badge-counter">7</span>
+                            </a>
+                            
+                        </li>
+                        
+                        
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -460,7 +475,7 @@ table.table .avatar {
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
 
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="Profile">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
                                     </a>
@@ -474,7 +489,7 @@ table.table .avatar {
 
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    D�connexion
+                                    Deconnexion
                                 </a>
 
                             </div>
@@ -484,6 +499,7 @@ table.table .avatar {
 
                 </nav>
                 <!-- End of Topbar -->
+
 
 
 <!-- Begin Page Content -->
