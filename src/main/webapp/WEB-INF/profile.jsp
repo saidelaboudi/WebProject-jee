@@ -119,15 +119,6 @@ function getFilePath(){
         
 </script>
 <style>
-body{
-    margin-top:20px;
-    color: #1a202c;
-    text-align: left;
-    background-color: #e2e8f0;    
-}
-.main-body {
-    padding: 15px;
-}
 .card {
     box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
 }
@@ -420,9 +411,12 @@ body{
                       	for(Team team : teams){
                       		%>
                       <small>
+				<div>
                       <%
-                      	out.print(team.name);
+                      	out.println(team.name);
                       %>
+
+				</div>
                       
                       
                       </small>
