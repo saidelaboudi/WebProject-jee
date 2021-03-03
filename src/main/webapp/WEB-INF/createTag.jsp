@@ -136,17 +136,15 @@
                             </li>
                             
                             
-                              <!-- Nav Item - Messages -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                
-                                <a class="nav-link dropdown-toggle" href="/BoiteMessages" id="messagesDropdown" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-envelope fa-fw"></i>
-                                    <!-- Counter - Messages -->
-                                    <span class="badge badge-danger badge-counter">7</span>
-                                </a>
-                                
-                            </li>
+                            <!-- Nav Item - Messages -->
+                         <li class="nav-item dropdown no-arrow mx-1">
+                            
+                            <a class="nav-link dropdown-toggle" href="BoiteMessages" id="messagesDropdown" role="button">
+                                <i class="fas fa-envelope fa-fw"></i>
+                                <!-- Counter - Messages -->
+                            </a>
+                            
+                        </li>
                             
                             
                             <div class="topbar-divider d-none d-sm-block"></div>
@@ -158,8 +156,7 @@
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     
                                     <%
-                                        out.print(user.lastName);
-                                        out.print(user.firstName);
+									out.println(user.firstName + " " + user.lastName);
                                     %>
                                     </span>
                                     <img class="img-profile rounded-circle"

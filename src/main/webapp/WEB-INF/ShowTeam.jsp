@@ -60,10 +60,7 @@ User user = (User)session.getAttribute("CurrentUser");
     font-size: 0.9rem;
     color: #999;
   }
-  body{
-    margin-top:20px;
-    background:#DCDCDC;
-}
+
 .card-box {
     padding: 20px;
     border-radius: 3px;
@@ -131,11 +128,7 @@ User user = (User)session.getAttribute("CurrentUser");
 h5 {
     font-size: 15px;
 }
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
-body {
-  font-family: 'Poppins', sans-serif;
-  background: #fafafa;
-}
+
 
 p {
   font-family: 'Poppins', sans-serif;
@@ -221,30 +214,6 @@ SIDEBAR STYLE
   background: #fff;
 }
 
-#sidebar ul li.active>a,
-a[aria-expanded="true"] {
-  color: #fff;
-  background: #6d7fcc;
-}
-
-a[data-toggle="collapse"] {
-  position: relative;
-}
-
-a[aria-expanded="false"]::before,
-a[aria-expanded="true"]::before {
-  content: '\e259';
-  display: block;
-  position: absolute;
-  right: 20px;
-  font-family: 'Glyphicons Halflings';
-  font-size: 0.6em;
-}
-
-a[aria-expanded="true"]::before {
-  content: '\e260';
-}
-
 ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
@@ -277,19 +246,6 @@ a.article:hover {
 CONTENT STYLE
 ----------------------------------------------------- */
 
-#content {
-  width: calc(100% - 250px);
-  padding: 40px;
-  min-height: 100vh;
-  transition: all 0.3s;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-#content.active {
-  width: 100%;
-}
 /* ---------------------------------------------------
 MEDIAQUERIES
 ----------------------------------------------------- */
@@ -344,7 +300,7 @@ MEDIAQUERIES
   }
 </script>
 
-<body id="page-top">
+    <body id="page-top">
 
 
     <div id="wrapper">
@@ -448,14 +404,12 @@ MEDIAQUERIES
                         </li>
                         
                         
-                          <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- Nav Item - Messages -->
+                         <li class="nav-item dropdown no-arrow mx-1">
                             
-                            <a class="nav-link dropdown-toggle" href="/BoiteMessages" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="BoiteMessages" id="messagesDropdown" role="button">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
                             </a>
                             
                         </li>
@@ -611,7 +565,7 @@ MEDIAQUERIES
                                                         <label for="checkbox2"></label>
                                                     </span>
                                                 </td>    
-                                                <td><%= users.get(i).firstName %><%=users.get(i).lastName %></td>
+                                                <td><% out.print(users.get(i).firstName+" "+users.get(i).lastName); %></td>
                                                 <td><%= users.get(i).email %></td> 
                                                  <td>
                                                     <a href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>

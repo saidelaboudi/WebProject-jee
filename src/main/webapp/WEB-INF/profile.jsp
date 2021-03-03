@@ -278,14 +278,12 @@ body{
                         </li>
                         
                         
-                          <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
+                        <!-- Nav Item - Messages -->
+                         <li class="nav-item dropdown no-arrow mx-1">
                             
-                            <a class="nav-link dropdown-toggle" href="/BoiteMessages" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="BoiteMessages" id="messagesDropdown" role="button">
                                 <i class="fas fa-envelope fa-fw"></i>
                                 <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
                             </a>
                             
                         </li>
@@ -354,7 +352,7 @@ body{
                     <div class="mt-3">
                       <h4>
                             		<%
-                            		out.print(user.lastName);
+                            		out.println(user.lastName);
                             		%>
                             		</h4>
                     </div>
@@ -371,8 +369,7 @@ body{
                     </div>
                     <div class="col-sm-9 text-secondary">
                      <%
-                		out.print(user.lastName);
-                		out.print(user.firstName);
+						out.println(user.firstName + " " + user.lastName);
                         %>
                     </div>
                   </div>
