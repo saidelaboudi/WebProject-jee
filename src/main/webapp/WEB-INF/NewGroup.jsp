@@ -164,8 +164,8 @@ User user = (User)session.getAttribute("CurrentUser");
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 
                                 <%
-                            		out.print(user.lastName);
-                                	out.print(user.firstName);
+                            		
+										out.println(user.firstName + " " + user.lastName);
                                 %>
                                 </span>
                                 <img class="img-profile rounded-circle"
@@ -211,7 +211,7 @@ User user = (User)session.getAttribute("CurrentUser");
                                     <div class="col-lg-7">
                                         <div class="p-5">
                                             <div class="text-center">
-                                                <h1 class="h4 text-gray-900 mb-4">Cr�er un nouveau Groupe</h1>
+                                                <h1 class="h4 text-gray-900 mb-4">Creer un nouveau Groupe</h1>
                                             </div>
                 
                 

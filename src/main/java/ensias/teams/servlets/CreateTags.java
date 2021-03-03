@@ -50,8 +50,9 @@ public class CreateTags extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String tagName = request.getParameter("tagName");
-		//User owner = (User) request.getSession().getAttribute("_SESSION");
-		User owner = new User("a", "b", "ab", "ab", "a@b.c");
+		User owner = (User) request.getSession().getAttribute("_SESSION");
+		
+		//User owner =(User)session.getAttribute("CurrentUser");
 		System.out.println(owner.toString());
 		request.getSession().setAttribute("_SESSION", owner);
 		Tag t = null;

@@ -469,8 +469,8 @@ table.table .avatar {
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 
                                 <%
-                            		out.print(user.lastName);
-                                	out.print(user.firstName);
+                            		
+										out.println(user.firstName + " " + user.lastName);
                                 %>
                                 </span>
                                 <img class="img-profile rounded-circle"

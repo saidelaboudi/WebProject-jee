@@ -45,10 +45,24 @@ public class ShowTeam extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession(true);
-		String Name=request.getParameter("TeamName");
+		
+		Team team = null ;
+			try {
+				if((String)request.getParameter("TeamName")!=null){
+					String Name= (String)request.getParameter("TeamName");
+					team=addTeam.getTeamByID(addTeam.getTeamID(new Team(Name, null), daoF), daoF);
+					session.setAttribute("TeamName", team);
+				}else {
+					team=(Team) session.getAttribute("TeamName");			
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		//session.setAttribute("TeamName",Name);
 		try {
 			TeamDAOImp addTeam = new TeamDAOImp();
-			ArrayList<User> users =addTeam.getUsersByTeamName(Name,daoF);
+			ArrayList<User> users =addTeam.getUsersByTeamName(team.name,daoF);
 			session.setAttribute("TeamMembers", users );
 			/*for(User user: users) {
 				System.out.println(user.toString());
@@ -73,8 +87,10 @@ public class ShowTeam extends HttpServlet {
 			//System.out.println(UserID);
 			User user = addUser.getUserByID(UserID, daoF);
 			HttpSession session = request.getSession(true);
+			//Team team = (Team) session.getAttribute("TeamName");
 			Team team = (Team) session.getAttribute("TeamName");
-			addTeam.addTeam_Member(team, user, daoF);
+			
+			addTeam.addTeam_Member(new Team(team.name, user), user, daoF);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

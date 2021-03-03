@@ -164,8 +164,8 @@ User user = (User)session.getAttribute("CurrentUser");
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                 
                                 <%
-                            		out.print(user.lastName);
-                                	out.print(user.firstName);
+                            		
+										out.println(user.firstName + " " + user.lastName);
                                 %>
                                 </span>
                                 <img class="img-profile rounded-circle"
@@ -211,7 +211,7 @@ User user = (User)session.getAttribute("CurrentUser");
                                     <div class="col-lg-7">
                                         <div class="p-5">
                                             <div class="text-center">
-                                                <h1 class="h4 text-gray-900 mb-4">Cr�er votre �quipe</h1>
+                                                <h1 class="h4 text-gray-900 mb-4">Creer votre equipe</h1>
                                             </div>
                 
                 
@@ -219,7 +219,7 @@ User user = (User)session.getAttribute("CurrentUser");
                                             <form class="user" action="TeamServlet" method="POST">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control form-control-user" id="teamName"
-                                                        placeholder="Nom de l'�quipe " name="teamName">
+                                                        placeholder="Nom de l'equipe " name="teamName">
                                                 </div>
                                                 <!-- <div class="form-group">
                                                     <textarea name="description" id="description" cols="30" rows="10" class="form-control" placeholder="Description" name="description"></textarea>

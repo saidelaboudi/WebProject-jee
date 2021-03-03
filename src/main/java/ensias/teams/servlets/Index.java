@@ -30,9 +30,9 @@ public class Index extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		User user = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");
 		HttpSession session = request.getSession(true);
-		session.setAttribute("CurrentUser", user);
+		User user = (User)session.getAttribute("CurrentUser");
+		//session.setAttribute("CurrentUser", user);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward( request, response );
 	}
 

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/login")
+@WebServlet("/")
 public class Login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CONF_DAO_FACTORY = "daofactory";
@@ -44,10 +44,12 @@ public class Login extends HttpServlet {
 		
 		if (user != null) {
 			HttpSession session = request.getSession();
+			
+			session.setAttribute("CurrentUser", user);
 			session.setAttribute("_SESSION", user);
 			request.setAttribute("user", user);
 
-			this.getServletContext().getRequestDispatcher("/WEB-INF/blank.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward( request, response );
 		}
 		else {
 	        this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward( request, response );

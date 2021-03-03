@@ -23,7 +23,6 @@ public class AddMembers extends HttpServlet {
 	private DAOFactory daoF =  DAOFactory.getInstance();
 	
 	
-	User owner = new User("James3", "Bandel3", "23, rue des keyboard , clavier, Pc ","12-19-20","java2@jee.oracle");//session.getAttribute("Owner");
 	
 	// Team session
 	Team NewTeam ;
@@ -59,6 +58,8 @@ public class AddMembers extends HttpServlet {
 		
 
 		HttpSession session = request.getSession(true);
+		User owner = (User)session.getAttribute("CurrentUser");
+		
 		NewTeam =(Team)session.getAttribute("TeamName");
 		ArrayList<User> users = new ArrayList<User>();
 		
