@@ -89,8 +89,9 @@ public class ShowTeam extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			//Team team = (Team) session.getAttribute("TeamName");
 			Team team = (Team) session.getAttribute("TeamName");
-			
-			addTeam.addTeam_Member(new Team(team.name, user), user, daoF);
+			if(addUser.getUserID(user, daoF)==0) {
+				addTeam.addTeam_Member(new Team(team.name, user), user, daoF);				
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

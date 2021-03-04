@@ -44,7 +44,6 @@ public class Login extends HttpServlet {
 		
 		if (user != null) {
 			HttpSession session = request.getSession();
-			
 			session.setAttribute("CurrentUser", user);
 			session.setAttribute("_SESSION", user);
 			request.setAttribute("user", user);
