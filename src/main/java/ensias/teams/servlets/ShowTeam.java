@@ -89,9 +89,20 @@ public class ShowTeam extends HttpServlet {
 			HttpSession session = request.getSession(true);
 			//Team team = (Team) session.getAttribute("TeamName");
 			Team team = (Team) session.getAttribute("TeamName");
-			if(addUser.getUserID(user, daoF)==0) {
+			// Pour savoir si l'utilisateur est deja dans l'equipe ou pas
+			boolean Already = true;
+			ArrayList<User> users = addTeam.getUsersByTeamName(team.name, daoF);
+			for(User u : users) {
+				if(user.email==u.email) {
+					Already=false;
+				}
+			}
+			// l'ajout du membre si il a deja un compte et n'est pas inserrer dans l ' equipe 
+			if(addUser.getUserID(user, daoF)==0) { // si l'utilisateur na pas d  compte
+			}else if(Already) {
 				addTeam.addTeam_Member(new Team(team.name, user), user, daoF);				
 			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
