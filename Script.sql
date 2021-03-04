@@ -74,3 +74,10 @@ CREATE TABLE Groups_Team(
     TeamID INTEGER references Team(ID),
     PRIMARY KEY (GroupsID,TeamID)
 );
+CREATE TABLE Message_Perso(
+    ID  INTEGER PRIMARY KEY AUTO_INCREMENT,
+    Message    Varchar(300),
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+    SenderID INTEGER references Users(ID),
+   	ReceiverID INTEGER references Users(ID)
+);
