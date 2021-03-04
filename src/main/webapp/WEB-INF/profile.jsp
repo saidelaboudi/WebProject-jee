@@ -413,7 +413,7 @@ function getFilePath(){
                       <small>
 				<div>
                       <%
-                      	out.println(team.name);
+                      	out.println(team.name + " Cree le :" + team.date );
                       %>
 
 				</div>

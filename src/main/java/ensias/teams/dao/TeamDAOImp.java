@@ -76,6 +76,7 @@ public class TeamDAOImp implements TeamDAO{
     	ResultSet set = db.Select("team","ID="+ID);
     	while(set.next()) {
     		team= new Team(set.getString(2),addUser.getUserByID(set.getInt(4), db));
+    		team.date=set.getString("created_at");
     	}
     	return team;
     }
