@@ -422,6 +422,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			set = db.Select("Users","ID = '"+UserId+"'");
 			if(set.next()) {
+				System.out.println((new User(set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6))).email);
 				return new User(set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6));
 			}
 		} catch (Exception e) {

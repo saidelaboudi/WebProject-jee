@@ -49,9 +49,9 @@ public class Groups extends HttpServlet {
 		HttpSession session = request.getSession(true);
 		
 		ArrayList<ensias.teams.buzinessLayer.Group> GroupList = null;
-		
+		User user = (User) session.getAttribute("CurrentUser");
 		try {
-			GroupList = addGroup.getGroupList(daoF);
+			GroupList = addGroup.getGroupList(user,daoF);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

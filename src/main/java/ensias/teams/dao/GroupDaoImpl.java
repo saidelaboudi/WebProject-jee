@@ -5,6 +5,7 @@ import java.sql.*;
 
 import ensias.teams.buzinessLayer.Group;
 import ensias.teams.buzinessLayer.Team;
+import ensias.teams.buzinessLayer.User;
 
 public class GroupDaoImpl implements GroupDao{
 	public DAOFactory daoFactory;
@@ -46,6 +47,32 @@ public class GroupDaoImpl implements GroupDao{
 		}
 		return list;
 	}
+	
+	public ArrayList<Group> getGroupList(User user ,DAOFactory db) throws SQLException {
+		ArrayList<Group> list = new ArrayList<Group>();
+		UserDaoImpl addUser = new UserDaoImpl();
+		int UserID = addUser.getUserID(user,db);
+		try{
+			ResultSet set = db.Select("Groups","OwnerID="+UserID);
+			while(set.next()) {
+				list.add(new Group(set.getString(2), null));
+			}
+		}catch(Exception e) {
+			e.getMessage();
+		}
+		return list;
+	}
+	
+	
+	public void addGroup_Member(int GroupID , int UserID,DAOFactory db) throws SQLException {
+		String sql="INSERT INTO Group_Users (GroupID,UsersID) VALUES (?,?)";
+        PreparedStatement statement = db.getConnection().prepareStatement(sql);
+        statement.setInt(1,GroupID);
+        statement.setInt(2, UserID);
+        statement.execute();
+	}
+	
+	
 	
 	
 	public int getGroupID(Group group,DAOFactory db) throws SQLException {
