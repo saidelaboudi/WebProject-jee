@@ -568,7 +568,7 @@ MEDIAQUERIES
                                                 <td><% out.print(users.get(i).firstName+" "+users.get(i).lastName); %></td>
                                                 <td><%= users.get(i).email %></td> 
                                                  <td>
-                                                    <a href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                                    <a  id="<%= users.get(i).email %>" href="#deleteMemberModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                                 </td>
                                             </tr>
                                             <%} %>

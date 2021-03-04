@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import ensias.teams.buzinessLayer.User;
+
 
 /**
  * Servlet implementation class Login
@@ -29,8 +31,16 @@ public class Login extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward( request, response );
+
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("CurrentUser");
+    	if (user != null) {
+			this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward( request, response );
+		}
+		else {
+	        this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward( request, response );
 	}
+    	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

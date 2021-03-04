@@ -1,4 +1,4 @@
-package test;
+package ensias.teams.tests;
 
 import static org.junit.Assert.*;
 

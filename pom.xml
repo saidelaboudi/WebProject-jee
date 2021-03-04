@@ -21,36 +21,32 @@
 
   <dependencies>
   
-<dependency>
+	<dependency>
+
        <groupId>org.slf4j</groupId>
        <artifactId>slf4j-api</artifactId>
        <version>1.7.5</version>
    </dependency>
+   
    <dependency>
        <groupId>org.slf4j</groupId>
        <artifactId>slf4j-simple</artifactId>
        <version>1.6.4</version>
    </dependency>
-<dependency>
- <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.23</version>
-</dependency>
-
+   
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>4.1.0</version>
 		</dependency>
   
-  <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
-<dependency>
-    <groupId>mysql</groupId>
-    <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.21</version>
-</dependency>
+	<dependency>
+	    <groupId>mysql</groupId>
+	    <artifactId>mysql-connector-java</artifactId>
+	    <version>8.0.21</version>
+	</dependency>
   
- <dependency>
+ 	<dependency>
       <groupId>com.dragome</groupId>
       <artifactId>dragome-sdk</artifactId>
       <version>0.96-beta2</version>
@@ -65,9 +61,9 @@
     </dependency>
 
     <dependency>
-    	<groupId>mysql</groupId>
-    	<artifactId>mysql-connector-java</artifactId>
-    	<version>8.0.23</version>
+    	<groupId>junit</groupId>
+    	<artifactId>junit</artifactId>
+    	<version>4.13.1</version>
     </dependency>
   </dependencies>
 
@@ -92,7 +88,7 @@
         <configuration>
           <webApp>
             <defaultsDescriptor>${basedir}/src/main/resources/webdefault.xml</defaultsDescriptor>
-            <contextPath>/teams</contextPath>
+            <contextPath>/teams/login</contextPath>
           </webApp>
           <classesDirectory>${basedir}/src/main/webapp/WEB-INF/classes</classesDirectory>
           <webAppSourceDirectory>${basedir}/src/main/webapp</webAppSourceDirectory>
