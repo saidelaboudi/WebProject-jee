@@ -93,7 +93,7 @@ public class ShowTeam extends HttpServlet {
 			boolean Already = true;
 			ArrayList<User> users = addTeam.getUsersByTeamName(team.name, daoF);
 			for(User u : users) {
-				if(user.email==u.email) {
+				if((user.email).equals(u.email)) {
 					Already=false;
 				}
 			}
