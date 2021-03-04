@@ -338,7 +338,7 @@
                 <div class="modal-body">S�lectionnez �D�connexion� ci-dessous si vous �tes pr�t � mettre fin � votre session en cours.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="login.html">D�connexion</a>
+                    <a class="btn btn-primary" href="login">D�connexion</a>
                 </div>
             </div>
         </div>
