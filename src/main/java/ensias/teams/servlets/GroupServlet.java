@@ -27,7 +27,7 @@ import ensias.teams.buzinessLayer.Group;
 public class GroupServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String CONF_DAO_FACTORY = "daofactory";
-	public DAOFactory daoF;
+	public DAOFactory daoF   = DAOFactory.getInstance();;
 	
 	public TeamDAOImp addTeam = new TeamDAOImp();
 	public UserDaoImpl addUser = new UserDaoImpl();

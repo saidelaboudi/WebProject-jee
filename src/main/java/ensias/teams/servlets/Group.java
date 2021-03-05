@@ -60,6 +60,7 @@ public class Group extends HttpServlet {
 			teamsList=addGroup.getTeamsByGroup(group,daoF);
 			//System.out.println(teamsList.size());
 			session.setAttribute("TeamList", teamsList);
+			session.setAttribute("CurrentGroup", group);
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
