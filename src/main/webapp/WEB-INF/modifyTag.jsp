@@ -78,11 +78,11 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Tables -->
+            <!-- Nav Item - Messagerie -->
             <li class="nav-item">
-                <a class="nav-link" href="">
+                <a class="nav-link" href="BoiteMessages" role="button" >
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span></a>
+                    <span>Messagerie</span></a>
             </li>
 
             <!-- Divider -->
