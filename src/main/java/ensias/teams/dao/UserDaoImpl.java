@@ -40,12 +40,12 @@ public class UserDaoImpl implements UserDao {
 			String setDb = "USE "+ this.daoFactory.getSchema();
 			connection = this.daoFactory.getConnection();
 			st=connection.prepareStatement(setDb);
-			st.executeQuery(setDb);
+			st.executeQuery();
 			st.close();
 			
 			String query = "SELECT * FROM users";
-			st=connection.prepareStatement(setDb);
-			rs=st.executeQuery(query);
+			st=connection.prepareStatement(query);
+			rs=st.executeQuery();
 			while( rs.next()) {
 				users.add( new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7) ));
 			}
@@ -162,7 +162,7 @@ public class UserDaoImpl implements UserDao {
 			String query = "INSERT INTO Users (FirstName,LastName,Address,Password,Email) VALUES (?, ?, ?, ?, ?)";
 			connection = this.daoFactory.getConnection();
 			st=connection.prepareStatement(setDb);
-			st.executeQuery(setDb);
+			st.executeQuery();
 			st.close();
 			st=connection.prepareStatement(query);
 			st.setString(1, user.firstName);
@@ -170,7 +170,7 @@ public class UserDaoImpl implements UserDao {
 			st.setString(3, user.address);
 			st.setString(4, user.password);
 			st.setString(5, user.email);
-			st.executeQuery(query);
+			st.executeQuery();
 			st.close();
 			
 		}catch ( SQLException e ) {
@@ -381,13 +381,13 @@ public class UserDaoImpl implements UserDao {
 			String setDb = "USE "+ this.daoFactory.getSchema();
 			connection = this.daoFactory.getConnection();
 			st=connection.prepareStatement(setDb);
-			st.executeQuery(setDb);
+			st.executeQuery();
 			st.close();
 			
 			String query = "SELECT * FROM tag WHERE tag = ?";
 			st=connection.prepareStatement(query);
 			st.setString(1, tag1.tagName);
-			rs = st.executeQuery(query);
+			rs = st.executeQuery();
 			rs.next();
 			st.close();
 			
@@ -395,7 +395,7 @@ public class UserDaoImpl implements UserDao {
 			query = "SELECT * FROM tag_users WHERE TagID = ?";
 			st=connection.prepareStatement(query);
 			st.setLong(1, TagID);
-			rs = st.executeQuery(query);
+			rs = st.executeQuery();
 			while(rs.next()) {
 				int UserID= (int)rs.getInt(2);
 				users.add(getUserByID(UserID));
@@ -447,14 +447,14 @@ public class UserDaoImpl implements UserDao {
 			String setDb = "USE "+ this.daoFactory.getSchema();
 			connection = this.daoFactory.getConnection();
 			st=connection.prepareStatement(setDb);
-			st.executeQuery(setDb);
+			st.executeQuery();
 			st.close();
 			
 			String query = "SELECT * FROM Users WHERE Email = ?";
 			st=connection.prepareStatement(query);
 			st.setString(1, user.email);
 			
-			rs=st.executeQuery(query);
+			rs=st.executeQuery();
 			if (rs.next())
 				id = (int) rs.getLong(1);
 		}catch ( SQLException e ) {
@@ -478,12 +478,12 @@ public class UserDaoImpl implements UserDao {
 				String query = "SELECT * FROM Users WHERE ID = ?";
 				connection = this.daoFactory.getConnection();
 				st=connection.prepareStatement(setDb);
-				st.executeQuery(setDb);
+				st.executeQuery();
 				st.close();
 				st=connection.prepareStatement(query);
 				st.setLong(1, UserId);
 				
-				rs=st.executeQuery(query);
+				rs=st.executeQuery();
 				if (rs.next())
 					users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
 				st.close();

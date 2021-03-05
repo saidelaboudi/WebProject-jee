@@ -178,7 +178,7 @@
     
                                     <div class="dropdown-divider"></div>
     
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <a class="dropdown-item" href="Deconnexion" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Deconnexion
                                     </a>
@@ -303,7 +303,7 @@
                 <div class="modal-body">Selectionnez Deconnexion ci-dessous si vous etes pret � mettre fin � votre session en cours.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Annuler</button>
-                    <a class="btn btn-primary" href="login">Deconnexion</a>
+                    <a class="btn btn-primary" href="Deconnexion">Deconnexion</a>
                 </div>
             </div>
         </div>
