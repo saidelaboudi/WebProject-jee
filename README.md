@@ -17,6 +17,18 @@ jdbc.url=jdbc:mysql://localhost:3306/NameOFtheDB?useUnicode=true&useJDBCComplian
 
 langage=fr
 ```
+###FlowChart
+
+```flow
+st=>start: Login
+op=>operation: Login operation
+cond=>condition: Successful Yes or No?
+e=>end: To ENSIAS teams
+
+st->op->cond
+cond(yes)->e
+cond(no)->op
+```
 
 ###Images
 
