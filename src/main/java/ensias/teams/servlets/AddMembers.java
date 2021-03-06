@@ -84,7 +84,7 @@ public class AddMembers extends HttpServlet {
 				/*if(session.getAttribute("TagList")==null)
 					session.setAttribute("TagList", tagName );*/
 				for(int i=0;i<tagName.length;i++) {
-					//System.out.println(tagName[i]);
+					////system.out.println(tagName[i]);
 					userList = addtag.getUsersTagged(tagName[i], daoF);
 					users.addAll(userList);
 				}
@@ -99,25 +99,25 @@ public class AddMembers extends HttpServlet {
 			if(users!=null) {
 				// On verifie la liste et on ajout les nouveau memebre a la bvase de donnee
 				for(User user:users) {
-					if(addUser.getUserID(user, daoF)==0) { // l utilisation n'est pas inscrit dans le system
+					if(addUser.getUserID(user, daoF)==0) { // l utilisation n'est pas inscrit dans le //system
 						addUser.addUser(user, daoF);
 						NewTeam.addMember(user);
 					}else {
-						//System.out.println(user.toString());
+						////system.out.println(user.toString());
 					}
 					NewTeam.addMember(user);
 				}
 				// Ajjouter les memebre au team
 				for(User user:users) {
 					addTeam.addTeam_Member(NewTeam, user, daoF);
-					System.out.println("----"+user.toString());
+					//system.out.println("----"+user.toString());
 				}
 			}
 			
 			/*
 			for(User user: users) {
-				System.out.println(user.toString());
-				System.out.println(addUser.getUserID(user, daoF));
+				//system.out.println(user.toString());
+				//system.out.println(addUser.getUserID(user, daoF));
 			}
 			*/
 			//ArrayList<User> users = (ArrayList<User>) session.getAttribute("Users");
@@ -131,7 +131,7 @@ public class AddMembers extends HttpServlet {
 		String[] tagName=(String[])request.getParameterValues("SelectOption");
 		if(tagName!=null)
 		for(int i=0;i<tagName.length;i++) {
-			System.out.println(tagName[i]);
+			//system.out.println(tagName[i]);
 		}
 			 */
 			/*
@@ -147,7 +147,7 @@ public class AddMembers extends HttpServlet {
 			String email = (String) request.getAttribute("addaoFyEmail");
 			if(email!=null) {
 				User user = new User(null,null,null,null,email);
-				//System.out.println(email);
+				////system.out.println(email);
 				addTeam.addTeam_Member(NewTeam, user, daoF);
 			}
 		} catch (Exception e) {

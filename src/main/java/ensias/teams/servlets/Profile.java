@@ -55,7 +55,7 @@ public class Profile extends HttpServlet {
 		ArrayList<Team> teams =new ArrayList<Team>();
 		try {
 			teams=addUser.getTeamsByUser(user, daoF);
-			System.out.println("---------------------"+teams.toString());
+			//System.out.println("---------------------"+teams.toString());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

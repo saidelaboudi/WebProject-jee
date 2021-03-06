@@ -23,7 +23,7 @@ public class BoiteMessages extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoiteMessages.doGet()");
+		//system.out.println("BoiteMessages.doGet()");
 		User user = (User)  request.getSession().getAttribute("_SESSION");
 		if ( user == null ) {
 			request.getRequestDispatcher("/login").forward(request, response);
@@ -40,9 +40,9 @@ public class BoiteMessages extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("BoiteMessages.doPost()");
+		//system.out.println("BoiteMessages.doPost()");
 		Long id = Long.decode(request.getParameter("maxid"));
-		System.out.println("max id =" + id);
+		//system.out.println("max id =" + id);
 		//
 		User user = (User)  request.getSession().getAttribute("_SESSION");
 		List<ChatPersoUser> messageriesUsers = new ArrayList<ChatPersoUser>();
@@ -63,7 +63,7 @@ public class BoiteMessages extends HttpServlet {
 			str += "</user>";
 		}
 		str += "</users>";
-		System.out.println(str);
+		//system.out.println(str);
 		response.getWriter().print(str);
 	
 	

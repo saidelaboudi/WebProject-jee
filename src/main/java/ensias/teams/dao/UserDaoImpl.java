@@ -110,7 +110,6 @@ public class UserDaoImpl implements UserDao {
 			rs=st.executeQuery();
 			
 			if (rs.next()) {
-				System.out.println("blbl");
 				users = new User(rs.getLong(1) , rs.getString(2) ,rs.getString(3) , rs.getString(6) , rs.getString(5) , rs.getString(7));
 			}
 			st.close();
@@ -186,7 +185,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            resultSet.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "�chec de la fermeture du ResultSet : " + e.getMessage() );
+	            System.out.println( "Echec de la fermeture du ResultSet : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -196,7 +195,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            statement.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "�chec de la fermeture du Statement : " + e.getMessage() );
+	            System.out.println( "Echec de la fermeture du Statement : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -205,7 +204,7 @@ public class UserDaoImpl implements UserDao {
 	        try {
 	            connexion.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "�chec de la fermeture de la connexion : " + e.getMessage() );
+	            System.out.println( "Echec de la fermeture de la connexion : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -365,7 +364,7 @@ public class UserDaoImpl implements UserDao {
 	}catch(Exception e) {
 		System.out.println(e.getMessage());
 	}
-	System.out.println("Get users by Tag done !");
+	//System.out.println("Get users by Tag done !");
 	return users;
 }
 
@@ -422,7 +421,7 @@ public class UserDaoImpl implements UserDao {
 		try {
 			set = db.Select("Users","ID = '"+UserId+"'");
 			if(set.next()) {
-				System.out.println((new User(set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6))).email);
+				//System.out.println((new User(set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6))).email);
 				return new User(set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6));
 			}
 		} catch (Exception e) {
@@ -528,7 +527,7 @@ public class UserDaoImpl implements UserDao {
 			
 			while(rs.next()) {
 				User u = bringUser(rs.getInt(1));
-				System.out.println(u);
+				//System.out.println(u);
 				if ( u != null )
 					users.add(u);
 			}
@@ -636,7 +635,7 @@ public class UserDaoImpl implements UserDao {
 				condition += " and (firstName like '%"+str+"%' or lastName like '%"+str+"%' or email like '%"+str+"%@%' ) ";
 			}
 			String query = " SELECT * from users where id <> "+user.id+"  " + condition;
-			System.out.println(query);
+			//System.out.println(query);
 			rs= st.executeQuery( query );
 			
 			while(rs.next()) {

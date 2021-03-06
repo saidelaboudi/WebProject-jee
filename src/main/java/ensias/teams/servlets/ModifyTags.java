@@ -45,7 +45,7 @@ public class ModifyTags extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String tagName = request.getParameter("tagName");
-		System.out.println(tagName);
+		////system.out.println(tagName);
 		//User owner = (User) request.getSession().getAttribute("_SESSION");
 		HttpSession session = request.getSession(true);
 		
@@ -55,13 +55,13 @@ public class ModifyTags extends HttpServlet {
 			Tag tag = new Tag(tagName, owner);
 			TagDAO dao = new TagDAOImp();
 			request.setAttribute("_TAG", tag);
-			System.out.println(!request.getParameterMap().containsKey("marker"));
+			////system.out.println(!request.getParameterMap().containsKey("marker"));
 
 			if (!request.getParameterMap().containsKey("marker")) {
 				// if request does not have key marker then this is not first time visiting from create jsp, so members are added 	
 				if (request.getParameterMap().containsKey("Nmember")) {
 					String mail = (String) request.getParameter("Nmember");
-					System.out.println(mail);
+					////system.out.println(mail);
 	
 					DAOFactory db = DAOFactory.getInstance();
 					User added = db.getUserDao().bringUser(mail);
@@ -75,7 +75,7 @@ public class ModifyTags extends HttpServlet {
 				}
 				else if (request.getParameterMap().containsKey("Demail")) {
 					String mail = (String) request.getParameter("Demail");
-					System.out.println("Del " + mail);
+					////system.out.println("Del " + mail);
 					if (!mail.equals(owner.email)) {
 						DAOFactory db = DAOFactory.getInstance();
 						User deleted = db.getUserDao().bringUser(mail);

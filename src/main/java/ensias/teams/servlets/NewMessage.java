@@ -39,12 +39,12 @@ public class NewMessage extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("NewMessage.doPost()");
+		//System.out.println("NewMessage.doPost()");
 		Long id = Long.parseLong(request.getParameter("id"));
 		String contenu = request.getParameter("content");
 		
 		if ( id != null && contenu != null && id > 0l && contenu.length() != 0 ) {
-			System.out.println("jai recu " + id + contenu);
+			//System.out.println("jai recu " + id + contenu);
 			User user = (User)  request.getSession().getAttribute("_SESSION");	
 			ensias.teams.dao.DAOFactory daoF =  (ensias.teams.dao.DAOFactory)getServletContext().getAttribute("daofactory");
 			//insert the new message

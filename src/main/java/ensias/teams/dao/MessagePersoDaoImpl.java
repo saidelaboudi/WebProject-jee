@@ -48,7 +48,7 @@ public class MessagePersoDaoImpl implements MessagePersoDao{
 	        try {
 	            resultSet.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "échec de la fermeture du ResultSet : " + e.getMessage() );
+	            System.out.println( "Echec de la fermeture du ResultSet : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -58,7 +58,7 @@ public class MessagePersoDaoImpl implements MessagePersoDao{
 	        try {
 	            statement.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "échec de la fermeture du Statement : " + e.getMessage() );
+	            System.out.println( "Echec de la fermeture du Statement : " + e.getMessage() );
 	        }
 	    }
 	}
@@ -67,7 +67,7 @@ public class MessagePersoDaoImpl implements MessagePersoDao{
 	        try {
 	            connexion.close();
 	        } catch ( SQLException e ) {
-	            System.out.println( "échec de la fermeture de la connexion : " + e.getMessage() );
+	            System.out.println( "Echec de la fermeture de la connexion : " + e.getMessage() );
 	        }
 	    }
 	}

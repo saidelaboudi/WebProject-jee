@@ -53,7 +53,7 @@ public class CreateTags extends HttpServlet {
 		User owner = (User) request.getSession().getAttribute("_SESSION");
 		
 		//User owner =(User)session.getAttribute("CurrentUser");
-		System.out.println(owner.toString());
+		//system.out.println(owner.toString());
 		request.getSession().setAttribute("_SESSION", owner);
 		Tag t = null;
 		try {

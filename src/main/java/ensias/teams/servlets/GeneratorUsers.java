@@ -23,7 +23,7 @@ public class GeneratorUsers extends HttpServlet {
 		
 	}	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GeneratorUsers.doPost()");
+		//system.out.println("GeneratorUsers.doPost()");
 		String value = request.getParameter("value");
 		if ( value != null ) {
 			User user = (User)  request.getSession().getAttribute("_SESSION");
@@ -37,7 +37,7 @@ public class GeneratorUsers extends HttpServlet {
 			}
 			str += "</users>";
 			
-			System.out.println(str);
+			//system.out.println(str);
 			response.getWriter().print(str);
 		}
 		
