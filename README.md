@@ -14,4 +14,4 @@ jdbc.url=jdbc:mysql://localhost:3306/NameOFtheDB?useUnicode=true&useJDBCComplian
 
 langage=fr
 
-![alt text](https://github.com/saidelaboudi/WebProject-jee/tree/main/screenshots/register.jpg?raw=true)
+![alt text](https://github.com/saidelaboudi/WebProject-jee/tree/main/screenshots/register.PNG?raw=true)
