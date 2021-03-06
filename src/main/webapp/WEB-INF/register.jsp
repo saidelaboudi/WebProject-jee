@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>SB Admin 2 - Register</title>
+    <title>ENSIAS TEAMS- Register</title>
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.css" rel="stylesheet">
 </head>
