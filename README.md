@@ -13,3 +13,5 @@ jdbc.password=UserPassword
 jdbc.url=jdbc:mysql://localhost:3306/NameOFtheDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
 langage=fr
+
+![alt text](https://github.com/saidelaboudi/WebProject-jee/tree/main/screenshots/register.jpg?raw=true)
