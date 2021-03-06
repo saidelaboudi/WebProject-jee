@@ -30,7 +30,8 @@ st->op->cond
 cond(yes)->e
 cond(no)->op
 ```
-
+> Diagramme de classe
+![](https://github.com/saidelaboudi/WebProject-jee/blob/main/ClasDiagram.jpg)
 ###Images
 
 Image:
