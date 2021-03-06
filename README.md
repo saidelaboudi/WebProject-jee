@@ -1,4 +1,7 @@
-ENSIAS TEAMS Platform
+
+#### ENSIAS TEAMS Platform
+```
+
 
 Change thos informations up to your database informations : (dao.proprieties)
 
@@ -13,5 +16,14 @@ jdbc.password=UserPassword
 jdbc.url=jdbc:mysql://localhost:3306/NameOFtheDB?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
 
 langage=fr
+```
 
-![alt text](https://github.com/saidelaboudi/WebProject-jee/tree/main/screenshots/register.PNG?raw=true)
+###Images
+
+Image:
+
+![](https://github.com/saidelaboudi/WebProject-jee/blob/main/screenshots/Add%20Equipes%20to%20group.PNG)
+
+> Follow your heart.
+
+###End
