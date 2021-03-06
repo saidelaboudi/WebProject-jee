@@ -34,7 +34,7 @@ public class Tag {
 		ArrayList<User> tg = new ArrayList<User>();
 		TagDAO dao = new TagDAOImp();
 		tg = dao.getUsersTagged(tagName, DAOFactory.getInstance());
-		tg.add(owner);
+		//tg.add(owner);
 		return tg;
 	}
 	
