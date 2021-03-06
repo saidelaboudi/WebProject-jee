@@ -216,8 +216,7 @@
                 <div class="container">
                 <h2>ENSIAS TEAMS</h2>
                 <p>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quibusdam atque exercitationem quis corporis, adipisci sint non dolores, accusamus odit eos eius! At hic doloremque exercitationem alias labore, quod perspiciatis molestiae?
-                
+
                 </p>
                 </div>
 					<div class="row">

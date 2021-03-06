@@ -47,7 +47,7 @@ public class Signin extends HttpServlet {
 					;
 			daoF.getUserDao().addUser(user1);
 			request.setAttribute("user", user1);
-			this.getServletContext().getRequestDispatcher("/WEB-INF/hello.jsp").forward( request, response );
+			this.getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward( request, response );
 		}
 		else {
 	        this.getServletContext().getRequestDispatcher("/WEB-INF/register.jsp").forward( request, response );

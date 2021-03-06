@@ -170,7 +170,7 @@ public class UserDaoImpl implements UserDao {
 			st.setString(3, user.address);
 			st.setString(4, user.password);
 			st.setString(5, user.email);
-			st.executeQuery();
+			st.execute();
 			st.close();
 			
 		}catch ( SQLException e ) {

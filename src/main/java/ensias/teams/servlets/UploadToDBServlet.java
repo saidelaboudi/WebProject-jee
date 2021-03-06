@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+
+import ensias.teams.dao.DAOFactory;
  
 @WebServlet("/uploadToDB")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
@@ -22,12 +24,14 @@ import javax.servlet.http.Part;
         maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class UploadToDBServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
- 
+	private DAOFactory daoF =  DAOFactory.getInstance();
+	
+	
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
  
-        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/jsps/uploadToDB.jsp");
+        RequestDispatcher dispatcher = request.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp");
  
         dispatcher.forward(request, response);
     }
@@ -35,14 +39,12 @@ public class UploadToDBServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Connection conn = null;
+        Connection conn = daoF.getConnection();
         try {
             // Connection to Database
         	
-            conn = ConnectionUtils.getMyConnection();
             conn.setAutoCommit(false);
- 
-            String description = request.getParameter("description");
+
  
             // Part list (multi files).
             for (Part part : request.getParts()) {
@@ -51,7 +53,7 @@ public class UploadToDBServlet extends HttpServlet {
                     // File data
                     InputStream is = part.getInputStream();
                     // Write to file
-                    this.writeToDB(conn, fileName, is, description);
+                    this.writeToDB(conn, fileName, is);
                 }
             }
             conn.commit();
@@ -99,17 +101,16 @@ public class UploadToDBServlet extends HttpServlet {
         return 0L;
     }
  
-    private void writeToDB(Connection conn, String fileName, InputStream is, String description) throws SQLException {
+    private void writeToDB(Connection conn, String fileName, InputStream is) throws SQLException {
  
-        String sql = "Insert into Attachment(Id,File_Name,File_Data,Description) " //
-                + " values (?,?,?,?) ";
+        String sql = "Insert into Attachment(Id,File_Name,File_Data) " //
+                + " values (?,?,?) ";
         PreparedStatement pstm = conn.prepareStatement(sql);
  
         Long id = this.getMaxAttachmentId(conn) + 1;
         pstm.setLong(1, id);
         pstm.setString(2, fileName);
         pstm.setBlob(3, is);
-        pstm.setString(4, description);
         pstm.executeUpdate();
     }
  
