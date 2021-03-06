@@ -216,7 +216,10 @@
                 <div class="container">
                 <h2>ENSIAS TEAMS</h2>
                 <p>
-
+<h2>ENSIASTEAMS </h2>est une platforme  collaborative personnalisable qui intègre  la visioconférence ( Pas encore réalisé xD ) , le stockage et le transfert de fichiers( Pas encore réalisé aussi xD ) 
+La messagerie instantanée permettant d'échanger en équipe ( Pas encore réalisé xD )  ou en privé tout en conservant une trace de tous les échanges. 
+Cette platforme avait pour but de faciliter l'ajout des membres aux équipes un par un , qui est un travail répététif , alors notre platforme se caractérise par les étiquettes qui contient un Nom et 
+des membres associés à elle ( exemple : étiquette GL qui contient les étudiants de cette filière alors l'ajout à chaque groupe se fait juste en spécifiant cette étiquette ) .
                 </p>
                 </div>
 					<div class="row">
