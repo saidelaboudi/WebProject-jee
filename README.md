@@ -1,9 +1,23 @@
 
+
+```
+EnsiasTEAMS est une platforme collaborative personnalisable (
+semblable `a Microsoft Teams) qui int`egre le stockage et le transfert
+de fichiers( Pas encore r´ealis´e ).
+La messagerie instantan´ee permettant d’´echanger en ´equipe ou en
+priv´e tout en conservant une trace de tous les ´echanges.
+Cette platforme avait pour but de faciliter l’ajout des membres aux
+´equipes un par un , qui est un travail r´ep´et´etif , alors notre platforme
+se caract´erise par les ´etiquettes qui contient un Nom et des membres
+associ´es `a elle ( exemple : ´etiquette GL qui contient les ´etudiants de
+cette fili`ere alors l’ajout `a chaque groupe se fait juste en sp´ecifiant
+cette ´etiquette ) 
+```
 #### ENSIAS TEAMS Platform
 ```
 
 
-Change thos informations up to your database informations : (dao.proprieties)
+Change those informations up to your database informations : (dao.proprieties)
 
 jdbc.driverClass=com.mysql.cj.jdbc.Driver
 
